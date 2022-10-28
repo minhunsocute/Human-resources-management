@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:get/get.dart';
+import 'package:ueh_project_admin/constants/app_color.dart';
 import 'package:ueh_project_admin/routes/app_pages.dart';
 import 'package:ueh_project_admin/routes/route_name.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
           // fontFamily: 'Montserrat',
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          backgroundColor: AppColors.greyBackgroundCOlor,
         ),
         initialRoute: RouteNames.signInScreen,
         getPages: AppPages.pages,
