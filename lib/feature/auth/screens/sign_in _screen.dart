@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ueh_project_admin/widgets/custom_button.dart';
 
 import '../../../constants/app_color.dart';
+import '../../../routes/route_name.dart';
 
 PageController pageController = PageController(initialPage: 0, keepPage: true);
 void onButtonTape(int index) {
@@ -56,40 +57,43 @@ class SignInScreen extends StatelessWidget {
                 ),
               ],
             ),
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 450.0,
-                  child: PageView.builder(
-                    controller: pageController,
-                    onPageChanged: (value) {
-                      _currentIndex.value = value;
-                    },
-                    itemBuilder: (context, index) {
-                      return listViewAuth[index];
-                    },
-                    itemCount: listViewAuth.length,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 450.0,
+                    child: PageView.builder(
+                      controller: pageController,
+                      onPageChanged: (value) {
+                        _currentIndex.value = value;
+                      },
+                      itemBuilder: (context, index) {
+                        return listViewAuth[index];
+                      },
+                      itemCount: listViewAuth.length,
+                    ),
                   ),
-                ),
-                const Divider(),
-                Row(
-                  children: [
-                    SizedBox(
-                      height: 10,
-                      width: 200,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: listViewAuth.length,
-                        itemBuilder: (context, index) => Obx(
-                          () => buildIndicator(_currentIndex.value == index,
-                              MediaQuery.of(context).size),
+                  const Divider(),
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                        width: 200,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: listViewAuth.length,
+                          itemBuilder: (context, index) => Obx(
+                            () => buildIndicator(_currentIndex.value == index,
+                                MediaQuery.of(context).size),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -171,10 +175,8 @@ class SignUpField extends StatelessWidget {
                 fontSize: 15.0),
           ),
           const SizedBox(height: 20.0),
-          CustomPasswordField(
-            hintText: 'Your Password',
-            controller: _password,
-          ),
+          CustomTextField(
+              hintText: 'Username', icon: Icons.person, controller: _password),
           const SizedBox(height: 10.0),
           CustomPasswordField(
             hintText: 'New Password',
@@ -189,7 +191,7 @@ class SignUpField extends StatelessWidget {
           SizedBox(
             width: 140,
             child: CustomButton(
-              text: 'Sign In',
+              text: 'Sign Up',
               onTap: () {},
             ),
           ),
@@ -278,7 +280,8 @@ class SignInField extends StatelessWidget {
   SignInField({super.key});
 
   RxBool checkBox = false.obs;
-
+  final _userNameController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -325,60 +328,20 @@ class SignInField extends StatelessWidget {
                 fontSize: 15.0),
           ),
           const SizedBox(height: 20.0),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.0),
-              border: Border.all(width: 1, color: Colors.grey),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(Icons.person, color: Colors.grey),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Username',
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          CustomTextField(
+            controller: _userNameController,
+            hintText: 'Username',
+            icon: Icons.person,
           ),
           const SizedBox(height: 10.0),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.0),
-              border: Border.all(width: 1, color: Colors.grey),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(Icons.key, color: Colors.grey),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Password',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          CustomPasswordField(
+              hintText: 'Password', controller: _passwordController),
           const SizedBox(height: 10.0),
           SizedBox(
             width: 140,
             child: CustomButton(
               text: 'Sign In',
-              onTap: () {},
+              onTap: () => Get.toNamed(RouteNames.dashboardScreen),
             ),
           ),
           const SizedBox(height: 10.0),
@@ -437,11 +400,53 @@ class SignInField extends StatelessWidget {
                 onTap: () => onButtonTape(1),
                 child: const Text(
                   'Sign Up',
-                  style:
-                      TextStyle(color: AppColors.primaryColor, fontSize: 16.0),
+                  style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 16.0,
+                      decoration: TextDecoration.underline),
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final String hintText;
+  final IconData icon;
+  final TextEditingController controller;
+  const CustomTextField({
+    Key? key,
+    required this.hintText,
+    required this.icon,
+    required this.controller,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(2.0),
+        border: Border.all(width: 1, color: Colors.grey),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(icon, color: Colors.grey),
+          const SizedBox(width: 10),
+          Expanded(
+            child: TextFormField(
+              controller: controller,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: hintText,
+              ),
+            ),
           ),
         ],
       ),
