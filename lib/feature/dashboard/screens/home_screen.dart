@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:ueh_project_admin/constants/utils.dart';
 
 import '../../../constants/app_color.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -48,13 +49,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 10.0),
-        const SizedBox(height: 20.0),
+        const SizedBox(height: 30.0),
         ResponsiveWidget.isSmallScreen(context)
             ? Column(
                 children: [
                   ...listCard1.map((e) => Container(
-                        width: double.infinity,
+                        width: Get.width,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         padding: const EdgeInsets.symmetric(
@@ -123,17 +123,17 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-        const SizedBox(height: 20.0),
-        _row2(context),
-        const SizedBox(height: 20.0),
-        _row3(context),
-        const SizedBox(height: 20.0),
-        _row4(context),
-        const SizedBox(height: 20.0),
+        // const SizedBox(height: 20.0),
+        // _row2(context),
+        // const SizedBox(height: 20.0),
+        // _row3(context),
+        // const SizedBox(height: 20.0),
+        // _row4(context),
+        // const SizedBox(height: 20.0),
         Container(
           width: double.infinity,
-          margin: const EdgeInsets.symmetric(horizontal: 20.0),
-          padding: const EdgeInsets.all(20.0),
+          margin: Utils.edgeInsetsHorizontal20,
+          padding: Utils.edgeInsetsAll20,
           decoration: BoxDecoration(
             color: AppColors.backgroundColor,
             borderRadius: BorderRadius.circular(10.0),
@@ -246,17 +246,37 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
+}
 
-  Row2Field _row4(BuildContext context) {
+BarChartGroupData makeGroupData(int x, double y1, double y2) {
+  return BarChartGroupData(barsSpace: 4, x: x, barRods: [
+    BarChartRodData(
+      toY: y1,
+      color: const Color(0xff53fdd7),
+      width: 7,
+    ),
+    BarChartRodData(
+      toY: y2,
+      color: const Color(0xffff5182),
+      width: 7,
+    ),
+  ]);
+}
+
+class Row4FieldWidget extends StatelessWidget {
+  const Row4FieldWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Row2Field(
       childre: [
         FieldAuto(
           flex: 3,
           child: Container(
             margin: (ResponsiveWidget.isSmallScreen(context))
-                ? const EdgeInsets.symmetric(horizontal: 20.0)
+                ? Utils.edgeInsetsHorizontal20
                 : const EdgeInsets.only(right: 10.0, left: 20.0),
-            padding: const EdgeInsets.all(20.0),
+            padding: Utils.edgeInsetsAll20,
             decoration: BoxDecoration(
               color: AppColors.backgroundColor,
               borderRadius: BorderRadius.circular(10.0),
@@ -287,8 +307,7 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0),
                       onTap: () {},
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 5.0),
+                        padding: Utils.edgeInsetsHor10Ver5,
                         decoration: BoxDecoration(
                           color: AppColors.backgroundColor,
                           borderRadius: BorderRadius.circular(5.0),
@@ -382,9 +401,9 @@ class HomeScreen extends StatelessWidget {
           flex: 2,
           child: Container(
             margin: (ResponsiveWidget.isSmallScreen(context))
-                ? const EdgeInsets.symmetric(horizontal: 20.0)
-                : const EdgeInsets.only(right: 20.0, left: 10.0),
-            padding: const EdgeInsets.all(20.0),
+                ? Utils.edgeInsetsHorizontal20
+                : Utils.edgeInsetsRight20Left20,
+            padding: Utils.edgeInsetsAll20,
             decoration: BoxDecoration(
               color: AppColors.backgroundColor,
               borderRadius: BorderRadius.circular(10.0),
@@ -443,230 +462,22 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
+}
 
-  Row2Field _row3(BuildContext context) {
-    return Row2Field(
-      childre: [
-        FieldAuto(
-          flex: 6,
-          child: Container(
-              margin: (ResponsiveWidget.isSmallScreen(context))
-                  ? const EdgeInsets.symmetric(horizontal: 20.0)
-                  : const EdgeInsets.only(right: 10.0, left: 20.0),
-              padding: const EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                color: AppColors.backgroundColor,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.textColor.withOpacity(0.04),
-                    blurRadius: 10.0,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Employees By Department',
-                      style: TextStyle(
-                        color: AppColors.textColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 40.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 280,
-                        width: 280,
-                        child: Obx(
-                          () => PieChart(
-                            PieChartData(
-                              pieTouchData: PieTouchData(
-                                touchCallback:
-                                    (FlTouchEvent event, pieTouchResponse) {
-                                  if (!event.isInterestedForInteractions ||
-                                      pieTouchResponse == null ||
-                                      pieTouchResponse.touchedSection == null) {
-                                    touchedIndex.value = -1;
-                                    return;
-                                  }
-                                  touchedIndex.value = pieTouchResponse
-                                      .touchedSection!.touchedSectionIndex;
-                                },
-                              ),
-                              startDegreeOffset: 180,
-                              borderData: FlBorderData(
-                                show: false,
-                              ),
-                              sectionsSpace: 1,
-                              centerSpaceRadius: 100,
-                              sections: data
-                                  .asMap()
-                                  .map<int, PieChartSectionData>((index, data) {
-                                    final isTouched =
-                                        index == touchedIndex.value;
+class Row2FieldWidget extends StatelessWidget {
+  const Row2FieldWidget({super.key});
 
-                                    return MapEntry(
-                                      index,
-                                      PieChartSectionData(
-                                        color: data.color,
-                                        value: data.percents,
-                                        title: '',
-                                        // borderSide:
-                                        //     const BorderSide(style: BorderStyle.solid),
-                                        radius: isTouched ? 80 : 60,
-                                        titleStyle: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                        titlePositionPercentageOffset: 0.55,
-                                      ),
-                                    );
-                                  })
-                                  .values
-                                  .toList(),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 60.0),
-                      SizedBox(
-                        width: 300,
-                        height: 300,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                TypeEmployItem(i: 0),
-                                TypeEmployItem(i: 1),
-                              ],
-                            ),
-                            const SizedBox(height: 20.0),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                TypeEmployItem(i: 2),
-                                TypeEmployItem(i: 3),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 20.0),
-                ],
-              )),
-        ),
-        FieldAuto(
-          flex: 5,
-          child: Container(
-            margin: (ResponsiveWidget.isSmallScreen(context))
-                ? const EdgeInsets.symmetric(horizontal: 20.0)
-                : const EdgeInsets.only(right: 20.0, left: 10.0),
-            padding: const EdgeInsets.all(20.0),
-            decoration: BoxDecoration(
-              color: AppColors.backgroundColor,
-              borderRadius: BorderRadius.circular(10.0),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.textColor.withOpacity(0.04),
-                  blurRadius: 10.0,
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Text(
-                        'Project Status',
-                        style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          color: AppColors.textColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    InkWell(
-                      borderRadius: BorderRadius.circular(5.0),
-                      onTap: () {},
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 5.0),
-                        decoration: BoxDecoration(
-                          color: AppColors.backgroundColor,
-                          borderRadius: BorderRadius.circular(5.0),
-                          border: Border.all(width: 1, color: Colors.grey),
-                        ),
-                        child: Row(
-                          children: const [
-                            Text(
-                              'Year ',
-                              style: TextStyle(
-                                color: AppColors.textColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                            ),
-                            Icon(Icons.keyboard_arrow_down_rounded,
-                                color: Colors.grey),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20.0),
-                const SizedBox(
-                  width: double.infinity,
-                  height: 220,
-                  child: LineChartDesign(
-                    listData: [
-                      FlSpot(0, 3),
-                      FlSpot(1, 2),
-                      FlSpot(2, 5),
-                      FlSpot(3, 3.1),
-                      FlSpot(4, 4),
-                      FlSpot(5, 3),
-                      FlSpot(6, 4),
-                      FlSpot(7, 3),
-                      FlSpot(8, 2),
-                      FlSpot(9, 5),
-                      FlSpot(10, 3.1),
-                      FlSpot(11, 4),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-  Row2Field _row2(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Row2Field(
       childre: [
         FieldAuto(
           flex: 2,
           child: Container(
             margin: (ResponsiveWidget.isSmallScreen(context))
-                ? const EdgeInsets.symmetric(horizontal: 20.0)
+                ? Utils.edgeInsetsHorizontal20
                 : const EdgeInsets.only(left: 20.0, right: 10.0),
-            padding: const EdgeInsets.all(20.0),
+            padding: Utils.edgeInsetsAll20,
             decoration: BoxDecoration(
               color: AppColors.backgroundColor,
               borderRadius: BorderRadius.circular(10.0),
@@ -757,10 +568,10 @@ class HomeScreen extends StatelessWidget {
           flex: 3,
           child: Container(
             margin: (ResponsiveWidget.isSmallScreen(context))
-                ? const EdgeInsets.symmetric(horizontal: 20.0)
+                ? Utils.edgeInsetsHorizontal20
                 : const EdgeInsets.symmetric(horizontal: 10.0),
             // height: 300,
-            padding: const EdgeInsets.all(20.0),
+            padding: Utils.edgeInsetsAll20,
             decoration: BoxDecoration(
               color: AppColors.backgroundColor,
               borderRadius: BorderRadius.circular(10.0),
@@ -791,8 +602,7 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0),
                       onTap: () {},
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 5.0),
+                        padding: Utils.edgeInsetsHor10Ver5,
                         decoration: BoxDecoration(
                           color: AppColors.backgroundColor,
                           borderRadius: BorderRadius.circular(5.0),
@@ -830,15 +640,7 @@ class HomeScreen extends StatelessWidget {
                       makeGroupData(5, 100 / 300 * 20, 30 / 300 * 20),
                       makeGroupData(6, 200 / 300 * 20, 30 / 300 * 20),
                     ],
-                    members: const [
-                      'Sun',
-                      'Mon',
-                      'Tue',
-                      'Wed',
-                      'Thu',
-                      'Fri',
-                      'Sat'
-                    ],
+                    members: Utils.listDaysInWeek,
                     columnData: 300,
                   ),
                 ),
@@ -890,9 +692,9 @@ class HomeScreen extends StatelessWidget {
           flex: 3,
           child: Container(
             margin: (ResponsiveWidget.isSmallScreen(context))
-                ? const EdgeInsets.symmetric(horizontal: 20.0)
-                : const EdgeInsets.only(right: 20.0, left: 10.0),
-            padding: const EdgeInsets.all(20.0),
+                ? Utils.edgeInsetsHorizontal20
+                : Utils.edgeInsetsRight20Left20,
+            padding: Utils.edgeInsetsAll20,
             decoration: BoxDecoration(
               color: AppColors.backgroundColor,
               borderRadius: BorderRadius.circular(10.0),
@@ -920,8 +722,7 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0),
                       onTap: () {},
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 5.0),
+                        padding: Utils.edgeInsetsHor10Ver5,
                         decoration: BoxDecoration(
                           color: AppColors.backgroundColor,
                           borderRadius: BorderRadius.circular(5.0),
@@ -977,19 +778,4 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
-}
-
-BarChartGroupData makeGroupData(int x, double y1, double y2) {
-  return BarChartGroupData(barsSpace: 4, x: x, barRods: [
-    BarChartRodData(
-      toY: y1,
-      color: const Color(0xff53fdd7),
-      width: 7,
-    ),
-    BarChartRodData(
-      toY: y2,
-      color: const Color(0xffff5182),
-      width: 7,
-    ),
-  ]);
 }
