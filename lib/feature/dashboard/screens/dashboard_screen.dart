@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/constants/app_color.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/tool_bar_item.dart';
+import 'package:ueh_project_admin/feature/employ/screens/employ_main_screen.dart';
 
 import 'home_screen.dart';
 
@@ -56,7 +57,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     const CustomAppBarDashboard(),
                     const SizedBox(height: 35),
                     const CustomToolBar(),
-                    HomeScreen(),
+                    EmployMainScreen(),
                   ],
                 ),
               ),

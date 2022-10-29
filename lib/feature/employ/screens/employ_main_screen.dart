@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:ueh_project_admin/feature/auth/screens/sign_in%20_screen.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
@@ -324,6 +325,96 @@ class EmployMainScreen extends StatelessWidget {
                 )
               ],
             ),
+            const SizedBox(height: 20.0),
+            Row(
+              children: const [
+                Expanded(
+                  flex: 1,
+                  child: Text('USER',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text('NAME',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text('PROGRESS',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.grey, fontWeight: FontWeight.bold)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text('AMOUNT',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text('DEADLINE',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10.0),
+            const Divider(thickness: 1),
+            const SizedBox(height: 10.0),
+            EmployeeProgressItem(
+              image: 'assets/images/person.png',
+              name: 'Truong Huynh Duc hoang',
+              type: 'Backend Developer',
+              amount: 20.01,
+              email: 'hoang.201102ak@gmail.com',
+              phoneNumber: '0935703991',
+              time: DateTime.now(),
+              percent: 0.6,
+            ),
+            const Divider(thickness: 1),
+            EmployeeProgressItem(
+              image: 'assets/images/person2.png',
+              name: 'Truong Huynh Duc hoang',
+              type: 'Backend Developer',
+              amount: 31.02,
+              email: 'hoang.201102ak@gmail.com',
+              phoneNumber: '0935703991',
+              time: DateTime.now(),
+              percent: 0.3,
+            ),
+            const Divider(thickness: 1),
+            EmployeeProgressItem(
+              image: 'assets/images/person1.png',
+              name: 'Truong Huynh Duc hoang',
+              type: 'Backend Developer',
+              amount: 10.01,
+              email: 'hoang.201102ak@gmail.com',
+              phoneNumber: '0935703991',
+              time: DateTime.now(),
+              percent: 0.8,
+            ),
+            const Divider(thickness: 1),
+            EmployeeProgressItem(
+              image: 'assets/images/person2.png',
+              name: 'Truong Huynh Duc hoang',
+              type: 'Backend Developer',
+              amount: 12.2,
+              email: 'hoang.201102ak@gmail.com',
+              phoneNumber: '0935703991',
+              time: DateTime.now(),
+              percent: 0.1,
+            ),
           ],
         ),
       ),
@@ -394,5 +485,118 @@ class FieldAuto1 extends StatelessWidget {
             ResponsiveWidget.isSmallScreen(context)
         ? SizedBox(child: child)
         : Expanded(child: child);
+  }
+}
+
+class EmployeeProgressItem extends StatelessWidget {
+  final String image;
+  final String name;
+  final String type;
+  final String email;
+  final double amount;
+  final String phoneNumber;
+  final DateTime time;
+  final double percent;
+  const EmployeeProgressItem({
+    Key? key,
+    required this.image,
+    required this.name,
+    required this.type,
+    required this.email,
+    required this.phoneNumber,
+    required this.amount,
+    required this.time,
+    required this.percent,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        fit: BoxFit.cover, image: AssetImage(image)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: AppColors.textColor.withOpacity(0.6),
+                          blurRadius: 10.0),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              name,
+              style: const TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 16,
+                  color: AppColors.textColor,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: LinearPercentIndicator(
+              percent: percent,
+              backgroundColor: Colors.grey.withOpacity(0.2),
+              progressColor: percent > 0.6
+                  ? Colors.green.withOpacity(0.8)
+                  : Colors.red.withOpacity(0.8),
+              // ignore: deprecated_member_use
+              barRadius: Radius.circular(20.0),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              '\$$amount ',
+              style: const TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  color: AppColors.textColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 5.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.red,
+                    ),
+                  ),
+                  child: Text(
+                    '${time.day}/${time.month}/${time.year}',
+                    style: const TextStyle(
+                        color: Colors.red, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
