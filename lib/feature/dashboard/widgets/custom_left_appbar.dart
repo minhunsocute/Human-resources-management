@@ -87,7 +87,6 @@ class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
                 title: 'Dashboard',
                 icon: Icons.dashboard_outlined,
                 index: 0,
-                selectPage: selectPage,
               ),
               Utils.spaceBetweenTabBarItem,
               AppBarItem(
@@ -95,7 +94,6 @@ class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
                 title: 'Employees',
                 icon: Icons.people_outlined,
                 index: 1,
-                selectPage: selectPage,
               ),
             ],
           ),
