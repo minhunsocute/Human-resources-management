@@ -4,25 +4,23 @@ import 'package:get/get.dart';
 import '../../../constants/utils.dart';
 
 class AppBarItem extends StatelessWidget {
-  AppBarItem(
-      {super.key,
-      required this.isOpened,
-      required this.title,
-      required this.icon,
-      required this.index,
-      required this.selectPage});
+  AppBarItem({
+    super.key,
+    required this.isOpened,
+    required this.title,
+    required this.icon,
+    required this.index,
+  });
   final int index;
   final String title;
   final IconData icon;
   final bool isOpened;
-  final Function(int) selectPage;
 
   late final focus = FocusNode();
   var isFocus = false.obs;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      customBorder: Border.all(),
       onFocusChange: (value) {
         isFocus.value = value;
       },
@@ -32,11 +30,10 @@ class AppBarItem extends StatelessWidget {
       borderRadius: Utils.appBarItemBorder,
       onTap: () {
         focus.requestFocus();
-        selectPage(index);
       },
       child: Row(
         children: [
-          Obx(() => (!isOpened && isFocus.value)
+          Obx(() => (isFocus.value && !isOpened)
               ? Container(
                   height: 40,
                   decoration: const BoxDecoration(
