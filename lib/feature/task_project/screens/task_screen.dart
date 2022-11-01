@@ -140,27 +140,6 @@ class TaskScreen extends StatelessWidget {
                         tasks: 20),
                   ]),
                 )),
-            // FieldAuto(
-            //   flex: 1,
-            //   child: Container(
-            //     width: double.infinity,
-            //     padding: const EdgeInsets.all(20.0),
-            //     margin: ResponsiveWidget.isSmallScreen(context)
-            //         ? const EdgeInsets.symmetric(horizontal: 20.0)
-            //         : const EdgeInsets.only(right: 20.0),
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(15.0),
-            //       color: AppColors.backgroundColor,
-            //       boxShadow: [
-            //         BoxShadow(
-            //           color: AppColors.textColor.withOpacity(0.2),
-            //           blurRadius: 10.0,
-            //         ),
-            //       ],
-            //     ),
-
-            //   ),
-            // ),
           ],
         ),
         const SizedBox(height: 20.0),
@@ -225,7 +204,7 @@ class TaskScreen extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               FieldAuto(
-                  child: Container(
+                  child: SizedBox(
                       child: Column(
                 children: [
                   Row(

@@ -418,29 +418,35 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final TextEditingController controller;
+  final int? maxLines;
   const CustomTextField({
     Key? key,
     required this.hintText,
     required this.icon,
     required this.controller,
+    this.maxLines,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: EdgeInsets.symmetric(
+          horizontal: 10.0, vertical: maxLines == null ? 0.0 : 5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(2.0),
         border: Border.all(width: 1, color: Colors.grey),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: (maxLines == null)
+            ? CrossAxisAlignment.center
+            : CrossAxisAlignment.start,
         children: [
           Icon(icon, color: Colors.grey),
           const SizedBox(width: 10),
           Expanded(
             child: TextFormField(
+              maxLines: maxLines ?? 1,
               controller: controller,
               decoration: InputDecoration(
                 border: InputBorder.none,

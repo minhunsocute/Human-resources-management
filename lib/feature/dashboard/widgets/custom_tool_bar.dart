@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
+import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/tool_bar_button_item.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/tool_bar_item.dart';
+
+import '../../../constants/reponsiveness.dart';
+import '../../employ/screens/employ_main_screen.dart';
 
 class CustomToolBar extends StatelessWidget {
   const CustomToolBar({super.key});
@@ -13,88 +18,93 @@ class CustomToolBar extends StatelessWidget {
           bottom: BorderSide(width: 0.1, color: Colors.black),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ToolBarTextItem(
-            text: 'Issues (2)',
-            color: Colors.blue,
-            decoration: const BoxDecoration(
-              border: BorderDirectional(
-                end: BorderSide(
-                  color: Colors.black,
-                  width: 0.1,
+      child: Row2Field(
+        childre: [
+          FieldAuto(
+            child: Row(children: [
+              ToolBarTextItem(
+                text: 'Issues (2)',
+                color: Colors.blue,
+                decoration: const BoxDecoration(
+                  border: BorderDirectional(
+                    end: BorderSide(
+                      color: Colors.black,
+                      width: 0.1,
+                    ),
+                  ),
                 ),
+                onTap: () {},
               ),
-            ),
-            onTap: () {},
-          ),
-          ToolBarTextItem(
-            text: 'Process',
-            color: Colors.black,
-            decoration: const BoxDecoration(
-              border: BorderDirectional(
-                end: BorderSide(
-                  color: Colors.black,
-                  width: 0.1,
+              ToolBarTextItem(
+                text: 'Process',
+                color: Colors.black,
+                decoration: const BoxDecoration(
+                  border: BorderDirectional(
+                    end: BorderSide(
+                      color: Colors.black,
+                      width: 0.1,
+                    ),
+                  ),
                 ),
+                onTap: () {},
               ),
-            ),
-            onTap: () {},
-          ),
-          ToolBarTextItem(
-            text: 'Employees',
-            color: Colors.black,
-            decoration: const BoxDecoration(
-              border: BorderDirectional(
-                end: BorderSide(
-                  color: Colors.black,
-                  width: 0.1,
+              ToolBarTextItem(
+                text: 'Employees',
+                color: Colors.black,
+                decoration: const BoxDecoration(
+                  border: BorderDirectional(
+                    end: BorderSide(
+                      color: Colors.black,
+                      width: 0.1,
+                    ),
+                  ),
                 ),
+                onTap: () {},
               ),
-            ),
-            onTap: () {},
-          ),
-          ToolBarTextItem(
-            text: 'More',
-            color: Colors.black,
-            decoration: null,
-            onTap: () {},
+              ToolBarTextItem(
+                text: 'More',
+                color: Colors.black,
+                decoration: null,
+                onTap: () {},
+              ),
+            ]),
           ),
 
           ///////////////////////////////////////////////////////
-          const Spacer(),
           ///////////////////////////////////////////////////////
 
-          const ToolBarButtonItem(
-            title: 'Share',
-            icon: Icon(
-              Icons.share_outlined,
-              color: Colors.black,
-              size: 15,
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          const ToolBarButtonItem(
-            title: 'Print',
-            icon: Icon(
-              Icons.print_outlined,
-              color: Colors.black,
-              size: 15,
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          const ToolBarButtonItem(
-            title: 'New',
-            icon: Icon(
-              Icons.add_circle_outlined,
-              color: Colors.black,
-              size: 15,
-            ),
+          FieldAuto(
+            child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+              ResponsiveWidget.isSmallScreen(context)
+                  ? Container()
+                  : const Spacer(),
+              const ToolBarButtonItem(
+                title: 'Share',
+                icon: Icon(
+                  Icons.share_outlined,
+                  color: Colors.black,
+                  size: 15,
+                ),
+              ),
+              const SizedBox(width: 10),
+              const ToolBarButtonItem(
+                title: 'Print',
+                icon: Icon(
+                  Icons.print_outlined,
+                  color: Colors.black,
+                  size: 15,
+                ),
+              ),
+              const SizedBox(width: 10),
+              const ToolBarButtonItem(
+                title: 'New',
+                icon: Icon(
+                  Icons.add_circle_outlined,
+                  color: Colors.black,
+                  size: 15,
+                ),
+              ),
+            ]),
           ),
         ],
       ),
