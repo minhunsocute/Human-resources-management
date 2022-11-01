@@ -31,7 +31,7 @@ class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       alignment: Alignment.center,
-      curve: Curves.ease,
+      curve: Curves.linear,
       duration: Utils.animationDuration,
       width: widget.isOpened
           ? widget.widthDevice * 0.12
@@ -47,13 +47,13 @@ class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         widget.openAppBar();
-                        turns = turns + (widget.isOpened ? -1 / 2 : 1 / 2);
+                        turns = turns + (widget.isOpened ? -1 : 1);
                       },
                       child: AnimatedRotation(
-                        duration: Utils.animationDuration,
+                        duration: const Duration(milliseconds: 350),
                         turns: turns,
                         child: Icon(
                           Icons.menu_outlined,
@@ -72,8 +72,7 @@ class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
                               if (snapshot.hasData) {
                                 if (snapshot.data as bool) {
                                   return RichText(
-                                    text: Utils.starAdminTextSpan,
-                                  );
+                                      text: Utils.starAdminTextSpan);
                                 }
                               }
                             }
@@ -86,7 +85,7 @@ class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
               AppBarItem(
                 isOpened: widget.isOpened,
                 title: 'Dashboard',
-                icon: Utils.dashboardIcon,
+                icon: Icons.dashboard_outlined,
                 index: 0,
                 selectPage: selectPage,
               ),
@@ -94,7 +93,7 @@ class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
               AppBarItem(
                 isOpened: widget.isOpened,
                 title: 'Employees',
-                icon: Utils.employeesIcon,
+                icon: Icons.people_outlined,
                 index: 1,
                 selectPage: selectPage,
               ),

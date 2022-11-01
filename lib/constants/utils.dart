@@ -15,10 +15,6 @@ class Utils {
 
   static const Duration animationDuration = Duration(milliseconds: 150);
 
-  static const dashboardIcon = Icon(Icons.dashboard_outlined, size: 28);
-
-  static const employeesIcon = Icon(Icons.people_outline_outlined, size: 28);
-
   static const spaceBetweenTabBarItem = SizedBox(height: 2.5);
 
   static const EdgeInsets edgeInsetsHorizontal20 =
@@ -52,11 +48,6 @@ class Utils {
         style: TextStyle(color: Colors.blueAccent),
       )
     ],
-  );
-
-  static const textStyleTabBarItem = TextStyle(
-    fontSize: 15,
-    fontWeight: FontWeight.w500,
   );
 
   static const EdgeInsets edgeInsetsHor10Ver5 =
