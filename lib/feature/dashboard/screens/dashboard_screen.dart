@@ -4,7 +4,9 @@ import 'package:ueh_project_admin/constants/app_color.dart';
 import 'package:ueh_project_admin/constants/reponsiveness.dart';
 import 'package:ueh_project_admin/feature/dashboard/controller/dashboard_controller.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/custom_drawer.dart';
+import 'package:ueh_project_admin/feature/employ/screens/employ_main_screen.dart';
 import 'package:ueh_project_admin/feature/task_project/screens/create_project_screen.dart';
+import 'package:ueh_project_admin/feature/task_project/screens/task_screen.dart';
 
 import '../widgets/custom_appbar_dashboard.dart';
 import '../widgets/custom_left_appbar.dart';
@@ -65,7 +67,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             const SizedBox(height: 35),
                             const CustomToolBar()
                           ],
-                          CreateProjectScreen(),
+                          TaskScreen(),
                         ],
                       ),
                     ),
