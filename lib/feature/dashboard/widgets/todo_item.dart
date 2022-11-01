@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ueh_project_admin/constants/utils.dart';
 
 import '../../../constants/app_color.dart';
 
@@ -50,8 +51,7 @@ class TodoItem extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 5.0),
+                      padding: Utils.edgeInsetsHor10Ver5,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
                         color: type == 0
