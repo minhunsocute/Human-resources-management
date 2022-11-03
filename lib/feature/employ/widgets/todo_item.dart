@@ -62,7 +62,7 @@ class TodoItem extends StatelessWidget {
                       ),
                       child: Text(
                         type == 0
-                            ? 'Dude Tommorrow'
+                            ? 'Dude'
                             : type == 1
                                 ? 'Done'
                                 : 'Expried',

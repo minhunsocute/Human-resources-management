@@ -18,6 +18,11 @@ class Utils {
       'title': 'Project',
       'icon': Icon(Icons.assignment_outlined, size: iconSize),
     },
+    {
+      'index': 3,
+      'title': 'Profile',
+      'icon': Icon(Icons.person_outline, size: iconSize),
+    }
   ];
 
   static const BorderRadius appBarItemBorder =
