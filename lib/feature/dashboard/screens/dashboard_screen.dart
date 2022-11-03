@@ -11,7 +11,7 @@ import 'package:ueh_project_admin/feature/task_project/screens/task_screen.dart'
 import '../widgets/custom_appbar_dashboard.dart';
 import '../widgets/custom_left_appbar.dart';
 import '../widgets/custom_tool_bar.dart';
-import 'home_screen.dart';
+import '../../home/screens/home_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -23,7 +23,6 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   Rx<double> widthDrawer = (Get.width * 0.2).obs;
   double turns = 0.0;
-  double widthDevice = Get.width;
 
   final scaffoldDashboardScreenKey = GlobalKey<ScaffoldState>();
 
@@ -42,14 +41,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             : const EdgeInsets.only(top: 0),
         child: Row(
           children: [
-            if (!isSmallScreen)
-              Obx(() {
-                return CustomLeftAppBar(
-                  isOpened: dashboardController.isOpened.value,
-                  openAppBar: dashboardController.openAppBar,
-                  widthDevice: widthDevice,
-                );
-              }),
+            if (!isSmallScreen) dashboardController.leftAppBarWidget,
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 30, top: 15, right: 15.0),
@@ -67,7 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             const SizedBox(height: 35),
                             const CustomToolBar()
                           ],
-                          TaskScreen(),
+                          dashboardController.pages,
                         ],
                       ),
                     ),

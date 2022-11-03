@@ -1,31 +1,32 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
+import 'package:ueh_project_admin/feature/dashboard/controller/dashboard_controller.dart';
 
 import '../../../constants/app_color.dart';
-import 'appbar_item.dart';
 
 class CustomLeftAppBar extends StatefulWidget {
   const CustomLeftAppBar(
       {super.key,
       required this.isOpened,
       required this.openAppBar,
-      required this.widthDevice});
+      required this.widthDevice,
+      required this.selectPage});
   final bool isOpened;
   final double widthDevice;
   final Function() openAppBar;
+  final Function(int) selectPage;
   @override
   State<CustomLeftAppBar> createState() => _CustomLeftAppBarState();
 }
 
 class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
   double turns = 0;
+  Offset offset = Offset(-1, 0);
 
-  Rx<int> selectedChoice = 0.obs;
-
-  void selectPage(int value) {
-    selectedChoice.value = value;
-  }
+  final controller = Get.find<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +37,12 @@ class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
       width: widget.isOpened
           ? widget.widthDevice * 0.12
           : widget.widthDevice * 0.04,
-      child: Material(
-        color: widget.isOpened ? AppColors.greyBackgroundCOlor : Colors.white,
-        child: Focus(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
+      child: GetBuilder<DashboardController>(
+          assignId: true,
+          id: Utils.idLeftNavigatorBar,
+          builder: (controller) {
+            return NavigationRail(
+              leading: Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -63,42 +63,26 @@ class _CustomLeftAppBarState extends State<CustomLeftAppBar> {
                     ),
                     const SizedBox(width: 10),
                     if (widget.isOpened)
-                      FutureBuilder(
-                          future: Future.delayed(
-                              Utils.animationDuration, () => true),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasData) {
-                                if (snapshot.data as bool) {
-                                  return RichText(
-                                      text: Utils.starAdminTextSpan);
-                                }
-                              }
-                            }
-                            return Utils.emptySizeBox;
-                          }),
+                      RichText(text: Utils.starAdminTextSpan),
                   ],
                 ),
               ),
-              const SizedBox(height: 40),
-              AppBarItem(
-                isOpened: widget.isOpened,
-                title: 'Dashboard',
-                icon: Icons.dashboard_outlined,
-                index: 0,
-              ),
-              Utils.spaceBetweenTabBarItem,
-              AppBarItem(
-                isOpened: widget.isOpened,
-                title: 'Employees',
-                icon: Icons.people_outlined,
-                index: 1,
-              ),
-            ],
-          ),
-        ),
-      ),
+              backgroundColor: widget.isOpened
+                  ? AppColors.greyBackgroundCOlor
+                  : Colors.white,
+              extended: widget.isOpened,
+              onDestinationSelected: controller.selectPage,
+              selectedIndex: controller.pageIndex.value,
+              destinations: Utils.titleAndIconList
+                  .map(
+                    (e) => NavigationRailDestination(
+                      icon: e['icon'] as Icon,
+                      label: Text(e['title'] as String),
+                    ),
+                  )
+                  .toList(),
+            );
+          }),
     );
   }
 }

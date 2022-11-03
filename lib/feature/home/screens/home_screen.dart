@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
+import 'package:ueh_project_admin/feature/employ/widgets/employee_status_item.dart';
+import 'package:ueh_project_admin/feature/employ/widgets/recruitment_progress_item.dart';
+import 'package:ueh_project_admin/feature/home/widgets/card_1.dart';
 
 import '../../../constants/app_color.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -9,14 +12,11 @@ import 'package:percent_indicator/percent_indicator.dart';
 import '../../../constants/reponsiveness.dart';
 import '../../../widgets/column_2_chart.dart';
 import '../../../widgets/line_chart.dart';
-import '../widgets/card_1.dart';
-import '../widgets/employee_status_item.dart';
-import '../widgets/field_auto.dart';
-import '../widgets/recruitment_progress_item.dart';
-import '../widgets/row_field.dart';
-import '../widgets/todo_item.dart';
-import '../widgets/top_employ_card.dart';
-import '../widgets/type_employ_item.dart';
+import '../../dashboard/widgets/field_auto.dart';
+import '../../dashboard/widgets/row_field.dart';
+import '../../employ/widgets/todo_item.dart';
+import '../../employ/widgets/top_employ_card.dart';
+import '../../employ/widgets/type_employ_item.dart';
 
 List<Map<String, dynamic>> listCard1 = [
   {

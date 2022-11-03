@@ -3,57 +3,43 @@ import 'package:get/get.dart';
 
 import '../../../constants/utils.dart';
 
+// ignore: must_be_immutable
 class AppBarItem extends StatelessWidget {
-  AppBarItem({
+  const AppBarItem({
     super.key,
     required this.isOpened,
     required this.title,
     required this.icon,
     required this.index,
+    required this.selectPage,
   });
   final int index;
   final String title;
   final IconData icon;
   final bool isOpened;
+  final Function(int) selectPage;
 
-  late final focus = FocusNode();
-  var isFocus = false.obs;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onFocusChange: (value) {
-        isFocus.value = value;
-      },
-      focusNode: focus,
+      // onFocusChange: (value) {
+      //   isFocus.value = value;
+      // },
       hoverColor: Colors.white60,
       focusColor: Colors.white60,
       borderRadius: Utils.appBarItemBorder,
       onTap: () {
-        focus.requestFocus();
+        selectPage(index);
       },
       child: Row(
         children: [
-          Obx(() => (isFocus.value && !isOpened)
-              ? Container(
-                  height: 40,
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      left: BorderSide(color: Colors.blue, width: 3),
-                    ),
-                  ),
-                )
-              : const SizedBox(
-                  height: 40,
-                )),
-          Obx(
-            () => Flexible(
-              fit: FlexFit.tight,
-              flex: 1,
-              child: Icon(
-                icon,
-                size: 28,
-                color: isFocus.value ? Colors.blueAccent : Colors.black,
-              ),
+          Flexible(
+            fit: FlexFit.tight,
+            flex: 1,
+            child: Icon(
+              icon,
+              size: 28,
+              color: Colors.black,
             ),
           ),
           if (isOpened)
@@ -67,17 +53,15 @@ class AppBarItem extends StatelessWidget {
                   if (snapshot.hasData) {
                     if (snapshot.data as bool) {
                       return Expanded(
-                        child: Obx(() => Text(
-                              title,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: isFocus.value
-                                    ? Colors.blueAccent
-                                    : Colors.black,
-                              ),
-                            )),
+                        child: Text(
+                          title,
+                          textAlign: TextAlign.start,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
                       );
                     }
                   }
