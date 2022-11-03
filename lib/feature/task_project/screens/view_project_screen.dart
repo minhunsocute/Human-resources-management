@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:ueh_project_admin/feature/dashboard/screens/home_screen.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
+import 'package:ueh_project_admin/feature/home/screens/home_screen.dart';
 
 import '../../../constants/app_color.dart';
 import '../../../constants/utils.dart';
