@@ -3,11 +3,17 @@ import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
+import 'package:ueh_project_admin/feature/employ/widgets/button_icon.dart';
 import 'package:ueh_project_admin/feature/home/screens/home_screen.dart';
+import 'package:ueh_project_admin/widgets/custom_button.dart';
 
 import '../../../constants/app_color.dart';
 import '../../../constants/utils.dart';
 import '../../../widgets/column_2_chart.dart';
+import '../../auth/screens/sign_in _screen.dart';
+import '../widgets/custom_dialog_error/question_dialog.dart';
+import '../widgets/git_hub_calender.dart';
+import '../widgets/task_data_item.dart';
 
 List<Map<String, dynamic>> fakeDataCommit = [
   {
@@ -62,8 +68,8 @@ List<Map<String, dynamic>> fakeDataCommit = [
 
 class ViewProjectScreen extends StatelessWidget {
   final Function() backFunc;
-  const ViewProjectScreen({super.key, required this.backFunc});
-
+  ViewProjectScreen({super.key, required this.backFunc});
+  final _textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -317,12 +323,6 @@ class ViewProjectScreen extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             color: AppColors.backgroundColor,
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: AppColors.textColor.withOpacity(0.2),
-            //     blurRadius: 10.0,
-            //   ),
-            // ],
           ),
           child: Column(children: [
             Row(
@@ -339,35 +339,285 @@ class ViewProjectScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20.0),
-            Row2Field(
-              childre: [
-                FieldAuto(
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: AppColors.backgroundColor,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.textColor.withOpacity(0.2),
-                              blurRadius: 10.0,
-                            ),
-                          ],
+            Column(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      color: AppColors.backgroundColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.textColor.withOpacity(0.2),
+                          blurRadius: 10.0,
                         ),
-                        padding: const EdgeInsets.all(10.0),
-                        child: GitHubCalenderBuit(
-                            fakeDataCommit: fakeDataCommit))),
-                FieldAuto(
-                    child: SizedBox(
-                        child: Column(
+                      ],
+                    ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: GitHubCalenderBuit(fakeDataCommit: fakeDataCommit)),
+                const SizedBox(height: 10.0),
+                SizedBox(
+                    child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: contributionAcitvityField(DateTime.now()),
                     ),
                   ],
-                )))
+                ))
               ],
             )
+          ]),
+        ),
+        const SizedBox(height: 20.0),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0),
+            color: AppColors.backgroundColor,
+          ),
+          child: Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'AllTask and Commitboard',
+                  style: TextStyle(
+                    color: AppColors.textColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                  ),
+                ),
+                ButtonIcon(
+                  title: 'Add New Task',
+                  press: () async => await showDialog(
+                    context: context,
+                    builder: (context) => Dialog(
+                      backgroundColor: Colors.transparent,
+                      child: Container(
+                        width: 500,
+                        height: 800,
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundColor,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Add New Task',
+                              style: TextStyle(
+                                color: AppColors.textColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                              ),
+                            ),
+                            const SizedBox(height: 20.0),
+                            const Divider(
+                              thickness: 1,
+                            ),
+                            const SizedBox(height: 10.0),
+                            CustomTextField(
+                              hintText: 'Enter Task Name',
+                              icon: Icons.task,
+                              controller: _textController,
+                            ),
+                            const SizedBox(height: 15.0),
+                            CustomTextField(
+                              hintText: 'Enter Description',
+                              icon: Icons.description,
+                              controller: _textController,
+                              maxLines: 5,
+                            ),
+                            const SizedBox(height: 15.0),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0,
+                                vertical: 5.0,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2.0),
+                                border:
+                                    Border.all(width: 1, color: Colors.grey),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.calendar_month,
+                                          color: Colors.grey)),
+                                  const SizedBox(width: 10),
+                                  const Expanded(
+                                    child: Text(
+                                      'Choose Dead Time',
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 16.0),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 15.0),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: AppColors.backgroundColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.textColor.withOpacity(0.4),
+                                    blurRadius: 10.0,
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              'assets/images/person.png')),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10.0),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: const [
+                                      Text('Nguyen Minh Hung',
+                                          style: TextStyle(
+                                              color: AppColors.textColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0)),
+                                      Text('Software Engineer',
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14.0)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10.0),
+                            Column(children: const [
+                              ChooseEmployForTaskItem(
+                                image: 'assets/images/person.png',
+                                name: "Nguyen Minh Hung",
+                                type: "Software Engineer",
+                              ),
+                              Divider(thickness: 1),
+                              ChooseEmployForTaskItem(
+                                image: 'assets/images/person1.png',
+                                name: "Truong Huynh Duc Hoang",
+                                type: "Software Engineer",
+                              ),
+                              Divider(thickness: 1),
+                              ChooseEmployForTaskItem(
+                                image: 'assets/images/person2.png',
+                                name: "Nguyen Trung Hieu",
+                                type: "Software Engineer",
+                              )
+                            ]),
+                            const Spacer(),
+                            CustomButton(text: 'Create Task', onTap: () {})
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  icon: Icons.add_task,
+                  color1: Colors.blue,
+                  color2: Colors.blue.withOpacity(0.5),
+                )
+              ],
+            ),
+            const SizedBox(height: 20.0),
+            Row(
+              children: const [
+                Expanded(
+                  flex: 1,
+                  child: Text('TASK NAME',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text('USER',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text('DEAD TIME',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text('STATUS',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold)),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text('BUTTON',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10.0),
+            const Divider(thickness: 1),
+            const SizedBox(height: 10.0),
+            TaskViewitem(
+                name: 'Coding Interview',
+                nameUser: 'Nguyen Minh Hung',
+                imageUser: 'assets/images/person2.png',
+                deadTime: DateTime.now(),
+                deleteFunc: () async => await showDialog(
+                      context: context,
+                      builder: (context) => const QuestionDialog(
+                        question: 'Do you want delete this Task?',
+                        title1: "This task will been deleted from this Project",
+                        icon: Icons.delete,
+                        color: Colors.red,
+                      ),
+                    ),
+                status: 1),
+            TaskViewitem(
+              name: 'Coding C++',
+              nameUser: 'Nguyen Minh Hung',
+              imageUser: 'assets/images/person.png',
+              deadTime: DateTime.now(),
+              status: 0,
+              deleteFunc: () async => await showDialog(
+                context: context,
+                builder: (context) => const QuestionDialog(
+                  question: 'Do you want delete this Task?',
+                  title1: "This task will been deleted from this Project",
+                  icon: Icons.delete,
+                  color: Colors.red,
+                ),
+              ),
+            ),
           ]),
         ),
         const SizedBox(height: 40.0),
@@ -444,62 +694,65 @@ class ViewProjectScreen extends StatelessWidget {
             height: 50,
             width: double.infinity,
             // padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: 2,
-                  height: 50,
-                  margin: const EdgeInsets.only(left: 9),
-                  color: AppColors.textColor.withOpacity(0.5),
-                ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          width: 190,
-                          child: Text(
-                            'minhunsocute/GHealth',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 2,
+                    height: 50,
+                    margin: const EdgeInsets.only(left: 9),
+                    color: AppColors.textColor.withOpacity(0.5),
+                  ),
+                  const SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            width: 190,
+                            child: Text(
+                              'minhunsocute/GHealth',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        // const Spacer(),
-                        SizedBox(
-                          width: 200,
-                          height: 7,
-                          child: LinearPercentIndicator(
-                            lineHeight: 10,
-                            percent: 0.4,
-                            progressColor: Colors.green.withOpacity(0.8),
-                            backgroundColor: Colors.grey.withOpacity(0.2),
-                            animation: true,
-                            animationDuration: 1000,
-                            barRadius: const Radius.circular(20),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    const Text(
-                      '155 commits',
-                      style: TextStyle(
-                        color: AppColors.textColor,
-                        fontSize: 12,
+                          const SizedBox(width: 10),
+                          // const Spacer(),
+                          SizedBox(
+                            width: 200,
+                            height: 7,
+                            child: LinearPercentIndicator(
+                              lineHeight: 10,
+                              percent: 0.4,
+                              progressColor: Colors.green.withOpacity(0.8),
+                              backgroundColor: Colors.grey.withOpacity(0.2),
+                              animation: true,
+                              animationDuration: 1000,
+                              barRadius: const Radius.circular(20),
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              ],
+                      const SizedBox(height: 2),
+                      const Text(
+                        '155 commits',
+                        style: TextStyle(
+                          color: AppColors.textColor,
+                          fontSize: 12,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         const SizedBox(height: 5.0),
@@ -515,17 +768,69 @@ class ViewProjectScreen extends StatelessWidget {
   }
 }
 
-class TaskDataItem extends StatelessWidget {
+class ChooseEmployForTaskItem extends StatelessWidget {
   final String image;
   final String name;
-  final int taskCompleted;
-  final int taskUncomleted;
-  const TaskDataItem({
+  final String type;
+  const ChooseEmployForTaskItem({
     Key? key,
     required this.image,
     required this.name,
-    required this.taskCompleted,
-    required this.taskUncomleted,
+    required this.type,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      child: Row(
+        children: [
+          Container(
+            width: 50.0,
+            height: 50.0,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image:
+                  DecorationImage(fit: BoxFit.cover, image: AssetImage(image)),
+            ),
+          ),
+          const SizedBox(width: 10.0),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(name,
+                  style: const TextStyle(
+                      color: AppColors.textColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0)),
+              Text(type,
+                  style: const TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TaskViewitem extends StatelessWidget {
+  final String name;
+  final String nameUser;
+  final String imageUser;
+  final DateTime deadTime;
+  final int status;
+  final Function() deleteFunc;
+  const TaskViewitem({
+    Key? key,
+    required this.name,
+    required this.nameUser,
+    required this.imageUser,
+    required this.deadTime,
+    required this.status,
+    required this.deleteFunc,
   }) : super(key: key);
 
   @override
@@ -536,6 +841,17 @@ class TaskDataItem extends StatelessWidget {
         children: [
           Expanded(
             flex: 1,
+            child: Text(
+              name,
+              textAlign: TextAlign.start,
+              style: const TextStyle(
+                  color: AppColors.textColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0),
+            ),
+          ),
+          Expanded(
+            flex: 1,
             child: Row(
               children: [
                 Container(
@@ -544,7 +860,7 @@ class TaskDataItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                        fit: BoxFit.cover, image: AssetImage(image)),
+                        fit: BoxFit.cover, image: AssetImage(imageUser)),
                     boxShadow: [
                       BoxShadow(
                           color: AppColors.textColor.withOpacity(0.6),
@@ -555,7 +871,7 @@ class TaskDataItem extends StatelessWidget {
                 const SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
-                    name,
+                    nameUser,
                     style: const TextStyle(
                         overflow: TextOverflow.ellipsis,
                         color: AppColors.textColor,
@@ -568,22 +884,69 @@ class TaskDataItem extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: Text(
-              '$taskCompleted Task',
-              style: const TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0),
+            child: Row(
+              children: [
+                const Icon(Icons.timelapse, color: AppColors.primaryColor),
+                Expanded(
+                  child: Text(
+                    DateFormat().add_yMd().format(deadTime),
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0),
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
             flex: 1,
-            child: Text(
-              '$taskUncomleted Task',
-              style: const TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 5.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: status == 0
+                          ? Colors.red.withOpacity(0.3)
+                          : Colors.green.withOpacity(0.3),
+                    ),
+                    child: Text(
+                      status == 0 ? 'UnCompleted' : 'Completed',
+                      style: TextStyle(
+                          color: status == 0 ? Colors.red : Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(children: [
+                ButtonIcon(
+                  title: 'Delete',
+                  press: deleteFunc,
+                  icon: Icons.delete,
+                  color1: Colors.red,
+                  color2: Colors.red.withOpacity(0.3),
+                ),
+                const SizedBox(width: 5.0),
+                ButtonIcon(
+                  title: 'Edit',
+                  press: () {},
+                  icon: Icons.edit,
+                  color1: Colors.blue,
+                  color2: Colors.blue.withOpacity(0.3),
+                )
+              ]),
             ),
           ),
         ],
@@ -616,171 +979,6 @@ class ImgeItem extends StatelessWidget {
             color: AppColors.textColor.withOpacity(0.3),
           )
         ],
-      ),
-    );
-  }
-}
-
-class GitHubCalenderBuit extends StatefulWidget {
-  final List<Map<String, dynamic>> fakeDataCommit;
-  const GitHubCalenderBuit({super.key, required this.fakeDataCommit});
-
-  @override
-  State<GitHubCalenderBuit> createState() => _GitHubCalenderBuitState();
-}
-
-class _GitHubCalenderBuitState extends State<GitHubCalenderBuit> {
-  List<String> weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  int checkConstainInList(DateTime time) {
-    for (var item in widget.fakeDataCommit) {
-      if (time.day == item['time'].day &&
-          time.month == item['time'].month &&
-          time.year == item['time'].year) {
-        return item['commit'];
-      }
-    }
-    return -1;
-  }
-
-  List<DateTime> listDateTime = [
-    for (int i = 0; i < 200; i++)
-      DateTime.now().subtract(const Duration(days: 10)).add(Duration(days: i))
-  ];
-  int get maxList => widget.fakeDataCommit
-      .fold<int>(0, (max, e) => e['commit'] > max ? e['commit'] : max);
-  int getStart() {
-    int count = 0;
-    for (var item in listDateTime) {
-      if (item.weekday != 1) {
-        count++;
-      } else {
-        break;
-      }
-    }
-    return count;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 140,
-      child: Row(
-        children: [
-          SizedBox(
-            width: 30,
-            height: 140,
-            child: Column(
-              children: [
-                ...weekDays.map(
-                  (e) => Expanded(
-                    child: Text(
-                      e,
-                      style: const TextStyle(
-                        color: AppColors.textColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 11,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics(),
-              ),
-              children: middleGithubField(getStart(), maxList),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  List<Widget> middleGithubField(int middleData, int maxOfList) {
-    int middle = ((listDateTime.length - middleData) / 7).floor();
-
-    return [
-      Column(
-        children: [
-          for (int i = 1; i <= 7; i++) startContainerGit(i, maxOfList),
-        ],
-      ),
-      for (int i = 0; i < middle; i++)
-        Column(
-          children: [
-            for (int j = 0; j < 7; j++)
-              middleContainerGIt(middleData, i, j, maxOfList),
-          ],
-        ),
-      Column(
-        children: [
-          for (int i = 0;
-              i <
-                  (listDateTime.length - middleData) -
-                      ((listDateTime.length - middleData) / 7).floor() * 7;
-              i++)
-            endContainerGit(middle, i, middleData, maxOfList),
-        ],
-      )
-    ];
-  }
-
-  Expanded startContainerGit(int i, int maxList) {
-    int check = 0;
-    if (i >= listDateTime[0].weekday) {
-      check = checkConstainInList(listDateTime[i - listDateTime[0].weekday]);
-    }
-    return Expanded(
-      child: Container(
-        height: 15,
-        width: 15,
-        margin: const EdgeInsets.all(2),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(2),
-          color: (i >= listDateTime[0].weekday)
-              ? (check > 0)
-                  ? Colors.green.withOpacity(check / maxList)
-                  : AppColors.textColor.withOpacity(0.2)
-              : Colors.transparent,
-        ),
-      ),
-    );
-  }
-
-  Container endContainerGit(int middle, int i, int middleData, int maxOfList) {
-    int check =
-        (checkConstainInList(listDateTime[middle * 7 + i + middleData]));
-    return Container(
-      height: 16,
-      width: 16,
-      margin: const EdgeInsets.all(2),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(2),
-        color: (check > 0)
-            ? Colors.green.withOpacity(check / maxOfList)
-            : AppColors.textColor.withOpacity(0.2),
-      ),
-    );
-  }
-
-  Expanded middleContainerGIt(int middleData, int i, int j, int maxOfList) {
-    int check = checkConstainInList(listDateTime[middleData + 7 * i + j]);
-    return Expanded(
-      child: Container(
-        height: 15,
-        width: 15,
-        margin: const EdgeInsets.all(2),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(2),
-          color: (check > 0)
-              ? Colors.green.withOpacity(check / maxOfList)
-              : AppColors.textColor.withOpacity(0.2),
-        ),
       ),
     );
   }
