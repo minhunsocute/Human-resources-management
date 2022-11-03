@@ -1,8 +1,34 @@
 import 'package:flutter/material.dart';
 
 class Utils {
+  static const double iconSize = 28;
+  static const List<Map<String, dynamic>> titleAndIconList = [
+    {
+      'index': 0,
+      'title': 'Dashboard',
+      'icon': Icon(Icons.dashboard_outlined, size: iconSize),
+    },
+    {
+      'index': 1,
+      'title': 'Employee',
+      'icon': Icon(Icons.people_outline_outlined, size: iconSize),
+    },
+    {
+      'index': 2,
+      'title': 'Project',
+      'icon': Icon(Icons.assignment_outlined, size: iconSize),
+    },
+  ];
+
   static const BorderRadius appBarItemBorder =
       BorderRadius.horizontal(right: Radius.circular(20));
+
+  static final Image faceImage = Image.asset(
+    'images/face8.jpg',
+    fit: BoxFit.cover,
+  );
+
+  static const idLeftNavigatorBar = 'leftNavigatorBar';
 
   static const EdgeInsets appBarItemPadding = EdgeInsets.symmetric(vertical: 8);
   static const BoxDecoration blueVerticalLineTabBarItem = BoxDecoration(
@@ -49,6 +75,8 @@ class Utils {
       )
     ],
   );
+
+  static const emptyTextSpan = TextSpan();
 
   static const EdgeInsets edgeInsetsHor10Ver5 =
       EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0);

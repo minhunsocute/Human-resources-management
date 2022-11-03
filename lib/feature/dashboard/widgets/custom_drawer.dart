@@ -11,31 +11,9 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     dashboardController.isOpened.value = true;
     return Drawer(
-      width: Get.width * 0.32,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5))),
+      width: Get.width * 0.35,
       elevation: 10,
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            height: MediaQuery.of(context).size.height * 0.1,
-            child: Text(
-              'UEH MUON NAM',
-              style: Theme.of(context).textTheme.caption,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: AppBarItem(
-              isOpened: dashboardController.isOpened.value,
-              title: 'Dashboard',
-              icon: Icons.dashboard_outlined,
-              index: 0,
-            ),
-          )
-        ],
-      ),
+      child: dashboardController.leftAppBarWidget,
     );
   }
 }

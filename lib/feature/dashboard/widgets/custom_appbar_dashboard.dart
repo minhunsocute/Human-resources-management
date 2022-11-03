@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ueh_project_admin/constants/utils.dart';
 
 import '../../../constants/reponsiveness.dart';
 
@@ -165,10 +166,7 @@ class CustomAppBarDashboard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      'images/face8.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                    child: Utils.faceImage,
                   ),
                 )
               ] else ...[

@@ -7,9 +7,9 @@ import 'package:ueh_project_admin/widgets/custom_button.dart';
 
 import '../../../constants/app_color.dart';
 import '../../../constants/reponsiveness.dart';
-import '../../dashboard/widgets/recruitment_progress_item.dart';
 import '../widgets/button_icon.dart';
 import '../widgets/employee_progress_item.dart';
+import '../widgets/recruitment_progress_item.dart';
 
 class EmployMainScreen extends StatelessWidget {
   EmployMainScreen({super.key});
