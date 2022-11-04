@@ -35,7 +35,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Row(
           children: [
             if (!isSmallScreen) dashboardController.leftAppBarWidget,
-            Flexible(
+            Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 30, top: 15, right: 15.0),
                 child: SingleChildScrollView(
@@ -43,19 +43,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     constraints: BoxConstraints(
                       minHeight: MediaQuery.of(context).size.height,
                     ),
-                    child: IntrinsicHeight(
-                      child: Column(
-                        children: [
-                          CustomAppBarDashboard(
-                              scaffoldDashboardScreenKey:
-                                  scaffoldDashboardScreenKey),
-                          if (!isSmallScreen) ...[
-                            const SizedBox(height: 35),
-                            const CustomToolBar()
-                          ],
-                          dashboardController.pages,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CustomAppBarDashboard(
+                            scaffoldDashboardScreenKey:
+                                scaffoldDashboardScreenKey),
+                        if (!isSmallScreen) ...[
+                          const SizedBox(height: 35),
+                          const CustomToolBar()
                         ],
-                      ),
+                        dashboardController.pages,
+                      ],
                     ),
                   ),
                 ),
