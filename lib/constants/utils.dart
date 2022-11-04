@@ -25,6 +25,25 @@ class Utils {
     }
   ];
 
+  static const titleAndIconWidget = [
+    NavigationRailDestination(
+      icon: Icon(Icons.dashboard_outlined, size: iconSize),
+      label: Text('Dashboard'),
+    ),
+    NavigationRailDestination(
+      icon: Icon(Icons.people_outline_outlined, size: iconSize),
+      label: Text('Employee'),
+    ),
+    NavigationRailDestination(
+      icon: Icon(Icons.assignment_outlined, size: iconSize),
+      label: Text('Project'),
+    ),
+    NavigationRailDestination(
+      icon: Icon(Icons.person_outline, size: iconSize),
+      label: Text('Profile'),
+    ),
+  ];
+
   static const BorderRadius appBarItemBorder =
       BorderRadius.horizontal(right: Radius.circular(20));
 
@@ -32,6 +51,8 @@ class Utils {
     'images/face8.jpg',
     fit: BoxFit.cover,
   );
+
+  static const curvesAnimation = Curves.easeInOut;
 
   static const starAdminText = [
     Text('Star'),
