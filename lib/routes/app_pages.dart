@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ueh_project_admin/feature/dashboard/bindings/dashboard_binding.dart';
 import 'package:ueh_project_admin/feature/dashboard/screens/dashboard_screen.dart';
 import 'package:ueh_project_admin/routes/route_name.dart';
 
@@ -13,8 +14,8 @@ class AppPages {
     ),
     GetPage(
       name: RouteNames.dashboardScreen,
-      page: () => DashboardScreen(),
-      // binding: DashboardBinding(),
+      page: () => const DashboardScreen(),
+      binding: DashboardBinding(),
     ),
   ];
 }

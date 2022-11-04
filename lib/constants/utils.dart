@@ -28,6 +28,14 @@ class Utils {
     fit: BoxFit.cover,
   );
 
+  static const starAdminText = [
+    Text('Star'),
+    Text(
+      'Admin',
+      style: TextStyle(color: Colors.blue),
+    )
+  ];
+
   static const idLeftNavigatorBar = 'leftNavigatorBar';
 
   static const EdgeInsets appBarItemPadding = EdgeInsets.symmetric(vertical: 8);
