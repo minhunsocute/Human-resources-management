@@ -25,9 +25,7 @@ class EmployMainScreen extends StatelessWidget {
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20.0),
-              margin: ResponsiveWidget.isSmallScreen(context)
-                  ? const EdgeInsets.symmetric(horizontal: 20.0)
-                  : const EdgeInsets.only(right: 20.0),
+              margin: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
                 color: AppColors.backgroundColor,
@@ -293,9 +291,7 @@ class EmployMainScreen extends StatelessWidget {
       Container(
         width: double.infinity,
         padding: const EdgeInsets.all(20.0),
-        margin: ResponsiveWidget.isSmallScreen(context)
-            ? const EdgeInsets.symmetric(horizontal: 20.0)
-            : const EdgeInsets.only(left: 10.0, right: 20.0),
+        margin: const EdgeInsets.symmetric(horizontal: 20.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
           color: AppColors.backgroundColor,
