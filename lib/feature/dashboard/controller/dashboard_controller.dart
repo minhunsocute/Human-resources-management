@@ -33,7 +33,7 @@ class DashboardController extends GetxController {
 
   late final pages = Obx(
     () => IndexedStack(
-      alignment: Alignment.topCenter,
+      alignment: Alignment.center,
       index: pageIndex.value,
       children: [
         TaskScreen(),
