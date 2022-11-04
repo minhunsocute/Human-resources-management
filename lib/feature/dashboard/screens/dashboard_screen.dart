@@ -52,13 +52,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: IntrinsicHeight(
                       child: Column(
                         children: [
-                          CustomAppBarDashboard(
-                              scaffoldDashboardScreenKey:
-                                  scaffoldDashboardScreenKey),
-                          if (!isSmallScreen) ...[
-                            const SizedBox(height: 35),
-                            const CustomToolBar()
-                          ],
+                          Obx(
+                            () => Column(children: [
+                              if (dashboardController.pageIndex.value != 0 ||
+                                  isSmallScreen)
+                                CustomAppBarDashboard(
+                                    scaffoldDashboardScreenKey:
+                                        scaffoldDashboardScreenKey),
+                              if (!isSmallScreen &&
+                                  dashboardController.pageIndex.value != 0) ...[
+                                const SizedBox(height: 35),
+                                const CustomToolBar()
+                              ],
+                            ]),
+                          ),
                           dashboardController.pages,
                         ],
                       ),

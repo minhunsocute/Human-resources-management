@@ -36,10 +36,10 @@ class DashboardController extends GetxController {
       alignment: Alignment.topCenter,
       index: pageIndex.value,
       children: [
-        TaskScreen(),
+        ProfileScreen(),
         HomeScreen(),
         EmployMainScreen(),
-        ProfileScreen(),
+        TaskScreen(),
       ],
     ),
   );
