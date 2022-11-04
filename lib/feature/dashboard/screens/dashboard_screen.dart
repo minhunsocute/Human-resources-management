@@ -36,33 +36,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: [
             if (!isSmallScreen) dashboardController.leftAppBarWidget,
             Flexible(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30, top: 15, right: 15.0),
-                child: SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: MediaQuery.of(context).size.height,
-                    ),
-                    child: IntrinsicHeight(
-                      child: Column(
-                        children: [
-                          Obx(
-                            () => Column(children: [
-                              if (dashboardController.pageIndex.value != 0 ||
-                                  isSmallScreen)
-                                CustomAppBarDashboard(
-                                    scaffoldDashboardScreenKey:
-                                        scaffoldDashboardScreenKey),
-                              if (!isSmallScreen &&
-                                  dashboardController.pageIndex.value != 0) ...[
-                                const SizedBox(height: 35),
-                                const CustomToolBar()
-                              ],
-                            ]),
-                          ),
-                          dashboardController.pages,
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height,
+                  ),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 5.0),
+                          child: CustomAppBarDashboard(
+                              scaffoldDashboardScreenKey:
+                                  scaffoldDashboardScreenKey),
+                        ),
+                        if (!isSmallScreen) ...[
+                          const SizedBox(height: 35),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.0),
+                            child: CustomToolBar(),
+                          )
                         ],
-                      ),
+                        dashboardController.pages,
+                      ],
                     ),
                   ),
                 ),

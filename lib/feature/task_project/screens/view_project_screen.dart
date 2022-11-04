@@ -78,15 +78,16 @@ class ViewProjectScreen extends StatelessWidget {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(20.0),
+          margin: const EdgeInsets.symmetric(horizontal: 20.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             color: AppColors.backgroundColor,
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: AppColors.textColor.withOpacity(0.2),
-            //     blurRadius: 10.0,
-            //   ),
-            // ],
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.textColor.withOpacity(0.2),
+                blurRadius: 10.0,
+              ),
+            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,15 +210,16 @@ class ViewProjectScreen extends StatelessWidget {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(20.0),
+          margin: const EdgeInsets.symmetric(horizontal: 20.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             color: AppColors.backgroundColor,
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: AppColors.textColor.withOpacity(0.2),
-            //     blurRadius: 10.0,
-            //   ),
-            // ],
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.textColor.withOpacity(0.2),
+                blurRadius: 10.0,
+              ),
+            ],
           ),
           child: Column(
             children: [
@@ -319,10 +321,17 @@ class ViewProjectScreen extends StatelessWidget {
         const SizedBox(height: 20.0),
         Container(
           width: double.infinity,
+          margin: const EdgeInsets.symmetric(horizontal: 20.0),
           padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             color: AppColors.backgroundColor,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.textColor.withOpacity(0.2),
+                blurRadius: 10.0,
+              ),
+            ],
           ),
           child: Column(children: [
             Row(
@@ -372,9 +381,16 @@ class ViewProjectScreen extends StatelessWidget {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(20.0),
+          margin: const EdgeInsets.symmetric(horizontal: 20.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             color: AppColors.backgroundColor,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.textColor.withOpacity(0.2),
+                blurRadius: 10.0,
+              ),
+            ],
           ),
           child: Column(children: [
             Row(
