@@ -35,6 +35,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Row(
           children: [
             if (!isSmallScreen) dashboardController.leftAppBarWidget,
+
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 30, top: 15, right: 15.0),

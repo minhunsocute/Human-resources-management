@@ -15,7 +15,7 @@ import '../../../widgets/custom_button.dart';
 
 class TaskScreen extends StatelessWidget {
   TaskScreen({super.key});
-  RxInt checkPage = 1.obs;
+  RxInt checkPage = 0.obs;
   @override
   Widget build(BuildContext context) {
     return Obx(() => checkPage.value == 0
@@ -29,9 +29,7 @@ class TaskScreen extends StatelessWidget {
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(20.0),
-                        margin: ResponsiveWidget.isSmallScreen(context)
-                            ? const EdgeInsets.symmetric(horizontal: 20.0)
-                            : const EdgeInsets.only(right: 20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
                           color: AppColors.backgroundColor,
@@ -152,9 +150,7 @@ class TaskScreen extends StatelessWidget {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(20.0),
-                margin: ResponsiveWidget.isSmallScreen(context)
-                    ? const EdgeInsets.symmetric(horizontal: 20.0)
-                    : const EdgeInsets.only(right: 20.0),
+                margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
                   color: AppColors.backgroundColor,
