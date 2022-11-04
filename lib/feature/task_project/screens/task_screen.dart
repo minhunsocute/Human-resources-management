@@ -618,12 +618,6 @@ class ImgeItem extends StatelessWidget {
           image: AssetImage(image),
           fit: BoxFit.cover,
         ),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 10.0,
-            color: AppColors.textColor.withOpacity(0.3),
-          )
-        ],
       ),
     );
   }
