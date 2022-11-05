@@ -17,6 +17,13 @@ class MailNotificationScreen extends StatelessWidget {
   MailNotificationScreen({super.key});
   RxInt check = 0.obs;
   RxBool checkUread = false.obs;
+  final decoration = BoxDecoration(
+    borderRadius: BorderRadius.circular(5.0),
+    color: Colors.white,
+    boxShadow: [
+      BoxShadow(color: AppColors.textColor.withOpacity(0.3), blurRadius: 10.0),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
     var widthDevice = MediaQuery.of(context).size.width;
@@ -207,29 +214,193 @@ class MailNotificationScreen extends StatelessWidget {
               ),
               FieldAutoHere(
                 isSmallScreen: isSmallScreen,
-                child: Container(
-                  height: heightDevice,
-                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: AppColors.backgroundColor,
-                    borderRadius: BorderRadius.circular(5.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.textColor.withOpacity(0.2),
-                        blurRadius: 10.0,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20.0),
+                      margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                      decoration: decoration,
+                      child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Phuc Khao diem co so du lieu',
+                          style: TextStyle(
+                              color: AppColors.textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                        ),
                       ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [],
-                  ),
+                    ),
+                    const SizedBox(height: 5.0),
+                    MessageViewItem(
+                      decoration: decoration,
+                      name: 'Nguyen Minh Hung',
+                      gmail: '<hungnguyen.201102ak@gmail.com>',
+                      toMail: 'hung.201102ak@gmail.com',
+                      title: '',
+                      iconHeader: const Icon(FontAwesome.github, size: 40.0),
+                      time: DateTime.now(),
+                    )
+                  ],
                 ),
               )
             ],
           ),
         )
       ],
+    );
+  }
+}
+
+class MessageViewItem extends StatelessWidget {
+  final String name;
+  final String gmail;
+  final String toMail;
+  final String title;
+  final Widget iconHeader;
+  final DateTime time;
+
+  const MessageViewItem({
+    Key? key,
+    required this.decoration,
+    required this.name,
+    required this.gmail,
+    required this.toMail,
+    required this.title,
+    required this.iconHeader,
+    required this.time,
+  }) : super(key: key);
+
+  final BoxDecoration decoration;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.all(20.0),
+      decoration: decoration,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(FontAwesome.github, size: 40.0),
+          const SizedBox(width: 10.0),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            name,
+                            style: const TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            gmail,
+                            style: const TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: const Icon(
+                        Icons.insert_emoticon_outlined,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    InkWell(
+                      onTap: () {},
+                      child: const Icon(FontAwesome.mail_reply,
+                          color: Colors.blue),
+                    ),
+                    const SizedBox(width: 10),
+                    InkWell(
+                      onTap: () {},
+                      child: const Icon(FontAwesome.mail_forward,
+                          color: Colors.blue),
+                    ),
+                    const SizedBox(width: 10),
+                    InkWell(
+                      onTap: () {},
+                      child: const Icon(Icons.more_horiz, color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5.0),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'To: $toMail',
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
+                    Text(
+                        '${DateFormat().add_yMEd().format(time)} ${DateFormat().add_jm().format(time)}')
+                  ],
+                ),
+                const SizedBox(height: 20.0),
+                Text(
+                  'Em tên Nguyễn Minh Hưng , MSSV là 20120491\nDạ thưa cô em có đi học, làm bài kiểm tra với làm bài nhóm nộp bài\nđầy đủ mà sao lại không có bài được ạ.\nMong cô xem lại bài của em với ạ. Em chân thành cảm ơn!',
+                  style: const TextStyle(
+                    color: AppColors.textColor,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16.0,
+                  ),
+                ),
+                const SizedBox(height: 20.0),
+                Text(
+                  'Vào Th 5, 7 thg 7, 2022 vào lúc 08:09 NGUYỄN MINH HƯNG <20120491@student.hcmus.edu.vn> đã viết:',
+                  style: const TextStyle(
+                    color: AppColors.textColor,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 16.0,
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+                Container(
+                  margin: const EdgeInsets.only(left: 10.0),
+                  padding: const EdgeInsets.only(left: 10.0),
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          left: BorderSide(color: Colors.black, width: 0.5))),
+                  child: Text(
+                    'Em tên Nguyễn Minh Hưng , MSSV là 20120491\nDạ thưa cô em có đi học, làm bài kiểm tra với làm bài nhóm nộp bài\nđầy đủ mà sao lại không có bài được ạ.\nMong cô xem lại bài của em với ạ. Em chân thành cảm ơn!',
+                    style: const TextStyle(
+                      color: AppColors.textColor,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20.0),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
