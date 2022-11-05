@@ -62,8 +62,7 @@ class TaskScreen extends StatelessWidget {
                               Expanded(child: TextFormField()),
                             ],
                           ),
-                          const SizedBox(height: 30.0),
-                          const SizedBox(height: 10.0),
+                          const SizedBox(height: 40.0),
                           Row(
                             children: const [
                               Expanded(
