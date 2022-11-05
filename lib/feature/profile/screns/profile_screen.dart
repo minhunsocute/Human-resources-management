@@ -8,6 +8,8 @@ import '../../../constants/app_color.dart';
 import '../../../constants/reponsiveness.dart';
 import '../../dashboard/widgets/field_auto.dart';
 import '../../employ/screens/employ_main_screen.dart';
+import '../widgets/button_contact.dart';
+import '../widgets/setting_item.dart';
 
 final _controller = TextEditingController();
 
@@ -229,65 +231,6 @@ List<Map<String, dynamic>> listPages = [
     ]),
   },
 ];
-
-class SettingItem extends StatelessWidget {
-  final String title;
-  final String subTitle;
-  final Function() press;
-  final IconData icon;
-  const SettingItem({
-    Key? key,
-    required this.title,
-    required this.subTitle,
-    required this.press,
-    required this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(icon, color: Colors.blue, size: 18.0),
-        const SizedBox(width: 5.0),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  color: AppColors.textColor,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Text(
-                subTitle,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 11.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ),
-        InkWell(
-          onTap: press,
-          child: Container(
-              padding: const EdgeInsets.all(5.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey.withOpacity(0.2),
-              ),
-              child: const Icon(Icons.edit, color: Colors.grey, size: 20.0)),
-        ),
-      ],
-    );
-  }
-}
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -652,45 +595,6 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class ButtonContact extends StatelessWidget {
-  final String image;
-  final String title;
-  final Color color;
-  final Function() press;
-  const ButtonContact({
-    Key? key,
-    required this.image,
-    required this.title,
-    required this.color,
-    required this.press,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: press,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          color: color,
-        ),
-        child: Row(
-          children: [
-            Image.asset(image, width: 20.0, height: 32.0),
-            const SizedBox(width: 5.0),
-            Text(
-              title,
-              style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

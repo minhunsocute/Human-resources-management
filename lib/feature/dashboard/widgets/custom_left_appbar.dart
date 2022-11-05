@@ -47,6 +47,14 @@ class CustomLeftAppBar extends StatelessWidget {
       ),
       label: const Text('Profile'),
     ),
+    NavigationRailDestination(
+      icon: IconTabBar(
+        icon: Icons.mail_outline,
+        top: 273,
+        isOpened: isOpened,
+      ),
+      label: const Text('Profile'),
+    ),
   ];
 
   @override
