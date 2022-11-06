@@ -148,6 +148,8 @@ class _IconTabBarState extends State<IconTabBar> {
 
   FocusNode focusNode = FocusNode();
 
+  bool showOverlay = false;
+
   final key = UniqueKey();
 
   @override
@@ -171,40 +173,48 @@ class _IconTabBarState extends State<IconTabBar> {
           return Positioned(
             left: 72,
             top: widget.top,
-            child: MouseRegion(
-              onExit: (event) {
-                focusNode.unfocus();
-              },
-              child: Material(
-                child: Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          focusNode.unfocus();
-                        },
-                        child: const Text(
-                          'Choice 1',
-                          style: TextStyle(fontSize: 15),
+            child: Focus(
+              child: MouseRegion(
+                onExit: (event) {
+                  showOverlay = false;
+                  focusNode.unfocus();
+                },
+                onHover: (event) {
+                  if (showOverlay) {
+                    focusNode.requestFocus();
+                  }
+                },
+                child: Material(
+                  child: Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            focusNode.unfocus();
+                          },
+                          child: const Text(
+                            'Choice 1',
+                            style: TextStyle(fontSize: 15),
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Choice 2',
-                          style: TextStyle(fontSize: 15),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Choice 2',
+                            style: TextStyle(fontSize: 15),
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Choice 3',
-                          style: TextStyle(fontSize: 15),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Choice 3',
+                            style: TextStyle(fontSize: 15),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -221,12 +231,17 @@ class _IconTabBarState extends State<IconTabBar> {
       focusNode: focusNode,
       canRequestFocus: true,
       child: MouseRegion(
-        key: key,
         cursor: SystemMouseCursors.click,
         onEnter: (event) {
           if (!widget.isOpened) {
-            focusNode.requestFocus();
+            if (!focusNode.hasFocus) {
+              focusNode.requestFocus();
+              showOverlay = true;
+            }
           }
+        },
+        onExit: (event) {
+          focusNode.unfocus();
         },
         child: SizedBox(
           width: 200,
