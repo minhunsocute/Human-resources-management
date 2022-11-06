@@ -19,8 +19,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'UEH Project',
         theme: ThemeData(
-          // fontFamily: 'Montserrat',
-          // fontFamily: 'Montserrat',
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           backgroundColor: AppColors.greyBackgroundCOlor,
