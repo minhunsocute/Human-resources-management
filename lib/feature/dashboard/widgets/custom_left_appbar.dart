@@ -62,6 +62,7 @@ class CustomLeftAppBar extends StatelessWidget {
     return GetBuilder<DashboardController>(
       assignId: true,
       id: Utils.idLeftNavigatorBar,
+      autoRemove: false,
       builder: (controller) {
         return NavigationRail(
           leading: LeftAppBarLeading(
@@ -181,25 +182,28 @@ class _IconTabBarState extends State<IconTabBar> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
-                          onPressed: () {
-                            focusNode.unfocus();
-                          },
-                          child: const Text(
-                            'Choice 1',
-                            style: TextStyle(fontSize: 15),
-                          )),
+                        onPressed: () {
+                          focusNode.unfocus();
+                        },
+                        child: const Text(
+                          'Choice 1',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
                       TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Choice 2',
-                            style: TextStyle(fontSize: 15),
-                          )),
+                        onPressed: () {},
+                        child: const Text(
+                          'Choice 2',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
                       TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Choice 3',
-                            style: TextStyle(fontSize: 15),
-                          )),
+                        onPressed: () {},
+                        child: const Text(
+                          'Choice 3',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -22,9 +22,6 @@ class AppBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // onFocusChange: (value) {
-      //   isFocus.value = value;
-      // },
       hoverColor: Colors.white60,
       focusColor: Colors.white60,
       borderRadius: Utils.appBarItemBorder,
