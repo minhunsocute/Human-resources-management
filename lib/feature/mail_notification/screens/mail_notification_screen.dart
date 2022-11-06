@@ -17,6 +17,7 @@ class MailNotificationScreen extends StatelessWidget {
   MailNotificationScreen({super.key});
   RxInt check = 0.obs;
   RxBool checkUread = false.obs;
+  RxInt showViewMessIndex = 0.obs;
   final decoration = BoxDecoration(
     borderRadius: BorderRadius.circular(5.0),
     color: Colors.white,
@@ -142,6 +143,7 @@ class MailNotificationScreen extends StatelessWidget {
                         checkRead: true,
                         index: 0,
                         groupValue: check.value,
+                        press: () => showViewMessIndex.value = 0,
                         func: (value) {
                           check.value = value!;
                         }),
@@ -155,6 +157,7 @@ class MailNotificationScreen extends StatelessWidget {
                         checkRead: false,
                         index: 1,
                         groupValue: check.value,
+                        press: () => showViewMessIndex.value = 0,
                         func: (value) {
                           check.value = value!;
                         }),
@@ -168,6 +171,7 @@ class MailNotificationScreen extends StatelessWidget {
                         checkRead: false,
                         index: 2,
                         groupValue: check.value,
+                        press: () => showViewMessIndex.value = 0,
                         func: (value) {
                           check.value = value!;
                         }),
@@ -193,6 +197,7 @@ class MailNotificationScreen extends StatelessWidget {
                         checkRead: true,
                         index: 3,
                         groupValue: check.value,
+                        press: () => showViewMessIndex.value = 0,
                         func: (value) {
                           check.value = value!;
                         }),
@@ -206,6 +211,7 @@ class MailNotificationScreen extends StatelessWidget {
                         checkRead: false,
                         index: 4,
                         groupValue: check.value,
+                        press: () => showViewMessIndex.value = 0,
                         func: (value) {
                           check.value = value!;
                         }),
@@ -214,42 +220,105 @@ class MailNotificationScreen extends StatelessWidget {
               ),
               FieldAutoHere(
                 isSmallScreen: isSmallScreen,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(20.0),
-                      margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                      decoration: decoration,
-                      child: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Phuc Khao diem co so du lieu',
-                          style: TextStyle(
-                              color: AppColors.textColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0),
-                        ),
+                child: Container(
+                  width: double.infinity,
+                  height: heightDevice,
+                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: AppColors.backgroundColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.textColor.withOpacity(0.4),
+                        blurRadius: 10.0,
                       ),
-                    ),
-                    const SizedBox(height: 5.0),
-                    MessageViewItem(
-                      decoration: decoration,
-                      name: 'Nguyen Minh Hung',
-                      gmail: '<hungnguyen.201102ak@gmail.com>',
-                      toMail: 'hung.201102ak@gmail.com',
-                      title: '',
-                      iconHeader: const Icon(FontAwesome.github, size: 40.0),
-                      time: DateTime.now(),
-                    )
-                  ],
+                    ],
+                  ),
+                  child: Column(
+                    children: [],
+                  ),
                 ),
               )
+              // Obx(() => showViewMessIndex.value != -1
+              //     ? _viewMessafeField(isSmallScreen, heightDevice)
+              //     : Utils.emptySizeBox)
             ],
           ),
         )
       ],
+    );
+  }
+
+  FieldAutoHere _viewMessafeField(bool isSmallScreen, double heightDevice) {
+    return FieldAutoHere(
+      isSmallScreen: isSmallScreen,
+      child: Container(
+        width: double.infinity,
+        height: heightDevice,
+        margin: const EdgeInsets.symmetric(horizontal: 10.0),
+        color: AppColors.greyBackgroundCOlor,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20.0),
+              decoration: decoration,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    isSmallScreen
+                        ? InkWell(
+                            onTap: () => showViewMessIndex.value = -1.obs,
+                            child: const Icon(Icons.close, color: Colors.black),
+                          )
+                        : Utils.emptySizeBox,
+                    const Text(
+                      ' Phuc Khao diem co so du lieu',
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 5.0),
+            MessageViewItem(
+              decoration: decoration,
+              name: 'Nguyen Minh Hung',
+              gmail: '<hungnguyen.201102ak@gmail.com>',
+              toMail: 'hung.201102ak@gmail.com',
+              title:
+                  'Em tên Nguyễn Minh Hưng , MSSV là 20120491\nDạ thưa cô em có đi học, làm bài kiểm tra với làm bài nhóm nộp bài\nđầy đủ mà sao lại không có bài được ạ.\nMong cô xem lại bài của em với ạ. Em chân thành cảm ơn!',
+              iconHeader: const Icon(FontAwesome.github, size: 40.0),
+              time: DateTime.now(),
+              messBefore:
+                  'Em tên Nguyễn Minh Hưng , MSSV là 20120491\nDạ thưa cô em có đi học, làm bài kiểm tra với làm bài nhóm nộp bài\nđầy đủ mà sao lại không có bài được ạ.\nMong cô xem lại bài của em với ạ. Em chân thành cảm ơn!',
+              gmailSendBefore: '20120491@student.hcmus.edu.vn',
+              timeMessBefore: DateTime.now(),
+            ),
+            const SizedBox(height: 5.0),
+            MessageViewItem(
+              decoration: decoration,
+              name: 'Truong Huynh Duc Hoang',
+              gmail: '<hoangankin.201102ak@gmail.com>',
+              toMail: 'hoangankin.201102ak@gmail.com',
+              title:
+                  'Em tên Nguyễn Minh Hưng , MSSV là 20120491\nDạ thưa cô em có đi học, làm bài kiểm tra với làm bài nhóm nộp bài\nđầy đủ mà sao lại không có bài được ạ.\nMong cô xem lại bài của em với ạ. Em chân thành cảm ơn!',
+              iconHeader: const Icon(FontAwesome.instagram,
+                  size: 40.0, color: Colors.pink),
+              time: DateTime.now(),
+              messBefore:
+                  'Em tên Nguyễn Minh Hưng , MSSV là 20120491\nDạ thưa cô em có đi học, làm bài kiểm tra với làm bài nhóm nộp bài\nđầy đủ mà sao lại không có bài được ạ.\nMong cô xem lại bài của em với ạ. Em chân thành cảm ơn!',
+              gmailSendBefore: '20120491@student.hcmus.edu.vn',
+              timeMessBefore: DateTime.now(),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
@@ -261,8 +330,11 @@ class MessageViewItem extends StatelessWidget {
   final String title;
   final Widget iconHeader;
   final DateTime time;
-
-  const MessageViewItem({
+  final DateTime timeMessBefore;
+  final String messBefore;
+  final String gmailSendBefore;
+  final BoxDecoration decoration;
+  MessageViewItem({
     Key? key,
     required this.decoration,
     required this.name,
@@ -271,136 +343,174 @@ class MessageViewItem extends StatelessWidget {
     required this.title,
     required this.iconHeader,
     required this.time,
+    required this.timeMessBefore,
+    required this.messBefore,
+    required this.gmailSendBefore,
   }) : super(key: key);
 
-  final BoxDecoration decoration;
-
+  RxBool onIt = false.obs;
+  RxBool checkSmallItem = true.obs;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 10.0),
-      padding: const EdgeInsets.all(20.0),
-      decoration: decoration,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Icon(FontAwesome.github, size: 40.0),
-          const SizedBox(width: 10.0),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Text(
-                            name,
-                            style: const TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w600,
+    return MouseRegion(
+      onEnter: (value) => onIt.value = true,
+      onExit: (value) => onIt.value = false,
+      child: Obx(() => InkWell(
+            onTap: () => checkSmallItem.value = !checkSmallItem.value,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 100),
+              width: double.infinity,
+              padding: const EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                color: checkSmallItem.value
+                    ? onIt.value
+                        ? AppColors.greyBackgroundCOlor
+                        : Colors.white
+                    : Colors.white,
+                borderRadius: BorderRadius.circular(5.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.textColor.withOpacity(0.4),
+                    blurRadius: 10.0,
+                  ),
+                ],
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  iconHeader,
+                  const SizedBox(width: 10.0),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Expanded(
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: name,
+                                      style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: gmail,
+                                      style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 18.0,
+                                      ),
+                                    ),
+                                  ],
+                                  style: const TextStyle(
+                                    color: AppColors.textColor,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                          Text(
-                            gmail,
-                            style: const TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w400,
+                            InkWell(
+                              onTap: () => print(1),
+                              child: const Icon(
+                                Icons.insert_emoticon_outlined,
+                                color: Colors.blue,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: const Icon(
-                        Icons.insert_emoticon_outlined,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {},
-                      child: const Icon(FontAwesome.mail_reply,
-                          color: Colors.blue),
-                    ),
-                    const SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {},
-                      child: const Icon(FontAwesome.mail_forward,
-                          color: Colors.blue),
-                    ),
-                    const SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {},
-                      child: const Icon(Icons.more_horiz, color: Colors.blue),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'To: $toMail',
-                        textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          color: AppColors.textColor,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.0,
+                            const SizedBox(width: 10),
+                            InkWell(
+                              onTap: () => print(2),
+                              child: const Icon(FontAwesome.mail_reply,
+                                  color: Colors.blue),
+                            ),
+                            const SizedBox(width: 10),
+                            InkWell(
+                              onTap: () => print(3),
+                              child: const Icon(FontAwesome.mail_forward,
+                                  color: Colors.blue),
+                            ),
+                            const SizedBox(width: 10),
+                            InkWell(
+                              onTap: () => print(4),
+                              child: const Icon(Icons.more_horiz,
+                                  color: Colors.blue),
+                            ),
+                          ],
                         ),
-                      ),
+                        const SizedBox(height: 5.0),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'To: $toMail',
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  color: AppColors.textColor,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ),
+                            Text(
+                                '${DateFormat().add_yMEd().format(time)} ${DateFormat().add_jm().format(time)}')
+                          ],
+                        ),
+                        !checkSmallItem.value
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                    const SizedBox(height: 20.0),
+                                    Text(
+                                      title,
+                                      style: const TextStyle(
+                                        color: AppColors.textColor,
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    Text(
+                                      'Vào Th ${timeMessBefore.weekday}, ${timeMessBefore.day} thg ${timeMessBefore.month}, ${timeMessBefore.year} vào lúc ${DateFormat().add_jm().format(timeMessBefore)} NGUYỄN MINH HƯNG <$gmailSendBefore> đã viết:',
+                                      style: const TextStyle(
+                                        color: AppColors.textColor,
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10.0),
+                                    Container(
+                                      margin: const EdgeInsets.only(left: 10.0),
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      decoration: const BoxDecoration(
+                                          border: Border(
+                                              left: BorderSide(
+                                                  color: Colors.black,
+                                                  width: 0.5))),
+                                      child: Text(
+                                        messBefore,
+                                        style: const TextStyle(
+                                          color: AppColors.textColor,
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 14.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ])
+                            : Utils.emptySizeBox,
+                      ],
                     ),
-                    Text(
-                        '${DateFormat().add_yMEd().format(time)} ${DateFormat().add_jm().format(time)}')
-                  ],
-                ),
-                const SizedBox(height: 20.0),
-                Text(
-                  'Em tên Nguyễn Minh Hưng , MSSV là 20120491\nDạ thưa cô em có đi học, làm bài kiểm tra với làm bài nhóm nộp bài\nđầy đủ mà sao lại không có bài được ạ.\nMong cô xem lại bài của em với ạ. Em chân thành cảm ơn!',
-                  style: const TextStyle(
-                    color: AppColors.textColor,
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16.0,
                   ),
-                ),
-                const SizedBox(height: 20.0),
-                Text(
-                  'Vào Th 5, 7 thg 7, 2022 vào lúc 08:09 NGUYỄN MINH HƯNG <20120491@student.hcmus.edu.vn> đã viết:',
-                  style: const TextStyle(
-                    color: AppColors.textColor,
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16.0,
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                Container(
-                  margin: const EdgeInsets.only(left: 10.0),
-                  padding: const EdgeInsets.only(left: 10.0),
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          left: BorderSide(color: Colors.black, width: 0.5))),
-                  child: Text(
-                    'Em tên Nguyễn Minh Hưng , MSSV là 20120491\nDạ thưa cô em có đi học, làm bài kiểm tra với làm bài nhóm nộp bài\nđầy đủ mà sao lại không có bài được ạ.\nMong cô xem lại bài của em với ạ. Em chân thành cảm ơn!',
-                    style: const TextStyle(
-                      color: AppColors.textColor,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 14.0,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20.0),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          )),
     );
   }
 }
@@ -486,6 +596,7 @@ class MailItem extends StatelessWidget {
   final int index;
   final int groupValue;
   final Function(int?) func;
+  final Function() press;
   MailItem(
       {super.key,
       required this.headerTitle,
@@ -496,7 +607,8 @@ class MailItem extends StatelessWidget {
       required this.checkRead,
       required this.index,
       required this.groupValue,
-      required this.func});
+      required this.func,
+      required this.press});
   RxBool onIt = false.obs;
   @override
   Widget build(BuildContext context) {
@@ -504,101 +616,107 @@ class MailItem extends StatelessWidget {
       onEnter: (value) => onIt.value = true,
       onExit: (value) => onIt.value = false,
       child: Obx(
-        () => AnimatedContainer(
-          duration: const Duration(milliseconds: 100),
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          decoration: BoxDecoration(
-            color: onIt.value ? AppColors.greyBackgroundCOlor : Colors.white,
-            border: Border(
-              bottom: const BorderSide(color: Colors.grey, width: 0.2),
-              left: BorderSide(
-                  width: 5,
-                  color: checkRead ? Colors.transparent : Colors.blue),
-            ),
-          ),
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  onIt.value
-                      ? Radio(
-                          value: index, groupValue: groupValue, onChanged: func)
-                      : icon,
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                headerTitle,
-                                style: const TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  color: AppColors.textColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ),
-                            onIt.value
-                                ? InkWell(
-                                    onTap: () {},
-                                    child: const Icon(Icons.mail_outline,
-                                        size: 18.0),
-                                  )
-                                : Utils.emptySizeBox,
-                            const SizedBox(width: 10.0),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                leadTitlte,
-                                style: const TextStyle(
-                                    overflow: TextOverflow.ellipsis,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 80,
-                              child: Text(
-                                DateFormat().add_yMd().format(time),
-                                style: const TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        Text(
-                          title,
-                          style: const TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.textColor),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.delete,
-                      color: onIt.value ? Colors.red : Colors.transparent,
-                    ),
-                  ),
-                ],
+        () => InkWell(
+          onTap: press,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 100),
+            width: double.infinity,
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            decoration: BoxDecoration(
+              color: onIt.value ? AppColors.greyBackgroundCOlor : Colors.white,
+              border: Border(
+                bottom: const BorderSide(color: Colors.grey, width: 0.2),
+                left: BorderSide(
+                    width: 5,
+                    color: checkRead ? Colors.transparent : Colors.blue),
               ),
-            ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    onIt.value
+                        ? Radio(
+                            value: index,
+                            groupValue: groupValue,
+                            onChanged: func)
+                        : icon,
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  headerTitle,
+                                  style: const TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    color: AppColors.textColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ),
+                              onIt.value
+                                  ? InkWell(
+                                      onTap: () {},
+                                      child: const Icon(Icons.mail_outline,
+                                          size: 18.0),
+                                    )
+                                  : Utils.emptySizeBox,
+                              const SizedBox(width: 10.0),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  leadTitlte,
+                                  style: const TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 80,
+                                child: Text(
+                                  DateFormat().add_yMd().format(time),
+                                  style: const TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          Text(
+                            title,
+                            style: const TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.textColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.delete,
+                        color: onIt.value ? Colors.red : Colors.transparent,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
