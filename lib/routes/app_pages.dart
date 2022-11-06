@@ -10,7 +10,6 @@ class AppPages {
     GetPage(
       name: RouteNames.signInScreen,
       page: () => SignInScreen(),
-      // binding: DashboardBinding(),
     ),
     GetPage(
       name: RouteNames.dashboardScreen,
