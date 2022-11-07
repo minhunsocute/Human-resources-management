@@ -17,46 +17,42 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   double turns = 0.0;
-  final scaffoldDashboardScreenKey = GlobalKey<ScaffoldState>();
   final dashboardController = Get.put(DashboardController());
 
   @override
   Widget build(BuildContext context) {
     final isSmallScreen = ResponsiveWidget.isSmallScreen(context);
     return Scaffold(
+      key: dashboardController.scaffoldDashboardScreenKey,
+      drawer:
+          CustomDrawer(leftAppBarWidget: dashboardController.leftAppBarWidget),
       endDrawer:
           CustomDrawer(leftAppBarWidget: dashboardController.leftAppBarWidget),
-      key: scaffoldDashboardScreenKey,
       backgroundColor: AppColors.greyBackgroundCOlor,
       body: Padding(
         padding: (isSmallScreen)
             ? const EdgeInsets.only(top: 20)
             : const EdgeInsets.only(top: 0),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (!isSmallScreen) dashboardController.leftAppBarWidget,
-            Expanded(
+            Flexible(
+              fit: FlexFit.loose,
               child: Padding(
                 padding: const EdgeInsets.only(top: 15),
-                child: SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: MediaQuery.of(context).size.height,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CustomAppBarDashboard(
-                            scaffoldDashboardScreenKey:
-                                scaffoldDashboardScreenKey),
-                        if (!isSmallScreen) ...[
-                          const SizedBox(height: 35),
-                          const CustomToolBar()
-                        ],
-                        dashboardController.pages,
-                      ],
-                    ),
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CustomAppBarDashboard(
+                        scaffoldDashboardScreenKey:
+                            dashboardController.scaffoldDashboardScreenKey),
+                    if (!isSmallScreen) ...[
+                      const SizedBox(height: 35),
+                      const CustomToolBar()
+                    ],
+                    Expanded(child: dashboardController.pages),
+                  ],
                 ),
               ),
             ),

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/feature/messenger/controller/message_controller.dart';
 
+// ignore: must_be_immutable
 class TypeMessageField extends StatelessWidget {
   TypeMessageField({super.key});
   TextEditingController typeMessage = TextEditingController();
   final messageController = Get.find<MessageController>();
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: FocusNode(),
+      autofocus: true,
       onFieldSubmitted: (value) {
         if (value.isNotEmpty) {
           messageController.addMessage(value);
-        }
-      },
-      onSaved: (newValue) {
-        if (newValue != null) {
-          messageController.addMessage(newValue);
+          typeMessage.clear();
         }
       },
       controller: typeMessage,
@@ -49,7 +49,7 @@ class TypeMessageField extends StatelessWidget {
           onPressed: () {
             messageController.addMessage(typeMessage.text);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.send,
             color: Colors.blue,
           ),

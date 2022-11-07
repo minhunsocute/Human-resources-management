@@ -47,203 +47,205 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 30.0),
-        ResponsiveWidget.isSmallScreen(context)
-            ? Column(
-                children: [
-                  ...listCard1.map((e) => Container(
-                        width: Get.width,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 10.0),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 20.0),
-                        decoration: BoxDecoration(
-                          color: AppColors.backgroundColor,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.textColor.withOpacity(0.04),
-                              blurRadius: 10.0,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              e['title'],
-                              style: const TextStyle(
-                                overflow: TextOverflow.ellipsis,
-                                color: AppColors.textColor,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(height: 5.0),
-                            Row(
-                              children: [
-                                Text(
-                                  e['data'].toString(),
-                                  style: const TextStyle(
-                                    color: AppColors.textColor,
-                                    fontSize: 28.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Spacer(),
-                                e['percent'] < 0
-                                    ? const Icon(Icons.trending_down_rounded,
-                                        color: Colors.red)
-                                    : const Icon(Icons.trending_up_rounded,
-                                        color: Colors.green),
-                                Text(
-                                  e['percent'].toString(),
-                                  style: TextStyle(
-                                    color: e['percent'] < 0
-                                        ? Colors.red
-                                        : Colors.green,
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ))
-                ],
-              )
-            : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Row(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 30.0),
+          ResponsiveWidget.isSmallScreen(context)
+              ? Column(
                   children: [
-                    ...listCard1.map((e) => Card1(e: e)),
+                    ...listCard1.map((e) => Container(
+                          width: Get.width,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 20.0),
+                          decoration: BoxDecoration(
+                            color: AppColors.backgroundColor,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.textColor.withOpacity(0.04),
+                                blurRadius: 10.0,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                e['title'],
+                                style: const TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                  color: AppColors.textColor,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 5.0),
+                              Row(
+                                children: [
+                                  Text(
+                                    e['data'].toString(),
+                                    style: const TextStyle(
+                                      color: AppColors.textColor,
+                                      fontSize: 28.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  e['percent'] < 0
+                                      ? const Icon(Icons.trending_down_rounded,
+                                          color: Colors.red)
+                                      : const Icon(Icons.trending_up_rounded,
+                                          color: Colors.green),
+                                  Text(
+                                    e['percent'].toString(),
+                                    style: TextStyle(
+                                      color: e['percent'] < 0
+                                          ? Colors.red
+                                          : Colors.green,
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ))
+                  ],
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Row(
+                    children: [
+                      ...listCard1.map((e) => Card1(e: e)),
+                    ],
+                  ),
+                ),
+          const SizedBox(height: 20.0),
+          const Row2FieldWidget(),
+          const SizedBox(height: 20.0),
+          // const Row4FieldWidget(),
+          const SizedBox(height: 20.0),
+          const Row4FieldWidget(),
+          const SizedBox(height: 20.0),
+          Container(
+            width: double.infinity,
+            margin: Utils.edgeInsetsHorizontal20,
+            padding: Utils.edgeInsetsAll20,
+            decoration: BoxDecoration(
+              color: AppColors.backgroundColor,
+              borderRadius: BorderRadius.circular(10.0),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.textColor.withOpacity(0.04),
+                  blurRadius: 10.0,
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Recruitment Progress',
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20.0),
+                Row(
+                  children: const [
+                    Expanded(
+                      flex: 1,
+                      child: Text('CANDIDATE NAME',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: AppColors.textColor,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text('EMAIL ADDRESS',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: AppColors.textColor,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text('CONTACT NUMBER',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.grey, fontWeight: FontWeight.bold)),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text('JOB TITLE',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: AppColors.textColor,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text('RECRUITMENT STATUS',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: AppColors.textColor,
+                              fontWeight: FontWeight.bold)),
+                    ),
                   ],
                 ),
-              ),
-        const SizedBox(height: 20.0),
-        const Row2FieldWidget(),
-        const SizedBox(height: 20.0),
-        // const Row4FieldWidget(),
-        const SizedBox(height: 20.0),
-        const Row4FieldWidget(),
-        const SizedBox(height: 20.0),
-        Container(
-          width: double.infinity,
-          margin: Utils.edgeInsetsHorizontal20,
-          padding: Utils.edgeInsetsAll20,
-          decoration: BoxDecoration(
-            color: AppColors.backgroundColor,
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.textColor.withOpacity(0.04),
-                blurRadius: 10.0,
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Recruitment Progress',
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                  ),
+                const SizedBox(height: 10.0),
+                const Divider(thickness: 1),
+                const SizedBox(height: 10.0),
+                const RecruitmentProgressItem(
+                  image: 'assets/images/person.png',
+                  name: 'Truong Huynh Duc hoang',
+                  type: 'Backend Developer',
+                  round: 1,
+                  email: 'hoang.201102ak@gmail.com',
+                  phoneNumber: '0935703991',
                 ),
-              ),
-              const SizedBox(height: 20.0),
-              Row(
-                children: const [
-                  Expanded(
-                    flex: 1,
-                    child: Text('CANDIDATE NAME',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('EMAIL ADDRESS',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('CONTACT NUMBER',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.bold)),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('JOB TITLE',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('RECRUITMENT STATUS',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              const Divider(thickness: 1),
-              const SizedBox(height: 10.0),
-              const RecruitmentProgressItem(
-                image: 'assets/images/person.png',
-                name: 'Truong Huynh Duc hoang',
-                type: 'Backend Developer',
-                round: 1,
-                email: 'hoang.201102ak@gmail.com',
-                phoneNumber: '0935703991',
-              ),
-              const Divider(thickness: 1),
-              const RecruitmentProgressItem(
-                image: 'assets/images/person2.png',
-                name: 'Truong Huynh Duc hoang',
-                type: 'Backend Developer',
-                round: 1,
-                email: 'hoang.201102ak@gmail.com',
-                phoneNumber: '0935703991',
-              ),
-              const Divider(thickness: 1),
-              const RecruitmentProgressItem(
-                image: 'assets/images/person1.png',
-                name: 'Truong Huynh Duc hoang',
-                type: 'Backend Developer',
-                round: 1,
-                email: 'hoang.201102ak@gmail.com',
-                phoneNumber: '0935703991',
-              ),
-              const Divider(thickness: 1),
-              const RecruitmentProgressItem(
-                image: 'assets/images/person2.png',
-                name: 'Truong Huynh Duc hoang',
-                type: 'Backend Developer',
-                round: 1,
-                email: 'hoang.201102ak@gmail.com',
-                phoneNumber: '0935703991',
-              ),
-            ],
+                const Divider(thickness: 1),
+                const RecruitmentProgressItem(
+                  image: 'assets/images/person2.png',
+                  name: 'Truong Huynh Duc hoang',
+                  type: 'Backend Developer',
+                  round: 1,
+                  email: 'hoang.201102ak@gmail.com',
+                  phoneNumber: '0935703991',
+                ),
+                const Divider(thickness: 1),
+                const RecruitmentProgressItem(
+                  image: 'assets/images/person1.png',
+                  name: 'Truong Huynh Duc hoang',
+                  type: 'Backend Developer',
+                  round: 1,
+                  email: 'hoang.201102ak@gmail.com',
+                  phoneNumber: '0935703991',
+                ),
+                const Divider(thickness: 1),
+                const RecruitmentProgressItem(
+                  image: 'assets/images/person2.png',
+                  name: 'Truong Huynh Duc hoang',
+                  type: 'Backend Developer',
+                  round: 1,
+                  email: 'hoang.201102ak@gmail.com',
+                  phoneNumber: '0935703991',
+                ),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: 40),
-      ],
+          const SizedBox(height: 40),
+        ],
+      ),
     );
   }
 }

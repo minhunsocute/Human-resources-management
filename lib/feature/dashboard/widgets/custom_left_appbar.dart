@@ -10,10 +10,12 @@ class CustomLeftAppBar extends StatelessWidget {
       {super.key,
       required this.isOpened,
       required this.widthDevice,
-      required this.selectPage});
+      required this.selectPage,
+      required this.scaffoldDashboardScreenKey});
   final bool isOpened;
   final double widthDevice;
   final Function(int) selectPage;
+  final GlobalKey<ScaffoldState> scaffoldDashboardScreenKey;
 
   late final titleAndIconWidget = [
     NavigationRailDestination(
@@ -76,7 +78,7 @@ class CustomLeftAppBar extends StatelessWidget {
         return NavigationRail(
           leading: LeftAppBarLeading(
             isOpened: isOpened,
-            openAppBar: controller.openAppBar,
+            openAppBar: () => controller.openAppBar(scaffoldDashboardScreenKey),
           ),
           minExtendedWidth: widthDevice * 0.13,
           labelType: NavigationRailLabelType.none,

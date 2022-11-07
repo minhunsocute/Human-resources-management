@@ -18,64 +18,232 @@ class TaskScreen extends StatelessWidget {
   RxInt checkPage = 0.obs;
   @override
   Widget build(BuildContext context) {
-    return Obx(() => checkPage.value == 0
-        ? Column(
-            children: [
-              const SizedBox(height: 20.0),
-              Row2Field(
-                childre: [
-                  FieldAuto(
-                      flex: 2,
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(20.0),
-                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: AppColors.backgroundColor,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.textColor.withOpacity(0.2),
-                              blurRadius: 10.0,
+    return SingleChildScrollView(
+      child: Obx(() => checkPage.value == 0
+          ? Column(
+              children: [
+                const SizedBox(height: 20.0),
+                Row2Field(
+                  childre: [
+                    FieldAuto(
+                        flex: 2,
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(20.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            color: AppColors.backgroundColor,
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.textColor.withOpacity(0.2),
+                                blurRadius: 10.0,
+                              ),
+                            ],
+                          ),
+                          child: Column(children: [
+                            Row(
+                              children: [
+                                const Text(
+                                  'List Project',
+                                  style: TextStyle(
+                                      color: AppColors.textColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                                const SizedBox(width: 20.0),
+                                const Text(
+                                  'Search',
+                                  style: TextStyle(
+                                      color: AppColors.textColor,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16.0),
+                                ),
+                                const SizedBox(width: 10.0),
+                                Expanded(child: TextFormField()),
+                              ],
+                            ),
+                            const SizedBox(height: 40.0),
+                            Row(
+                              children: const [
+                                Expanded(
+                                  flex: 1,
+                                  child: Text('PROJECT NAME',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          color: AppColors.textColor,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text('TIME START -> DEADLINE',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          color: AppColors.textColor,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Text('PROGRESS',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Text('TASK',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          color: AppColors.textColor,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Text('MEMBER',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          color: AppColors.textColor,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                Expanded(flex: 1, child: Text('')),
+                              ],
+                            ),
+                            const SizedBox(height: 10.0),
+                            const Divider(thickness: 1),
+                            const SizedBox(height: 10.0),
+                            ProjectItem(
+                                title: 'Manuel Project',
+                                startTime: DateTime.now(),
+                                deadTime: DateTime.now(),
+                                percent: 0.7,
+                                func: () => checkPage.value = 1,
+                                tasks: 20),
+                            const Divider(thickness: 1),
+                            ProjectItem(
+                                title: 'Coding Project',
+                                startTime: DateTime.now(),
+                                deadTime: DateTime.now(),
+                                func: () {},
+                                percent: 0.2,
+                                tasks: 20),
+                            const Divider(thickness: 1),
+                            ProjectItem(
+                                title: 'Lala Project',
+                                startTime: DateTime.now(),
+                                deadTime: DateTime.now(),
+                                func: () {},
+                                percent: 0.7,
+                                tasks: 20),
+                            const Divider(thickness: 1),
+                            ProjectItem(
+                                title: 'Pro Project',
+                                startTime: DateTime.now(),
+                                deadTime: DateTime.now(),
+                                func: () {},
+                                percent: 0.1,
+                                tasks: 20),
+                          ]),
+                        )),
+                  ],
+                ),
+                const SizedBox(height: 20.0),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: AppColors.backgroundColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.textColor.withOpacity(0.2),
+                        blurRadius: 10.0,
+                      ),
+                    ],
+                  ),
+                  child: Row2Field(
+                    childre: [
+                      FieldAuto(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Chart Task',
+                                  style: TextStyle(
+                                      color: AppColors.textColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                                ButtonIcon(
+                                    title: 'Select Date',
+                                    press: () {},
+                                    icon: Icons.calendar_month,
+                                    color1: AppColors.primaryColor,
+                                    color2:
+                                        AppColors.primaryColor.withOpacity(0.3))
+                              ],
+                            ),
+                            SizedBox(
+                              height: 420,
+                              width: double.infinity,
+                              child: ColumnChartTwoColumnCustom(
+                                barGroups: [
+                                  makeGroupData(
+                                      0, 150 / 300 * 20, 60 / 300 * 20),
+                                  makeGroupData(
+                                      1, 180 / 300 * 20, 70 / 300 * 20),
+                                  makeGroupData(
+                                      2, 80 / 300 * 20, 50 / 300 * 20),
+                                  makeGroupData(
+                                      3, 230 / 300 * 20, 210 / 300 * 20),
+                                  makeGroupData(
+                                      4, 100 / 300 * 20, 80 / 300 * 20),
+                                  makeGroupData(
+                                      5, 100 / 300 * 20, 30 / 300 * 20),
+                                  makeGroupData(
+                                      6, 200 / 300 * 20, 30 / 300 * 20),
+                                ],
+                                members: Utils.listDaysInWeek,
+                                columnData: 300,
+                              ),
                             ),
                           ],
                         ),
-                        child: Column(children: [
+                      ),
+                      const SizedBox(width: 20),
+                      FieldAuto(
+                          child: SizedBox(
+                              child: Column(
+                        children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                'List Project',
+                                'Task today',
                                 style: TextStyle(
                                     color: AppColors.textColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0),
                               ),
-                              const SizedBox(width: 20.0),
-                              const Text(
-                                'Search',
-                                style: TextStyle(
-                                    color: AppColors.textColor,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16.0),
-                              ),
-                              const SizedBox(width: 10.0),
-                              Expanded(child: TextFormField()),
+                              ButtonIcon(
+                                  title: 'Completed',
+                                  press: () {},
+                                  icon: Icons.change_circle_outlined,
+                                  color1: AppColors.primaryColor,
+                                  color2:
+                                      AppColors.primaryColor.withOpacity(0.3))
                             ],
                           ),
-                          const SizedBox(height: 40.0),
+                          const SizedBox(height: 30.0),
+                          const SizedBox(height: 10.0),
                           Row(
                             children: const [
                               Expanded(
                                 flex: 1,
-                                child: Text('PROJECT NAME',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: AppColors.textColor,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Text('TIME START -> DEADLINE',
+                                child: Text('TASK NAME',
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                         color: AppColors.textColor,
@@ -83,7 +251,15 @@ class TaskScreen extends StatelessWidget {
                               ),
                               Expanded(
                                 flex: 1,
-                                child: Text('PROGRESS',
+                                child: Text('USER',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        color: AppColors.textColor,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Text('DEAD TIME',
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                         color: Colors.grey,
@@ -91,229 +267,62 @@ class TaskScreen extends StatelessWidget {
                               ),
                               Expanded(
                                 flex: 1,
-                                child: Text('TASK',
+                                child: Text('EXPANDED',
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                        color: AppColors.textColor,
+                                        color: Colors.grey,
                                         fontWeight: FontWeight.bold)),
                               ),
-                              Expanded(
-                                flex: 1,
-                                child: Text('MEMBER',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: AppColors.textColor,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              Expanded(flex: 1, child: Text('')),
                             ],
                           ),
                           const SizedBox(height: 10.0),
                           const Divider(thickness: 1),
                           const SizedBox(height: 10.0),
-                          ProjectItem(
-                              title: 'Manuel Project',
-                              startTime: DateTime.now(),
-                              deadTime: DateTime.now(),
-                              percent: 0.7,
-                              func: () => checkPage.value = 1,
-                              tasks: 20),
-                          const Divider(thickness: 1),
-                          ProjectItem(
-                              title: 'Coding Project',
-                              startTime: DateTime.now(),
-                              deadTime: DateTime.now(),
-                              func: () {},
-                              percent: 0.2,
-                              tasks: 20),
-                          const Divider(thickness: 1),
-                          ProjectItem(
-                              title: 'Lala Project',
-                              startTime: DateTime.now(),
-                              deadTime: DateTime.now(),
-                              func: () {},
-                              percent: 0.7,
-                              tasks: 20),
-                          const Divider(thickness: 1),
-                          ProjectItem(
-                              title: 'Pro Project',
-                              startTime: DateTime.now(),
-                              deadTime: DateTime.now(),
-                              func: () {},
-                              percent: 0.1,
-                              tasks: 20),
-                        ]),
-                      )),
-                ],
-              ),
-              const SizedBox(height: 20.0),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(20.0),
-                margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: AppColors.backgroundColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.textColor.withOpacity(0.2),
-                      blurRadius: 10.0,
-                    ),
-                  ],
-                ),
-                child: Row2Field(
-                  childre: [
-                    FieldAuto(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Chart Task',
-                                style: TextStyle(
-                                    color: AppColors.textColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0),
-                              ),
-                              ButtonIcon(
-                                  title: 'Select Date',
-                                  press: () {},
-                                  icon: Icons.calendar_month,
-                                  color1: AppColors.primaryColor,
-                                  color2:
-                                      AppColors.primaryColor.withOpacity(0.3))
-                            ],
+                          TaskItem(
+                            taskName: 'UI/UX Design',
+                            imagePic: 'assets/images/person.png',
+                            name: 'Minh Hung',
+                            type: 0,
+                            time: DateTime.now(),
                           ),
-                          SizedBox(
-                            height: 420,
-                            width: double.infinity,
-                            child: ColumnChartTwoColumnCustom(
-                              barGroups: [
-                                makeGroupData(0, 150 / 300 * 20, 60 / 300 * 20),
-                                makeGroupData(1, 180 / 300 * 20, 70 / 300 * 20),
-                                makeGroupData(2, 80 / 300 * 20, 50 / 300 * 20),
-                                makeGroupData(
-                                    3, 230 / 300 * 20, 210 / 300 * 20),
-                                makeGroupData(4, 100 / 300 * 20, 80 / 300 * 20),
-                                makeGroupData(5, 100 / 300 * 20, 30 / 300 * 20),
-                                makeGroupData(6, 200 / 300 * 20, 30 / 300 * 20),
-                              ],
-                              members: Utils.listDaysInWeek,
-                              columnData: 300,
-                            ),
+                          const Divider(thickness: 1),
+                          TaskItem(
+                            taskName: 'Front End',
+                            imagePic: 'assets/images/person1.png',
+                            name: 'Duc Hoang',
+                            type: 1,
+                            time: DateTime.now(),
+                          ),
+                          const Divider(thickness: 1),
+                          TaskItem(
+                            taskName: 'Backend',
+                            imagePic: 'assets/images/person2.png',
+                            name: 'Trung Hieu',
+                            type: 1,
+                            time: DateTime.now(),
+                          ),
+                          const Divider(thickness: 1),
+                          TaskItem(
+                            taskName: 'Figma',
+                            imagePic: 'assets/images/person.png',
+                            name: 'Minh Hung',
+                            type: 0,
+                            time: DateTime.now(),
                           ),
                         ],
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    FieldAuto(
-                        child: SizedBox(
-                            child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Task today',
-                              style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0),
-                            ),
-                            ButtonIcon(
-                                title: 'Completed',
-                                press: () {},
-                                icon: Icons.change_circle_outlined,
-                                color1: AppColors.primaryColor,
-                                color2: AppColors.primaryColor.withOpacity(0.3))
-                          ],
-                        ),
-                        const SizedBox(height: 30.0),
-                        const SizedBox(height: 10.0),
-                        Row(
-                          children: const [
-                            Expanded(
-                              flex: 1,
-                              child: Text('TASK NAME',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      color: AppColors.textColor,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Text('USER',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      color: AppColors.textColor,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Text('DEAD TIME',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Text('EXPANDED',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10.0),
-                        const Divider(thickness: 1),
-                        const SizedBox(height: 10.0),
-                        TaskItem(
-                          taskName: 'UI/UX Design',
-                          imagePic: 'assets/images/person.png',
-                          name: 'Minh Hung',
-                          type: 0,
-                          time: DateTime.now(),
-                        ),
-                        const Divider(thickness: 1),
-                        TaskItem(
-                          taskName: 'Front End',
-                          imagePic: 'assets/images/person1.png',
-                          name: 'Duc Hoang',
-                          type: 1,
-                          time: DateTime.now(),
-                        ),
-                        const Divider(thickness: 1),
-                        TaskItem(
-                          taskName: 'Backend',
-                          imagePic: 'assets/images/person2.png',
-                          name: 'Trung Hieu',
-                          type: 1,
-                          time: DateTime.now(),
-                        ),
-                        const Divider(thickness: 1),
-                        TaskItem(
-                          taskName: 'Figma',
-                          imagePic: 'assets/images/person.png',
-                          name: 'Minh Hung',
-                          type: 0,
-                          time: DateTime.now(),
-                        ),
-                      ],
-                    )))
-                  ],
+                      )))
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 40.0),
-            ],
-          )
-        : ViewProjectScreen(
-            backFunc: () {
-              checkPage.value = 0;
-            },
-          ));
+                const SizedBox(height: 40.0),
+              ],
+            )
+          : ViewProjectScreen(
+              backFunc: () {
+                checkPage.value = 0;
+              },
+            )),
+    );
   }
 }
 
