@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/constants/app_color.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
@@ -57,7 +58,7 @@ class CustomLeftAppBar extends StatelessWidget {
     ),
     NavigationRailDestination(
       icon: IconTabBar(
-        icon: Icons.message_outlined,
+        icon: FontAwesome.send_o,
         top: 273,
         isOpened: isOpened,
       ),

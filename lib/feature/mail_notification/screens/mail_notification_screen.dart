@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
+import 'package:ueh_project_admin/feature/employ/screens/employ_main_screen.dart';
 import '../../../constants/app_color.dart';
 import '../../../constants/fake_data.dart';
 import '../../../constants/reponsiveness.dart';
@@ -19,7 +21,6 @@ class MailNotificationScreen extends StatelessWidget {
   RxBool checkUread = false.obs;
   RxInt showViewMessIndex = 0.obs;
   Rx<Color> colorFont = Colors.black.obs;
-  bool isSmallScreen = ResponsiveWidget.isSmallScreen(Get.context!);
   final decoration = BoxDecoration(
     borderRadius: BorderRadius.circular(5.0),
     color: Colors.white,
@@ -42,6 +43,8 @@ class MailNotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var widthDevice = MediaQuery.of(context).size.width;
     var heightDevice = MediaQuery.of(context).size.height;
+    bool isSmallScreen = ResponsiveWidget.isSmallScreen(context);
+
     return Column(
       children: [
         Container(
@@ -66,7 +69,9 @@ class MailNotificationScreen extends StatelessWidget {
                       message: e['message'],
                       child: e['child'],
                       color: e['color'],
-                      press: () {},
+                      press: () {
+                        if (e['message'] == 'Change LeftBar') {}
+                      },
                     )),
                 Container(height: 30.0, width: 0.2, color: AppColors.textColor),
                 const SizedBox(width: 10),
@@ -79,6 +84,34 @@ class MailNotificationScreen extends StatelessWidget {
                 Container(height: 30.0, width: 0.2, color: AppColors.textColor),
                 const SizedBox(width: 10),
                 ...listPopupButtonField3.map((e) => PopupButton(
+                      message: e['message'],
+                      child: e['child'],
+                      color: e['color'],
+                      press: () {},
+                    )),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          margin: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            color: AppColors.backgroundColor,
+            borderRadius: BorderRadius.circular(5.0),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.textColor.withOpacity(0.4),
+                blurRadius: 10.0,
+              ),
+            ],
+          ),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ...listPopupButtonField2.map((e) => PopupButton(
                       message: e['message'],
                       child: e['child'],
                       color: e['color'],
@@ -155,12 +188,15 @@ class MailNotificationScreen extends StatelessWidget {
                         checkRead: true,
                         index: 0,
                         groupValue: check.value,
-                        press: () => listPageView.value.add(
-                              {
-                                'type': 0,
-                                'title': 'Phuc Khao Diem CC j day t dell biet',
-                              },
-                            ),
+                        press: () {
+                          listPageView.value.add(
+                            {
+                              'type': 0,
+                              'title': 'Phuc Khao Diem CC j day t dell biet',
+                            },
+                          );
+                          showViewMessIndex.value = 0;
+                        },
                         func: (value) {
                           check.value = value!;
                         }),
@@ -236,108 +272,125 @@ class MailNotificationScreen extends StatelessWidget {
                 ),
               ),
               Obx(
-                () => FieldAutoHere(
-                  isSmallScreen: isSmallScreen,
-                  child: Container(
-                    width: double.infinity,
-                    height: heightDevice,
-                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                    color: AppColors.greyBackgroundCOlor,
-                    child: Column(children: [
-                      listPageView.value.isEmpty
-                          ? Expanded(
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Icon(Icons.delete,
-                                        color: Colors.grey, size: 40.0),
-                                    SizedBox(height: 5.0),
-                                    Text(
-                                      'Select Mail',
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 35.0,
+                () => showViewMessIndex.value == 0
+                    ? FieldAutoHere(
+                        isSmallScreen: isSmallScreen,
+                        child: Container(
+                          width: double.infinity,
+                          height: heightDevice,
+                          margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                          color: AppColors.greyBackgroundCOlor,
+                          child: Column(children: [
+                            listPageView.value.isEmpty
+                                ? Expanded(
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: const [
+                                          Icon(Icons.delete,
+                                              color: Colors.grey, size: 40.0),
+                                          SizedBox(height: 5.0),
+                                          Text(
+                                            'Select Mail',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 35.0,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          : listPageView.value[selectPageView.value]['type'] ==
-                                  0
-                              ? _viewMessafeField(isSmallScreen)
-                              : _viewSendMessage(isSmallScreen),
-                      const SizedBox(height: 10.0),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: AppColors.backgroundColor,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.textColor.withOpacity(0.4),
-                              blurRadius: 10.0,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            for (int i = 0; i < listPageView.value.length; i++)
-                              InkWell(
-                                onTap: () => selectPageView.value = i,
-                                child: Container(
-                                  width: 200,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 10.0),
-                                  margin: const EdgeInsets.only(right: 10.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    color: selectPageView.value == i
-                                        ? Colors.blue
-                                        : Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.textColor
-                                            .withOpacity(0.2),
-                                        blurRadius: 3.0,
-                                      ),
-                                    ],
+                                  )
+                                : listPageView.value[selectPageView.value]
+                                            ['type'] ==
+                                        0
+                                    ? _viewMessafeField(isSmallScreen)
+                                    : _viewSendMessage(isSmallScreen),
+                            const SizedBox(height: 10.0),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5.0),
+                                color: AppColors.backgroundColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.textColor.withOpacity(0.4),
+                                    blurRadius: 10.0,
                                   ),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          listPageView.value[i]['title'],
-                                          style: TextStyle(
-                                            overflow: TextOverflow.ellipsis,
+                                ],
+                              ),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    for (int i = 0;
+                                        i < listPageView.value.length;
+                                        i++)
+                                      InkWell(
+                                        onTap: () => selectPageView.value = i,
+                                        child: Container(
+                                          width: 200,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 10.0),
+                                          margin: const EdgeInsets.only(
+                                              right: 10.0),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
                                             color: selectPageView.value == i
-                                                ? Colors.white
-                                                : AppColors.textColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16.0,
+                                                ? Colors.blue
+                                                : Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors.textColor
+                                                    .withOpacity(0.2),
+                                                blurRadius: 3.0,
+                                              ),
+                                            ],
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  listPageView.value[i]
+                                                      ['title'],
+                                                  style: TextStyle(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    color: selectPageView
+                                                                .value ==
+                                                            i
+                                                        ? Colors.white
+                                                        : AppColors.textColor,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16.0,
+                                                  ),
+                                                ),
+                                              ),
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Icon(Icons.close,
+                                                    color:
+                                                        selectPageView.value ==
+                                                                i
+                                                            ? Colors.white
+                                                            : Colors.black),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () {},
-                                        child: Icon(Icons.close,
-                                            color: selectPageView.value == i
-                                                ? Colors.white
-                                                : Colors.black),
-                                      ),
-                                    ],
-                                  ),
+                                  ],
                                 ),
                               ),
-                          ],
+                            ),
+                          ]),
                         ),
-                      ),
-                    ]),
-                  ),
-                ),
+                      )
+                    : Utils.emptySizeBox,
               ),
               // _viewSendMessage(isSmallScreen, heightDevice, context)
               // Obx(() => showViewMessIndex.value != -1
@@ -561,6 +614,26 @@ class RowField3 extends StatelessWidget {
         : Row(
             children: childre,
           );
+  }
+}
+
+class HeaderField extends StatelessWidget {
+  final bool isSmallScreen;
+  final Widget child;
+  const HeaderField(
+      {super.key, required this.isSmallScreen, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return isSmallScreen
+        ? Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(10.0),
+            child: child)
+        : Container(
+            height: double.infinity,
+            padding: const EdgeInsets.all(10.0),
+            child: child);
   }
 }
 

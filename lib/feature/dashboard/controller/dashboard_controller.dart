@@ -43,6 +43,7 @@ class DashboardController extends GetxController {
         EmployMainScreen(),
         TaskScreen(),
         ProfileScreen(),
+        MainMessengerScreen(),
       ],
     ),
   );
