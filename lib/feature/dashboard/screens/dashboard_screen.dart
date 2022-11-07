@@ -36,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (!isSmallScreen) dashboardController.leftAppBarWidget,
+            if (!isSmallScreen) dashboardController.leftAppBarWidgetDashboard,
             Flexible(
               fit: FlexFit.loose,
               child: Padding(
