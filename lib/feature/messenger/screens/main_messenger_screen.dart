@@ -102,10 +102,8 @@ class MainMessengerScreen extends StatelessWidget {
                                   return ChatWidget(
                                     textDirection: TextDirection.rtl,
                                     name: "Hoang Ankin",
-                                    displayMessage: MessageWidget(
-                                      message: messageController
-                                          .messages.value[index],
-                                    ),
+                                    displayMessage:
+                                        messageController.messages.value[index],
                                   );
                                 },
                                 itemCount:

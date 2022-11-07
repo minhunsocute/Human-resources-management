@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/feature/messenger/controller/message_controller.dart';
@@ -27,7 +30,15 @@ class TypeMessageField extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  FilePickerCross myFile =
+                      await FilePickerCross.importFromStorage(
+                          type: FileTypeCross
+                              .any, // Available: `any`, `audio`, `image`, `video`, `custom`. Note: not available using FDE
+                          fileExtension:
+                              'txt, md' // Only if FileTypeCross.custom . May be any file extension like `dot`, `ppt,pptx,odp`
+                          );
+                },
                 icon: const Icon(
                   Icons.attach_file,
                   color: Colors.grey,
