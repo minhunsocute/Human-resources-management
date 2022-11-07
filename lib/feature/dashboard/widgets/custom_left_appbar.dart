@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
-import 'package:ueh_project_admin/constants/app_color.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
 import 'package:ueh_project_admin/feature/dashboard/controller/dashboard_controller.dart';
 
@@ -53,7 +52,7 @@ class CustomLeftAppBar extends StatelessWidget {
     NavigationRailDestination(
       icon: IconTabBar(
         icon: Icons.mail_outline,
-        top: 273,
+        top: 343,
         isOpened: isOpened,
       ),
       label: const Text('Mail'),
@@ -61,7 +60,7 @@ class CustomLeftAppBar extends StatelessWidget {
     NavigationRailDestination(
       icon: IconTabBar(
         icon: FontAwesome.send_o,
-        top: 273,
+        top: 413,
         isOpened: isOpened,
       ),
       label: const Text('Messenger'),
@@ -76,14 +75,14 @@ class CustomLeftAppBar extends StatelessWidget {
       autoRemove: false,
       builder: (controller) {
         return NavigationRail(
+          elevation: 5,
           leading: LeftAppBarLeading(
             isOpened: isOpened,
             openAppBar: () => controller.openAppBar(scaffoldDashboardScreenKey),
           ),
           minExtendedWidth: widthDevice * 0.13,
           labelType: NavigationRailLabelType.none,
-          backgroundColor:
-              isOpened ? AppColors.greyBackgroundCOlor : Colors.white,
+          backgroundColor: Colors.white,
           extended: isOpened,
           onDestinationSelected: controller.selectPage,
           selectedIndex: controller.pageIndex.value,
@@ -94,44 +93,45 @@ class CustomLeftAppBar extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class LeftAppBarLeading extends StatelessWidget {
-  const LeftAppBarLeading({
+  LeftAppBarLeading({
     super.key,
-    required this.isOpened,
     required this.openAppBar,
+    required this.isOpened,
   });
-
   final bool isOpened;
   final Function() openAppBar;
+
+  var isOpenedDrawer = false.obs;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: Utils.appBarItemPadding,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          (isOpened) ? const SizedBox(width: 25) : const SizedBox(width: 7),
           GestureDetector(
-            onTap: openAppBar,
-            child: AnimatedRotation(
-              duration: const Duration(milliseconds: 350),
-              turns: isOpened ? 1 : -1,
-              curve: Utils.curvesAnimation,
-              child: const Icon(
-                Icons.menu_outlined,
-                color: Colors.grey,
+            onTap: () {
+              isOpenedDrawer.value = !isOpenedDrawer.value;
+              openAppBar();
+            },
+            child: Obx(
+              () => AnimatedRotation(
+                duration: const Duration(milliseconds: 350),
+                turns: isOpenedDrawer.value ? 1 : -1,
+                curve: Utils.curvesAnimation,
+                child: const Icon(
+                  Icons.menu_outlined,
+                  color: Colors.grey,
+                ),
               ),
             ),
           ),
           const SizedBox(width: 10),
-          AnimatedDefaultTextStyle(
-            duration: Utils.animationDuration,
-            style: TextStyle(fontSize: isOpened ? 23 : -2),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: Utils.starAdminText,
-            ),
-          )
+          if (isOpened) RichText(text: Utils.starAdminTextSpan)
         ],
       ),
     );

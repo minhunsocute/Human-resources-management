@@ -11,8 +11,6 @@ import 'package:ueh_project_admin/feature/profile/screns/profile_screen.dart';
 import 'package:ueh_project_admin/feature/task_project/screens/task_screen.dart';
 
 class DashboardController extends GetxController {
-  var isOpened = false.obs;
-
   var pageIndex = 0.obs;
   final scaffoldDashboardScreenKey = GlobalKey<ScaffoldState>();
 
@@ -22,12 +20,23 @@ class DashboardController extends GetxController {
   }
 
   void openAppBar(GlobalKey<ScaffoldState> key) {
-    // isOpened.value = !isOpened.value;
-    key.currentState!.openDrawer();
+    if (key.currentState!.isDrawerOpen || key.currentState!.isEndDrawerOpen) {
+      key.currentState!.closeDrawer();
+      key.currentState!.closeEndDrawer();
+    } else {
+      key.currentState!.openDrawer();
+    }
   }
 
   late final leftAppBarWidget = CustomLeftAppBar(
-    isOpened: isOpened.value,
+    isOpened: true,
+    widthDevice: Get.width,
+    selectPage: selectPage,
+    scaffoldDashboardScreenKey: scaffoldDashboardScreenKey,
+  );
+
+  late final leftAppBarWidgetDashboard = CustomLeftAppBar(
+    isOpened: false,
     widthDevice: Get.width,
     selectPage: selectPage,
     scaffoldDashboardScreenKey: scaffoldDashboardScreenKey,

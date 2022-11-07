@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ueh_project_admin/constants/reponsiveness.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key, required this.leftAppBarWidget});
@@ -8,7 +9,9 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: Get.width * 0.35,
+      width: ResponsiveWidget.isSmallScreen(context)
+          ? Get.width * 0.35
+          : Get.width * 0.15,
       elevation: 10,
       child: leftAppBarWidget,
     );
