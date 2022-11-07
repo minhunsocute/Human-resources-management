@@ -38,11 +38,12 @@ class DashboardController extends GetxController {
       alignment: Alignment.topCenter,
       index: pageIndex.value,
       children: [
-        MailNotificationScreen(),
         HomeScreen(),
         EmployMainScreen(),
         TaskScreen(),
         ProfileScreen(),
+        MailNotificationScreen(),
+        MainMessengerScreen(),
       ],
     ),
   );

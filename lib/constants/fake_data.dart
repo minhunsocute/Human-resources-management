@@ -51,12 +51,12 @@ class FakeData {
 
 final List<Map<String, dynamic>> listPopupButtonField2 = [
   {
-    'message': 'Answer Mail',
+    'message': 'Mail Recieve',
     'child': Row(
       children: const [
-        Icon(FontAwesome.mail_reply, color: AppColors.textColor, size: 20.0),
+        Icon(Icons.mail, color: AppColors.textColor, size: 20.0),
         Text(
-          ' Answer',
+          ' Mail Recievei',
           style: TextStyle(
               color: AppColors.textColor,
               fontWeight: FontWeight.bold,
@@ -67,13 +67,12 @@ final List<Map<String, dynamic>> listPopupButtonField2 = [
     'color': Colors.white,
   },
   {
-    'message': 'Answer All Mail',
+    'message': 'Mail Send',
     'child': Row(
       children: const [
-        Icon(FontAwesome.mail_reply_all,
-            color: AppColors.textColor, size: 20.0),
+        Icon(FontAwesome.send, color: AppColors.textColor, size: 20.0),
         Text(
-          ' Answer All',
+          ' Mail  Send',
           style: TextStyle(
               color: AppColors.textColor,
               fontWeight: FontWeight.bold,
@@ -84,12 +83,12 @@ final List<Map<String, dynamic>> listPopupButtonField2 = [
     'color': Colors.white,
   },
   {
-    'message': 'Forward Mail',
+    'message': 'Draft Mail',
     'child': Row(
       children: const [
-        Icon(FontAwesome.mail_forward, color: AppColors.textColor, size: 20.0),
+        Icon(Icons.drafts_rounded, color: AppColors.textColor, size: 20.0),
         Text(
-          ' Answer',
+          ' Draft mail',
           style: TextStyle(
               color: AppColors.textColor,
               fontWeight: FontWeight.bold,
