@@ -3,8 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
-import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
 
 import '../../../constants/app_color.dart';
 import '../../../constants/fake_data.dart';
@@ -13,6 +11,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 import '../../../constants/utils.dart';
 
+// ignore: must_be_immutable
 class MailNotificationScreen extends StatelessWidget {
   MailNotificationScreen({super.key});
   RxInt check = 0.obs;
@@ -27,7 +26,6 @@ class MailNotificationScreen extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
-    var widthDevice = MediaQuery.of(context).size.width;
     var heightDevice = MediaQuery.of(context).size.height;
     bool isSmallScreen = ResponsiveWidget.isSmallScreen(context);
     return Column(
