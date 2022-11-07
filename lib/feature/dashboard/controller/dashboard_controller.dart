@@ -5,12 +5,9 @@ import 'package:ueh_project_admin/constants/utils.dart';
 import 'package:ueh_project_admin/feature/home/screens/home_screen.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/custom_left_appbar.dart';
 import 'package:ueh_project_admin/feature/employ/screens/employ_main_screen.dart';
-<<<<<<< HEAD
-import 'package:ueh_project_admin/feature/mail_notification/widgets/mail_notification_screen.dart';
-=======
+import 'package:ueh_project_admin/feature/mail_notification/screens/mail_notification_screen.dart';
 import 'package:ueh_project_admin/feature/mail_notification/screens/mail_notification_screen.dart';
 import 'package:ueh_project_admin/feature/messenger/screens/main_messenger_screen.dart';
->>>>>>> 38cb6add5a734b9cf8b6928e3418fa4cb88ed4af
 import 'package:ueh_project_admin/feature/profile/screns/profile_screen.dart';
 import 'package:ueh_project_admin/feature/task_project/screens/task_screen.dart';
 
@@ -41,12 +38,11 @@ class DashboardController extends GetxController {
       alignment: Alignment.topCenter,
       index: pageIndex.value,
       children: [
-        MainMessengerScreen(),
+        MailNotificationScreen(),
         HomeScreen(),
         EmployMainScreen(),
         TaskScreen(),
         ProfileScreen(),
-        MailNotificationScreen(),
       ],
     ),
   );
