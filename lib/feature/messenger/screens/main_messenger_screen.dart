@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ueh_project_admin/constants/utils.dart';
-import 'package:ueh_project_admin/feature/dashboard/controller/dashboard_controller.dart';
 import 'package:ueh_project_admin/feature/messenger/controller/message_controller.dart';
 import 'package:ueh_project_admin/feature/messenger/widgets/bottom_toolbar.dart';
 import 'package:ueh_project_admin/feature/messenger/widgets/chat_widget.dart';
-import 'package:ueh_project_admin/feature/messenger/widgets/image_file_widget.dart';
 import 'package:ueh_project_admin/feature/messenger/widgets/message_toolbar.dart';
 import 'package:ueh_project_admin/feature/messenger/widgets/message_widget.dart';
 import 'package:ueh_project_admin/feature/messenger/widgets/messenger_tab.dart';
 import 'package:ueh_project_admin/feature/messenger/widgets/search_widget.dart';
 import 'package:ueh_project_admin/feature/messenger/widgets/type_message_field.dart';
-
-import '../widgets/document_file_widget.dart';
 
 // ignore: must_be_immutable
 class MainMessengerScreen extends StatelessWidget {
@@ -26,6 +21,7 @@ class MainMessengerScreen extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.all(15.0),
         child: Material(
+          elevation: 10,
           borderRadius: BorderRadius.circular(20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -43,7 +39,7 @@ class MainMessengerScreen extends StatelessWidget {
                       SearchBox(),
                       const Divider(),
                       SizedBox(
-                        height: Get.height * 0.8,
+                        height: Get.height * 0.66,
                         child: ListView(
                           children: ListTile.divideTiles(
                             color: Colors.grey[400],
@@ -94,7 +90,7 @@ class MainMessengerScreen extends StatelessWidget {
                             height: 40,
                           ),
                           SizedBox(
-                            height: Get.height * 0.8,
+                            height: Get.height * 0.65,
                             child: GetBuilder<MessageController>(
                               assignId: true,
                               id: 'test',
@@ -106,10 +102,8 @@ class MainMessengerScreen extends StatelessWidget {
                                   return ChatWidget(
                                     textDirection: TextDirection.rtl,
                                     name: "Hoang Ankin",
-                                    displayMessage: MessageWidget(
-                                      message: messageController
-                                          .messages.value[index],
-                                    ),
+                                    displayMessage:
+                                        messageController.messages.value[index],
                                   );
                                 },
                                 itemCount:

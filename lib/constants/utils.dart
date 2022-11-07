@@ -35,13 +35,20 @@ class Utils {
 
   static const curvesAnimation = Curves.easeInOut;
 
-  static const starAdminText = [
-    Text('Star'),
-    Text(
-      'Admin',
-      style: TextStyle(color: Colors.blue),
-    )
-  ];
+  static const starAdminTextSpan = TextSpan(
+    text: 'Star',
+    style: TextStyle(
+      fontSize: 23,
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
+    ),
+    children: [
+      TextSpan(
+        text: 'Admin',
+        style: TextStyle(color: Colors.blueAccent),
+      )
+    ],
+  );
 
   static const idLeftNavigatorBar = 'leftNavigatorBar';
 
@@ -75,21 +82,6 @@ class Utils {
     'Fri',
     'Sat'
   ];
-
-  static const starAdminTextSpan = TextSpan(
-    text: 'Star',
-    style: TextStyle(
-      fontSize: 23,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-    ),
-    children: [
-      TextSpan(
-        text: 'Admin',
-        style: TextStyle(color: Colors.blueAccent),
-      )
-    ],
-  );
 
   static const emptyTextSpan = TextSpan();
 
