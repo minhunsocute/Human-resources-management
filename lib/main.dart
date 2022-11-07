@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'UEH Project',
         theme: ThemeData(
+          dividerTheme: DividerThemeData(
+              color: Colors.grey[400], thickness: 0.5, space: 10),
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           backgroundColor: AppColors.greyBackgroundCOlor,
