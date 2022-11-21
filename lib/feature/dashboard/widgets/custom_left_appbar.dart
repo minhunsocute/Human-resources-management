@@ -43,14 +43,6 @@ class CustomLeftAppBar extends StatelessWidget {
     ),
     NavigationRailDestination(
       icon: IconTabBar(
-        icon: Icons.person_outline,
-        top: 273,
-        isOpened: isOpened,
-      ),
-      label: const Text('Profile'),
-    ),
-    NavigationRailDestination(
-      icon: IconTabBar(
         icon: Icons.mail_outline,
         top: 343,
         isOpened: isOpened,
@@ -59,11 +51,11 @@ class CustomLeftAppBar extends StatelessWidget {
     ),
     NavigationRailDestination(
       icon: IconTabBar(
-        icon: FontAwesome.send_o,
-        top: 413,
+        icon: Icons.person_outline,
+        top: 273,
         isOpened: isOpened,
       ),
-      label: const Text('Messenger'),
+      label: const Text('Profile'),
     ),
   ];
 
