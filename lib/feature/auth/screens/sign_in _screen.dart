@@ -4,6 +4,7 @@ import 'package:ueh_project_admin/widgets/custom_button.dart';
 
 import '../../../constants/app_color.dart';
 import '../../../routes/route_name.dart';
+import '../../../services/auth_services.dart';
 
 PageController pageController = PageController(initialPage: 0, keepPage: true);
 void onButtonTape(int index) {
@@ -358,7 +359,7 @@ class SignInField extends StatelessWidget {
               ),
               const Spacer(),
               InkWell(
-                onTap: () {},
+                onTap: () => AuthService.instance.getData(),
                 child: const Text(
                   'Forgot Password?',
                   style: TextStyle(

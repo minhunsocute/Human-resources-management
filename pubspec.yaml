@@ -51,6 +51,7 @@ dependencies:
   audio_waveforms: ^0.1.5+1
   open_file: ^2.1.1
   file_picker_cross: ^4.4.2
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:
