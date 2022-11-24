@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:ueh_project_admin/feature/auth/screens/sign_in%20_screen.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
@@ -10,6 +9,7 @@ import '../../../constants/reponsiveness.dart';
 import '../widgets/button_icon.dart';
 import '../widgets/employee_progress_item.dart';
 import '../widgets/recruitment_progress_item.dart';
+import '../widgets/top_employee.dart';
 
 class EmployMainScreen extends StatelessWidget {
   EmployMainScreen({super.key});
@@ -19,9 +19,41 @@ class EmployMainScreen extends StatelessWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(15),
       child: Column(children: [
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              TopEmployeeWidget(
+                name: "HEAD OF THE DEPARTMENT",
+                image: "assets/images/doctor1.png",
+                description:
+                    "Doctors, also known as physicians, are licensed health professionals who maintain and restore human health through the practice of medicine. They examine patients, review their medical history, diagnose illnesses or injuries, administer treatment, and counsel patients on their health and well-being.",
+                type: "Dentist",
+                ratings: 4.8,
+              ),
+              TopEmployeeWidget(
+                name: "HEAD OF THE DEPARTMENT",
+                image: "assets/images/doctor3.png",
+                description:
+                    "Doctors, also known as physicians, are licensed health professionals who maintain and restore human health through the practice of medicine. They examine patients, review their medical history, diagnose illnesses or injuries, administer treatment, and counsel patients on their health and well-being.",
+                type: "Dentist",
+                ratings: 4.8,
+              ),
+              TopEmployeeWidget(
+                name: "HEAD OF THE DEPARTMENT",
+                image: "assets/images/doctor2.png",
+                description:
+                    "Doctors, also known as physicians, are licensed health professionals who maintain and restore human health through the practice of medicine. They examine patients, review their medical history, diagnose illnesses or injuries, administer treatment, and counsel patients on their health and well-being.",
+                type: "Dentist",
+                ratings: 4.8,
+              )
+            ],
+          ),
+        ),
         const SizedBox(height: 40.0),
         Row2Field(
-          childre: [
+          children: [
             FieldAuto(
               flex: 3,
               child: Container(

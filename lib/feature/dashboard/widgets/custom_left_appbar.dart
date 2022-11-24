@@ -16,56 +16,18 @@ class CustomLeftAppBar extends StatelessWidget {
   final Function(int) selectPage;
   final GlobalKey<ScaffoldState> scaffoldDashboardScreenKey;
 
-  late final titleAndIconWidget = [
-    NavigationRailDestination(
-      icon: IconTabBar(
-        icon: Icons.dashboard_outlined,
-        top: 60,
-        isOpened: isOpened,
-      ),
-      label: const Text('Dashboard'),
-    ),
-    NavigationRailDestination(
-      icon: IconTabBar(
-        icon: Icons.people_outline_outlined,
-        top: 130,
-        isOpened: isOpened,
-      ),
-      label: const Text('Employee'),
-    ),
-    NavigationRailDestination(
-      icon: IconTabBar(
-        icon: Icons.assignment_outlined,
-        top: 203,
-        isOpened: isOpened,
-      ),
-      label: const Text('Project'),
-    ),
-    NavigationRailDestination(
-      icon: IconTabBar(
-        icon: Icons.person_outline,
-        top: 273,
-        isOpened: isOpened,
-      ),
-      label: const Text('Profile'),
-    ),
-    NavigationRailDestination(
-      icon: IconTabBar(
-        icon: Icons.mail_outline,
-        top: 343,
-        isOpened: isOpened,
-      ),
-      label: const Text('Mail'),
-    ),
-    NavigationRailDestination(
-      icon: IconTabBar(
-        icon: FontAwesome.send_o,
-        top: 413,
-        isOpened: isOpened,
-      ),
-      label: const Text('Messenger'),
-    ),
-  ];
+  late final titleAndIconWidget = Utils.titleAndIconList
+      .map(
+        (e) => NavigationRailDestination(
+          icon: IconTabBar(
+            icon: e['icon'],
+            top: e['position'],
+            isOpened: isOpened,
+          ),
+          label: Text(e['title'] as String),
+        ),
+      )
+      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +46,11 @@ class CustomLeftAppBar extends StatelessWidget {
           labelType: NavigationRailLabelType.none,
           backgroundColor: Colors.white,
           extended: isOpened,
-          onDestinationSelected: controller.selectPage,
+          onDestinationSelected: (value) {
+            controller.selectPage(value);
+            scaffoldDashboardScreenKey.currentState!.closeDrawer();
+            scaffoldDashboardScreenKey.currentState!.closeEndDrawer();
+          },
           selectedIndex: controller.pageIndex.value,
           destinations: titleAndIconWidget,
         );

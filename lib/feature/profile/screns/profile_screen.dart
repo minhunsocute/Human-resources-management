@@ -315,7 +315,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: Row2Field(
               check: 1,
-              childre: [
+              children: [
                 Container(
                   width: 150,
                   height: 150,
@@ -529,7 +529,7 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             child: Row2Field(
-              childre: [
+              children: [
                 SizedBox(
                   width: isSmasllScreen ? double.infinity : 220,
                   child: Column(

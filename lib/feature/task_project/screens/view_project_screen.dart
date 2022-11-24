@@ -238,7 +238,7 @@ class ViewProjectScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               Row2Field(
-                childre: [
+                children: [
                   FieldAuto(
                     flex: 1,
                     child: SizedBox(

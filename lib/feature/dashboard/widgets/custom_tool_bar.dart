@@ -19,7 +19,7 @@ class CustomToolBar extends StatelessWidget {
         ),
       ),
       child: Row2Field(
-        childre: [
+        children: [
           FieldAuto(
             child: Row(children: [
               ToolBarTextItem(

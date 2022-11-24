@@ -39,8 +39,19 @@ List<Map<String, dynamic>> listCard1 = [
     'data': 352,
     'percent': -24,
   },
+  {
+    'title': 'Purchase',
+    'data': '\$32,431',
+    'percent': 12,
+  },
+  {
+    'title': 'Return',
+    'data': '\$28,838',
+    'percent': -12,
+  }
 ];
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   RxInt touchedIndex = (-1).obs;
@@ -124,6 +135,74 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+
+          const SizedBox(height: 10.0),
+          ////////////////////////////////////////////////////////////////
+          Container(
+            width: MediaQuery.of(context).size.width * 0.5,
+            margin: const EdgeInsets.only(left: 15.0),
+            padding: const EdgeInsets.all(15.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: AppColors.backgroundColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey[350]!,
+                  blurRadius: 10.0,
+                )
+              ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Turnover",
+                      style: TextStyle(
+                          // color: AppColors.headline1TextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Row(
+                        children: const [
+                          Text("Week ",
+                              style: TextStyle(
+                                  color: AppColors.primarySecondColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0)),
+                          Icon(Icons.arrow_drop_down,
+                              color: AppColors.primarySecondColor),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10.0),
+                const SizedBox(
+                  width: double.infinity,
+                  height: 210,
+                  child: LineChartDesign(listData: [
+                    FlSpot(0, 3.44),
+                    FlSpot(1, 2.44),
+                    FlSpot(2, 4.44),
+                    FlSpot(3, 1.44),
+                    FlSpot(4, 6.44),
+                    FlSpot(5, 4.44),
+                    FlSpot(6, 2.44),
+                    FlSpot(7, 2.7),
+                    FlSpot(8, 1.6),
+                    FlSpot(9, 2.65),
+                    FlSpot(10, 2.84),
+                    FlSpot(11, 1.44),
+                  ]),
+                )
+              ],
+            ),
+          ),
+          ////////////////////////////////////////////////////////////////
           const SizedBox(height: 20.0),
           const Row2FieldWidget(),
           const SizedBox(height: 20.0),
@@ -271,7 +350,7 @@ class Row4FieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row2Field(
-      childre: [
+      children: [
         FieldAuto(
           flex: 3,
           child: Container(
@@ -472,7 +551,7 @@ class Row2FieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row2Field(
-      childre: [
+      children: [
         FieldAuto(
           flex: 2,
           child: Container(

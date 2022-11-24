@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
 
+import '../feature/employ/screens/employ_main_screen.dart';
+import '../feature/home/screens/home_screen.dart';
+import '../feature/mail_notification/screens/mail_notification_screen.dart';
+import '../feature/messenger/screens/main_messenger_screen.dart';
+import '../feature/profile/screns/profile_screen.dart';
+import '../feature/task_project/screens/task_screen.dart';
+
 class Utils {
   static const double iconSize = 28;
   static const List<Map<String, dynamic>> titleAndIconList = [
     {
-      'index': 0,
       'title': 'Dashboard',
-      'icon': Icon(Icons.dashboard_outlined, size: iconSize),
+      'icon': Icons.dashboard_outlined,
+      'position': 60,
     },
     {
-      'index': 1,
       'title': 'Employee',
-      'icon': Icon(Icons.people_outline_outlined, size: iconSize),
+      'icon': Icons.people_outline_outlined,
+      'position': 130,
     },
     {
-      'index': 2,
       'title': 'Project',
-      'icon': Icon(Icons.assignment_outlined, size: iconSize),
+      'icon': Icons.assignment_outlined,
+      'position': 203,
     },
     {
-      'index': 3,
       'title': 'Profile',
-      'icon': Icon(Icons.person_outline, size: iconSize),
+      'icon': Icons.person_outline,
+      'position': 273,
+    },
+    {
+      'title': 'Mail',
+      'icon': Icons.mail_outline,
+      'position': 343,
+    },
+    {
+      'title': 'Message',
+      'icon': Icons.message_outlined,
+      'position': 413,
     }
   ];
 
@@ -81,6 +98,15 @@ class Utils {
     'Thu',
     'Fri',
     'Sat'
+  ];
+
+  static final List<Widget> widgetDashboard = [
+    HomeScreen(),
+    EmployMainScreen(),
+    TaskScreen(),
+    ProfileScreen(),
+    MailNotificationScreen(),
+    MainMessengerScreen(),
   ];
 
   static const emptyTextSpan = TextSpan();
