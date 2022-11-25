@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
 import 'package:ueh_project_admin/feature/dashboard/controller/dashboard_controller.dart';
@@ -11,6 +10,7 @@ class CustomLeftAppBar extends StatelessWidget {
       required this.widthDevice,
       required this.selectPage,
       required this.scaffoldDashboardScreenKey});
+
   final bool isOpened;
   final double widthDevice;
   final Function(int) selectPage;
@@ -58,6 +58,18 @@ class CustomLeftAppBar extends StatelessWidget {
       label: const Text('Profile'),
     ),
   ];
+  late final titleAndIconWidget = Utils.titleAndIconList
+      .map(
+        (e) => NavigationRailDestination(
+          icon: IconTabBar(
+            icon: e['icon'],
+            top: e['position'],
+            isOpened: isOpened,
+          ),
+          label: Text(e['title'] as String),
+        ),
+      )
+      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +88,11 @@ class CustomLeftAppBar extends StatelessWidget {
           labelType: NavigationRailLabelType.none,
           backgroundColor: Colors.white,
           extended: isOpened,
-          onDestinationSelected: controller.selectPage,
+          onDestinationSelected: (value) {
+            controller.selectPage(value);
+            scaffoldDashboardScreenKey.currentState!.closeDrawer();
+            scaffoldDashboardScreenKey.currentState!.closeEndDrawer();
+          },
           selectedIndex: controller.pageIndex.value,
           destinations: titleAndIconWidget,
         );

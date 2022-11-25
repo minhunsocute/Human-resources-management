@@ -5,7 +5,7 @@ import 'package:ueh_project_admin/feature/dashboard/widgets/tool_bar_button_item
 import 'package:ueh_project_admin/feature/dashboard/widgets/tool_bar_item.dart';
 
 import '../../../constants/reponsiveness.dart';
-import '../../employ/screens/employ_main_screen.dart';
+import '../../employee/screens/employ_main_screen.dart';
 
 class CustomToolBar extends StatelessWidget {
   const CustomToolBar({super.key});
@@ -19,7 +19,7 @@ class CustomToolBar extends StatelessWidget {
         ),
       ),
       child: Row2Field(
-        childre: [
+        children: [
           FieldAuto(
             child: Row(children: [
               ToolBarTextItem(

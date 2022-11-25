@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
-import 'package:ueh_project_admin/feature/employ/widgets/button_icon.dart';
+import 'package:ueh_project_admin/feature/employee/widgets/button_icon.dart';
 import 'package:ueh_project_admin/feature/home/screens/home_screen.dart';
 import 'package:ueh_project_admin/widgets/custom_button.dart';
 
@@ -238,7 +238,7 @@ class ViewProjectScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               Row2Field(
-                childre: [
+                children: [
                   FieldAuto(
                     flex: 1,
                     child: SizedBox(
