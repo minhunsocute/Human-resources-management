@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
-import 'package:ueh_project_admin/feature/employ/widgets/button_icon.dart';
+import 'package:ueh_project_admin/feature/employee/widgets/button_icon.dart';
 import 'package:ueh_project_admin/feature/task_project/screens/view_project_screen.dart';
 
 import '../../../constants/app_color.dart';

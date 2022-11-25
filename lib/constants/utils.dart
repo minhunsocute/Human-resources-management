@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../feature/employ/screens/employ_main_screen.dart';
+import '../feature/employee/screens/employ_main_screen.dart';
 import '../feature/home/screens/home_screen.dart';
 import '../feature/mail_notification/screens/mail_notification_screen.dart';
 import '../feature/messenger/screens/main_messenger_screen.dart';
 import '../feature/profile/screns/profile_screen.dart';
 import '../feature/task_project/screens/task_screen.dart';
+import 'app_color.dart';
 
 class Utils {
   static const double iconSize = 28;
@@ -107,6 +108,44 @@ class Utils {
     ProfileScreen(),
     MailNotificationScreen(),
     MainMessengerScreen(),
+  ];
+
+  static const List<Widget> tableTitleListEmployee = [
+    Expanded(
+      flex: 1,
+      child: Text('CANDIDATE NAME',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
+    Expanded(
+      flex: 1,
+      child: Text('EMAIL ADDRESS',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
+    Expanded(
+      flex: 1,
+      child: Text('CONTACT NUMBER',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
+    Expanded(
+      flex: 1,
+      child: Text('JOB TITLE',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
+    Expanded(
+      flex: 1,
+      child: Text('RECRUITMENT STATUS',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
   ];
 
   static const emptyTextSpan = TextSpan();

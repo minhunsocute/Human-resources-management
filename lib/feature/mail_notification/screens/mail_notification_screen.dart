@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
-import 'package:ueh_project_admin/feature/employ/screens/employ_main_screen.dart';
+import 'package:ueh_project_admin/feature/employee/screens/employ_main_screen.dart';
 import '../../../constants/app_color.dart';
 import '../../../constants/fake_data.dart';
 import '../../../constants/reponsiveness.dart';

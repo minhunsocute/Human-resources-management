@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,7 +32,8 @@ class TypeMessageField extends StatelessWidget {
                   FilePickerCross myFile =
                       await FilePickerCross.importFromStorage(
                           type: FileTypeCross
-                              .any, // Available: `any`, `audio`, `image`, `video`, `custom`. Note: not available using FDE
+                              .any, 
+                              // Available: `any`, `audio`, `image`, `video`, `custom`. Note: not available using FDE
                           fileExtension:
                               'txt, md' // Only if FileTypeCross.custom . May be any file extension like `dot`, `ppt,pptx,odp`
                           );

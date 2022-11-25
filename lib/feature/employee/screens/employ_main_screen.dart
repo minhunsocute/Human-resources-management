@@ -1,15 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ueh_project_admin/constants/utils.dart';
 import 'package:ueh_project_admin/feature/auth/screens/sign_in%20_screen.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
+import 'package:ueh_project_admin/feature/employee/screens/employee_profile_screen.dart';
+import 'package:ueh_project_admin/feature/home/screens/home_screen.dart';
 import 'package:ueh_project_admin/widgets/custom_button.dart';
-
 import '../../../constants/app_color.dart';
 import '../../../constants/reponsiveness.dart';
 import '../widgets/button_icon.dart';
 import '../widgets/employee_progress_item.dart';
 import '../widgets/recruitment_progress_item.dart';
 import '../widgets/top_employee.dart';
+
+List<Map<String, dynamic>> listEmployeeFakeData = [
+  {
+    'image': 'assets/images/person.png',
+    'name': 'Truong Huynh Duc hoang',
+    'type': 'Backend Developer',
+    'round': 1,
+    'email': 'hoang.201102ak@gmail.com',
+    'phoneNumber': '0935703991',
+  },
+  {
+    'image': 'assets/images/person.png',
+    'name': 'Truong Huynh Duc hoang',
+    'type': 'Backend Developer',
+    'round': 1,
+    'email': 'hoang.201102ak@gmail.com',
+    'phoneNumber': '0935703991',
+  },
+  {
+    'image': 'assets/images/person.png',
+    'name': 'Truong Huynh Duc hoang',
+    'type': 'Backend Developer',
+    'round': 1,
+    'email': 'hoang.201102ak@gmail.com',
+    'phoneNumber': '0935703991',
+  },
+  {
+    'image': 'assets/images/person.png',
+    'name': 'Truong Huynh Duc hoang',
+    'type': 'Backend Developer',
+    'round': 1,
+    'email': 'hoang.201102ak@gmail.com',
+    'phoneNumber': '0935703991',
+  }
+];
 
 class EmployMainScreen extends StatelessWidget {
   EmployMainScreen({super.key});
@@ -70,112 +108,7 @@ class EmployMainScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'List Employee',
-                          style: TextStyle(
-                              color: AppColors.textColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0),
-                        ),
-                        ButtonIcon(
-                          title: 'Select Type',
-                          press: () {},
-                          icon: Icons.keyboard_arrow_down_rounded,
-                          color1: AppColors.primaryColor,
-                          color2: AppColors.primaryColor.withOpacity(0.4),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 20.0),
-                    Row(
-                      children: const [
-                        Expanded(
-                          flex: 1,
-                          child: Text('CANDIDATE NAME',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text('EMAIL ADDRESS',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text('CONTACT NUMBER',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text('JOB TITLE',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text('RECRUITMENT STATUS',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                    const Divider(thickness: 1),
-                    const SizedBox(height: 10.0),
-                    const RecruitmentProgressItem(
-                      image: 'assets/images/person.png',
-                      name: 'Truong Huynh Duc hoang',
-                      type: 'Backend Developer',
-                      round: 1,
-                      email: 'hoang.201102ak@gmail.com',
-                      phoneNumber: '0935703991',
-                    ),
-                    const Divider(thickness: 1),
-                    const RecruitmentProgressItem(
-                      image: 'assets/images/person2.png',
-                      name: 'Truong Huynh Duc hoang',
-                      type: 'Backend Developer',
-                      round: 1,
-                      email: 'hoang.201102ak@gmail.com',
-                      phoneNumber: '0935703991',
-                    ),
-                    const Divider(thickness: 1),
-                    const RecruitmentProgressItem(
-                      image: 'assets/images/person1.png',
-                      name: 'Truong Huynh Duc hoang',
-                      type: 'Backend Developer',
-                      round: 1,
-                      email: 'hoang.201102ak@gmail.com',
-                      phoneNumber: '0935703991',
-                    ),
-                    const Divider(thickness: 1),
-                    const RecruitmentProgressItem(
-                      image: 'assets/images/person2.png',
-                      name: 'Truong Huynh Duc hoang',
-                      type: 'Backend Developer',
-                      round: 1,
-                      email: 'hoang.201102ak@gmail.com',
-                      phoneNumber: '0935703991',
-                    ),
-                  ],
-                ),
+                child: const TableListEmployee(),
               ),
             ),
             FieldAuto(
@@ -452,6 +385,60 @@ class EmployMainScreen extends StatelessWidget {
           ),
         ),
       ]),
+    );
+  }
+}
+
+class TableListEmployee extends StatelessWidget {
+  const TableListEmployee({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'List Employee',
+              style: TextStyle(
+                  color: AppColors.textColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0),
+            ),
+            ButtonIcon(
+              title: 'Select Type',
+              press: () {},
+              icon: Icons.keyboard_arrow_down_rounded,
+              color1: AppColors.primaryColor,
+              color2: AppColors.primaryColor.withOpacity(0.4),
+            )
+          ],
+        ),
+        const SizedBox(height: 20.0),
+        Row(
+          children: Utils.tableTitleListEmployee,
+        ),
+        const SizedBox(height: 10.0),
+        const Divider(thickness: 1),
+        const SizedBox(height: 10.0),
+        ...[
+          for (var item in listEmployeeFakeData) ...[
+            InkWell(
+              onTap: () => Get.to(() => const EmployeeProfileScreen()),
+              child: RecruitmentProgressItem(
+                image: item['image'],
+                name: item['name'],
+                type: item['type'],
+                round: 1,
+                email: item['email'],
+                phoneNumber: item['phoneNumber'],
+              ),
+            ),
+            const Divider(thickness: 1),
+          ]
+        ],
+      ],
     );
   }
 }

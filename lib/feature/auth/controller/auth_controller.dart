@@ -66,13 +66,8 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print("user-not-found");
-        // Get.dialog(const ErrorDialog(
-        //     question: 'Log In', title1: 'No user found for that email'));
       } else if (e.code == 'wrong-password') {
         print('wrong-password');
-        // Get.dialog(const ErrorDialog(
-        //     question: 'Log In',
-        //     title1: 'Wrong password provided for that user'));
       }
       return null;
     }

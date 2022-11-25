@@ -7,7 +7,7 @@ import 'package:ueh_project_admin/widgets/custom_button.dart';
 import '../../../constants/app_color.dart';
 import '../../../constants/reponsiveness.dart';
 import '../../dashboard/widgets/field_auto.dart';
-import '../../employ/screens/employ_main_screen.dart';
+import '../../employee/screens/employ_main_screen.dart';
 import '../widgets/button_contact.dart';
 import '../widgets/setting_item.dart';
 

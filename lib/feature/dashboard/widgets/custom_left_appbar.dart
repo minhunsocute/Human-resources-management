@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
 import 'package:ueh_project_admin/feature/dashboard/controller/dashboard_controller.dart';
@@ -11,6 +10,7 @@ class CustomLeftAppBar extends StatelessWidget {
       required this.widthDevice,
       required this.selectPage,
       required this.scaffoldDashboardScreenKey});
+
   final bool isOpened;
   final double widthDevice;
   final Function(int) selectPage;

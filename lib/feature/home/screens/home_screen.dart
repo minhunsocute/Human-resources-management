@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
-import 'package:ueh_project_admin/feature/employ/widgets/employee_status_item.dart';
-import 'package:ueh_project_admin/feature/employ/widgets/recruitment_progress_item.dart';
+import 'package:ueh_project_admin/feature/employee/widgets/employee_status_item.dart';
+import 'package:ueh_project_admin/feature/employee/widgets/recruitment_progress_item.dart';
 import 'package:ueh_project_admin/feature/home/widgets/card_1.dart';
 
 import '../../../constants/app_color.dart';
@@ -14,9 +14,9 @@ import '../../../widgets/column_2_chart.dart';
 import '../../../widgets/line_chart.dart';
 import '../../dashboard/widgets/field_auto.dart';
 import '../../dashboard/widgets/row_field.dart';
-import '../../employ/widgets/todo_item.dart';
-import '../../employ/widgets/top_employ_card.dart';
-import '../../employ/widgets/type_employ_item.dart';
+import '../../employee/widgets/todo_item.dart';
+import '../../employee/widgets/top_employ_card.dart';
+import '../../employee/widgets/type_employ_item.dart';
 
 List<Map<String, dynamic>> listCard1 = [
   {
@@ -49,6 +49,24 @@ List<Map<String, dynamic>> listCard1 = [
     'data': '\$28,838',
     'percent': -12,
   }
+];
+
+List<Map<String, dynamic>> listTodoFakeData = [
+  {
+    'title': 'Lorem ipsum is simply dummy text of the printing',
+    'time': DateTime.now(),
+    'type': 0,
+  },
+  {
+    'title': 'Lorem ipsum is=he printing',
+    'time': DateTime.now(),
+    'type': 1,
+  },
+  {
+    'title': 'Lorem ipsum is simply dummy textnting',
+    'time': DateTime.now(),
+    'type': 2,
+  },
 ];
 
 // ignore: must_be_immutable
@@ -208,7 +226,7 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 20.0),
           // const Row4FieldWidget(),
           const SizedBox(height: 20.0),
-          const Row4FieldWidget(),
+          Row4FieldWidget(),
           const SizedBox(height: 20.0),
           Container(
             width: double.infinity,
@@ -345,7 +363,26 @@ BarChartGroupData makeGroupData(int x, double y1, double y2) {
 }
 
 class Row4FieldWidget extends StatelessWidget {
-  const Row4FieldWidget({super.key});
+  Row4FieldWidget({super.key});
+
+  final _animatedListKey = GlobalKey<AnimatedListState>();
+
+  void deleteItem(int index) {
+    _animatedListKey.currentState!.removeItem(
+      index,
+      (context, animation) => TodoItem(
+        animation: animation.drive(
+          Tween(begin: const Offset(-1, 0), end: const Offset(0, 0)),
+        ),
+        title: listTodoFakeData[index]['title'],
+        time: listTodoFakeData[index]['time'],
+        type: listTodoFakeData[index]['type'],
+        checkItem: () {
+          deleteItem(index);
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -519,28 +556,76 @@ class Row4FieldWidget extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20.0),
-                TodoItem(
-                  title: 'Lorem ipsum is simply dummy text of the printing',
-                  time: DateTime.now(),
-                  type: 0,
+                SizedBox(
+                  height: Get.height * 0.2,
+                  child: AnimatedList(
+                    key: _animatedListKey,
+                    itemBuilder: (context, index, animation) {
+                      return TodoItem(
+                        checkItem: () => deleteItem(index),
+                        animation: animation.drive(
+                          Tween(begin: Offset.zero, end: Offset.zero),
+                        ),
+                        title: listTodoFakeData[index]['title'],
+                        time: listTodoFakeData[index]['time'],
+                        type: listTodoFakeData[index]['type'],
+                      );
+                    },
+                    initialItemCount: listTodoFakeData.length,
+                  ),
                 ),
-                const Divider(thickness: 1),
-                TodoItem(
-                  title: 'Lorem ipsum is=he printing',
-                  time: DateTime.now(),
-                  type: 1,
-                ),
-                const Divider(thickness: 1),
-                TodoItem(
-                  title: 'Lorem ipsum is simply dummy textnting',
-                  time: DateTime.now(),
-                  type: 2,
-                ),
+                const SizedBox(height: 10),
+                TodoItemInput(),
               ],
             ),
           ),
         ),
       ],
+    );
+  }
+}
+
+class TodoItemInput extends StatelessWidget {
+  const TodoItemInput({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: Colors.blueGrey[300]!,
+            width: 0.3,
+          ),
+        ),
+        hintText: 'Try typing \' Submit Report by Friday 3pm\'',
+        hintStyle: TextStyle(
+          color: Colors.blueGrey[200],
+          fontWeight: FontWeight.w400,
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        prefixIcon: const Icon(
+          Icons.circle_outlined,
+          color: Colors.blueGrey,
+        ),
+        suffixIcon: InkWell(
+          onTap: () {
+            Get.dialog(
+              DatePickerDialog(
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2022, 1, 1),
+                lastDate: DateTime(2022, 12, 30),
+              ),
+            );
+          },
+          child: const Icon(
+            Icons.calendar_month_outlined,
+            color: Colors.blueGrey,
+          ),
+        ),
+      ),
     );
   }
 }
