@@ -17,7 +17,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   double turns = 0.0;
-  final dashboardController = Get.put(DashboardController());
+  final dashboardController = Get.find<DashboardController>();
 
   @override
   Widget build(BuildContext context) {

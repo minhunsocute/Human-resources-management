@@ -4,11 +4,10 @@ import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
-import 'package:ueh_project_admin/feature/employ/widgets/button_icon.dart';
+import 'package:ueh_project_admin/feature/employee/widgets/button_icon.dart';
 import 'package:ueh_project_admin/feature/task_project/screens/view_project_screen.dart';
 
 import '../../../constants/app_color.dart';
-import '../../../constants/reponsiveness.dart';
 import '../../../constants/utils.dart';
 import '../../../widgets/column_2_chart.dart';
 import '../../../widgets/custom_button.dart';
@@ -24,7 +23,7 @@ class TaskScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 20.0),
                 Row2Field(
-                  childre: [
+                  children: [
                     FieldAuto(
                         flex: 2,
                         child: Container(
@@ -163,7 +162,7 @@ class TaskScreen extends StatelessWidget {
                     ],
                   ),
                   child: Row2Field(
-                    childre: [
+                    children: [
                       FieldAuto(
                         child: Column(
                           children: [

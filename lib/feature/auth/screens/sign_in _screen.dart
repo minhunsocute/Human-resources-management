@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ueh_project_admin/feature/auth/controller/auth_controller.dart';
 import 'package:ueh_project_admin/widgets/custom_button.dart';
 
 import '../../../constants/app_color.dart';
-import '../../../routes/route_name.dart';
-import '../../../services/auth_services.dart';
 
 PageController pageController = PageController(initialPage: 0, keepPage: true);
 void onButtonTape(int index) {
@@ -13,15 +12,36 @@ void onButtonTape(int index) {
 //  pageController.jumpToPage(index);
 }
 
-List<Widget> listViewAuth = [
-  SignInField(),
-  SignUpField(),
-];
+// ignore: must_be_immutable
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
-class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key});
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   // RxBool checkBox = false.obs;
-  RxInt _currentIndex = 0.obs;
+  final RxInt _currentIndex = 0.obs;
+
+  bool isLoading = false;
+
+  final _authController = Get.find<AuthController>();
+
+  void logIn(String userName, String password) async {
+    _authController.isLoading.value = true;
+    final response = await _authController.signInWithEmailAndPassword(
+        username: userName, password: password);
+    if (response != null) {
+      print('Sign in successfully');
+    }
+  }
+
+  late List<Widget> listViewAuth = [
+    SignInField(logIn: logIn),
+    SignUpField(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,59 +63,64 @@ class SignInScreen extends StatelessWidget {
       ),
       backgroundColor: AppColors.primaryColor.withOpacity(0.4),
       body: SafeArea(
-        child: Center(
-          child: Container(
-            padding: const EdgeInsets.all(20.0),
-            height: 530,
-            width: 600,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: AppColors.backgroundColor,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.textColor.withOpacity(0.7),
-                  blurRadius: 10.0,
-                ),
-              ],
-            ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 450.0,
-                    child: PageView.builder(
-                      controller: pageController,
-                      onPageChanged: (value) {
-                        _currentIndex.value = value;
-                      },
-                      itemBuilder: (context, index) {
-                        return listViewAuth[index];
-                      },
-                      itemCount: listViewAuth.length,
+        child: Obx(
+          () => Center(
+            child: _authController.isLoading.value
+                ? const CircularProgressIndicator()
+                : Container(
+                    padding: const EdgeInsets.all(20.0),
+                    height: 530,
+                    width: 600,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: AppColors.backgroundColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.textColor.withOpacity(0.7),
+                          blurRadius: 10.0,
+                        ),
+                      ],
+                    ),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            height: 450.0,
+                            child: PageView.builder(
+                              controller: pageController,
+                              onPageChanged: (value) {
+                                _currentIndex.value = value;
+                              },
+                              itemBuilder: (context, index) {
+                                return listViewAuth[index];
+                              },
+                              itemCount: listViewAuth.length,
+                            ),
+                          ),
+                          const Divider(),
+                          Row(
+                            children: [
+                              SizedBox(
+                                height: 10,
+                                width: 200,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: listViewAuth.length,
+                                  itemBuilder: (context, index) => Obx(
+                                    () => buildIndicator(
+                                        _currentIndex.value == index,
+                                        MediaQuery.of(context).size),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  const Divider(),
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 10,
-                        width: 200,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: listViewAuth.length,
-                          itemBuilder: (context, index) => Obx(
-                            () => buildIndicator(_currentIndex.value == index,
-                                MediaQuery.of(context).size),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
           ),
         ),
       ),
@@ -278,11 +303,12 @@ class CustomPasswordField extends StatelessWidget {
 }
 
 class SignInField extends StatelessWidget {
-  SignInField({super.key});
+  SignInField({super.key, required this.logIn});
 
   RxBool checkBox = false.obs;
   final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final Function(String, String) logIn;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -342,7 +368,8 @@ class SignInField extends StatelessWidget {
             width: 140,
             child: CustomButton(
               text: 'Sign In',
-              onTap: () => Get.toNamed(RouteNames.dashboardScreen),
+              onTap: () =>
+                  logIn(_userNameController.text, _passwordController.text),
             ),
           ),
           const SizedBox(height: 10.0),
