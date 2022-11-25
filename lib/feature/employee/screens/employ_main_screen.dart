@@ -19,7 +19,7 @@ List<Map<String, dynamic>> listEmployeeFakeData = [
     'image': 'assets/images/person.png',
     'name': 'Truong Huynh Duc hoang',
     'type': 'Backend Developer',
-    'round': 1,
+    'status': 'Learning',
     'email': 'hoang.201102ak@gmail.com',
     'phoneNumber': '0935703991',
   },
@@ -27,7 +27,7 @@ List<Map<String, dynamic>> listEmployeeFakeData = [
     'image': 'assets/images/person.png',
     'name': 'Truong Huynh Duc hoang',
     'type': 'Backend Developer',
-    'round': 1,
+    'status': 'Examining',
     'email': 'hoang.201102ak@gmail.com',
     'phoneNumber': '0935703991',
   },
@@ -35,7 +35,7 @@ List<Map<String, dynamic>> listEmployeeFakeData = [
     'image': 'assets/images/person.png',
     'name': 'Truong Huynh Duc hoang',
     'type': 'Backend Developer',
-    'round': 1,
+    'status': 'Learning',
     'email': 'hoang.201102ak@gmail.com',
     'phoneNumber': '0935703991',
   },
@@ -43,7 +43,7 @@ List<Map<String, dynamic>> listEmployeeFakeData = [
     'image': 'assets/images/person.png',
     'name': 'Truong Huynh Duc hoang',
     'type': 'Backend Developer',
-    'round': 1,
+    'status': 'Examining',
     'email': 'hoang.201102ak@gmail.com',
     'phoneNumber': '0935703991',
   }
@@ -64,7 +64,7 @@ class EmployMainScreen extends StatelessWidget {
             children: const [
               TopEmployeeWidget(
                 name: "HEAD OF THE DEPARTMENT",
-                image: "assets/images/doctor1.png",
+                image: "assets/images/person.png",
                 description:
                     "Doctors, also known as physicians, are licensed health professionals who maintain and restore human health through the practice of medicine. They examine patients, review their medical history, diagnose illnesses or injuries, administer treatment, and counsel patients on their health and well-being.",
                 type: "Dentist",
@@ -72,7 +72,7 @@ class EmployMainScreen extends StatelessWidget {
               ),
               TopEmployeeWidget(
                 name: "HEAD OF THE DEPARTMENT",
-                image: "assets/images/doctor3.png",
+                image: "assets/images/person.png",
                 description:
                     "Doctors, also known as physicians, are licensed health professionals who maintain and restore human health through the practice of medicine. They examine patients, review their medical history, diagnose illnesses or injuries, administer treatment, and counsel patients on their health and well-being.",
                 type: "Dentist",
@@ -80,7 +80,7 @@ class EmployMainScreen extends StatelessWidget {
               ),
               TopEmployeeWidget(
                 name: "HEAD OF THE DEPARTMENT",
-                image: "assets/images/doctor2.png",
+                image: "assets/images/person.png",
                 description:
                     "Doctors, also known as physicians, are licensed health professionals who maintain and restore human health through the practice of medicine. They examine patients, review their medical history, diagnose illnesses or injuries, administer treatment, and counsel patients on their health and well-being.",
                 type: "Dentist",
@@ -430,7 +430,7 @@ class TableListEmployee extends StatelessWidget {
                 image: item['image'],
                 name: item['name'],
                 type: item['type'],
-                round: 1,
+                status: item['status'],
                 email: item['email'],
                 phoneNumber: item['phoneNumber'],
               ),

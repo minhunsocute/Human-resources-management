@@ -18,6 +18,41 @@ import '../../employee/widgets/todo_item.dart';
 import '../../employee/widgets/top_employ_card.dart';
 import '../../employee/widgets/type_employ_item.dart';
 
+List<Map<String, dynamic>> listEmployeeFakeData = [
+  {
+    'image': 'assets/images/person.png',
+    'name': 'Truong Huynh Duc hoang',
+    'type': 'Backend Developer',
+    'status': 'Learning',
+    'email': 'hoang.201102ak@gmail.com',
+    'phoneNumber': '0935703991',
+  },
+  {
+    'image': 'assets/images/person.png',
+    'name': 'Truong Huynh Duc hoang',
+    'type': 'Backend Developer',
+    'status': 'Examining',
+    'email': 'hoang.201102ak@gmail.com',
+    'phoneNumber': '0935703991',
+  },
+  {
+    'image': 'assets/images/person.png',
+    'name': 'Truong Huynh Duc hoang',
+    'type': 'Backend Developer',
+    'status': 'Learning',
+    'email': 'hoang.201102ak@gmail.com',
+    'phoneNumber': '0935703991',
+  },
+  {
+    'image': 'assets/images/person.png',
+    'name': 'Truong Huynh Duc hoang',
+    'type': 'Backend Developer',
+    'status': 'Examining',
+    'email': 'hoang.201102ak@gmail.com',
+    'phoneNumber': '0935703991',
+  }
+];
+
 List<Map<String, dynamic>> listCard1 = [
   {
     'title': 'Total Employees',
@@ -224,7 +259,6 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 20.0),
           const Row2FieldWidget(),
           const SizedBox(height: 20.0),
-          // const Row4FieldWidget(),
           const SizedBox(height: 20.0),
           Row4FieldWidget(),
           const SizedBox(height: 20.0),
@@ -247,7 +281,7 @@ class HomeScreen extends StatelessWidget {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Recruitment Progress',
+                    'Learning Progress',
                     style: TextStyle(
                       color: AppColors.textColor,
                       fontWeight: FontWeight.bold,
@@ -260,7 +294,7 @@ class HomeScreen extends StatelessWidget {
                   children: const [
                     Expanded(
                       flex: 1,
-                      child: Text('CANDIDATE NAME',
+                      child: Text('EMPLOYEE NAME',
                           textAlign: TextAlign.start,
                           style: TextStyle(
                               color: AppColors.textColor,
@@ -291,7 +325,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Text('RECRUITMENT STATUS',
+                      child: Text('STATUS',
                           textAlign: TextAlign.start,
                           style: TextStyle(
                               color: AppColors.textColor,
@@ -302,41 +336,19 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 10.0),
                 const Divider(thickness: 1),
                 const SizedBox(height: 10.0),
-                const RecruitmentProgressItem(
-                  image: 'assets/images/person.png',
-                  name: 'Truong Huynh Duc hoang',
-                  type: 'Backend Developer',
-                  round: 1,
-                  email: 'hoang.201102ak@gmail.com',
-                  phoneNumber: '0935703991',
-                ),
-                const Divider(thickness: 1),
-                const RecruitmentProgressItem(
-                  image: 'assets/images/person2.png',
-                  name: 'Truong Huynh Duc hoang',
-                  type: 'Backend Developer',
-                  round: 1,
-                  email: 'hoang.201102ak@gmail.com',
-                  phoneNumber: '0935703991',
-                ),
-                const Divider(thickness: 1),
-                const RecruitmentProgressItem(
-                  image: 'assets/images/person1.png',
-                  name: 'Truong Huynh Duc hoang',
-                  type: 'Backend Developer',
-                  round: 1,
-                  email: 'hoang.201102ak@gmail.com',
-                  phoneNumber: '0935703991',
-                ),
-                const Divider(thickness: 1),
-                const RecruitmentProgressItem(
-                  image: 'assets/images/person2.png',
-                  name: 'Truong Huynh Duc hoang',
-                  type: 'Backend Developer',
-                  round: 1,
-                  email: 'hoang.201102ak@gmail.com',
-                  phoneNumber: '0935703991',
-                ),
+                ...[
+                  for (var item in listEmployeeFakeData) ...[
+                    RecruitmentProgressItem(
+                      image: item['image'],
+                      name: item['name'],
+                      type: item['type'],
+                      status: item['status'],
+                      email: item['email'],
+                      phoneNumber: item['phoneNumber'],
+                    ),
+                    const Divider(thickness: 1),
+                  ]
+                ],
               ],
             ),
           ),

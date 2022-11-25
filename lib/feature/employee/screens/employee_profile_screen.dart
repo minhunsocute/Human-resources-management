@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +8,7 @@ import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
 import '../../../constants/app_color.dart';
 import '../../../constants/utils.dart';
 import '../../../widgets/column_2_chart.dart';
+import '../../../widgets/line_chart.dart';
 import '../../dashboard/widgets/field_auto.dart';
 import '../../home/screens/home_screen.dart';
 import '../widgets/button_icon.dart';
@@ -179,26 +181,15 @@ class EmployeeProfileScreen extends StatelessWidget {
                               child: Row2Field(children: [
                                 FieldAuto(
                                   child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text(
-                                            'Activity Hours',
-                                            style: TextStyle(
-                                                color: AppColors.textColor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18.0),
-                                          ),
-                                          ButtonIcon(
-                                              title: 'Select Date',
-                                              press: () {},
-                                              icon: Icons.calendar_month,
-                                              color1: AppColors.primaryColor,
-                                              color2: AppColors.primaryColor
-                                                  .withOpacity(0.3))
-                                        ],
+                                      const Text(
+                                        'Activity Hours',
+                                        style: TextStyle(
+                                            color: AppColors.textColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0),
                                       ),
                                       SizedBox(
                                         height: 300,
@@ -230,11 +221,8 @@ class EmployeeProfileScreen extends StatelessWidget {
                                 const SizedBox(
                                   width: 5,
                                 ),
-                                Container(
+                                SizedBox(
                                   height: 300,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.black, width: 1)),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -293,14 +281,104 @@ class EmployeeProfileScreen extends StatelessWidget {
                                 ),
                               ]),
                             ),
+                            const SizedBox(height: 50),
+                            Container(
+                              padding: const EdgeInsets.all(15.0),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                color: AppColors.backgroundColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.textColor.withOpacity(0.2),
+                                    blurRadius: 10.0,
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Text(
+                                    'Statistic Assignment',
+                                    style: TextStyle(
+                                        color: AppColors.textColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0),
+                                  ),
+                                  SizedBox(height: 20),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 210,
+                                    child: LineChartDesign(
+                                      listData: [
+                                        FlSpot(0, 3.44),
+                                        FlSpot(1, 2.44),
+                                        FlSpot(2, 4.44),
+                                        FlSpot(3, 1.44),
+                                        FlSpot(4, 6.44),
+                                        FlSpot(5, 4.44),
+                                        FlSpot(6, 2.44),
+                                        FlSpot(7, 2.7),
+                                        FlSpot(8, 1.6),
+                                        FlSpot(9, 2.65),
+                                        FlSpot(10, 2.84),
+                                        FlSpot(11, 1.44),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
                           ],
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 50),
-                        height: constraints.maxHeight * 0.5,
-                        width: constraints.maxWidth * 0.2,
-                        child: const CurrentActivity(),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 70),
+                            height: constraints.maxHeight * 0.40,
+                            width: constraints.maxWidth * 0.2,
+                            child: const CurrentActivity(),
+                          ),
+                          const SizedBox(height: 50),
+                          Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.blueGrey[300]!,
+                                  blurRadius: 10.0,
+                                )
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Skill Improvement',
+                                  style: TextStyle(
+                                      color: AppColors.textColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                                const SizedBox(height: 10),
+                                Image.asset(
+                                  'images/growth.png',
+                                  height: 220,
+                                  width: 300,
+                                  fit: BoxFit.cover,
+                                  filterQuality: FilterQuality.high,
+                                  color: Colors.red,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                       const SizedBox(width: 15),
                     ],
@@ -313,6 +391,12 @@ class EmployeeProfileScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       color: AppColors.backgroundColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueGrey[300]!,
+                          blurRadius: 10.0,
+                        )
+                      ],
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

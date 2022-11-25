@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ueh_project_admin/feature/contest/screens/contest_management_screen.dart';
 
 import '../feature/employee/screens/employ_main_screen.dart';
 import '../feature/home/screens/home_screen.dart';
@@ -22,24 +23,29 @@ class Utils {
       'position': 130,
     },
     {
+      'title': 'Exam',
+      'icon': Icons.book_outlined,
+      'position': 203,
+    },
+    {
       'title': 'Project',
       'icon': Icons.assignment_outlined,
-      'position': 203,
+      'position': 273,
     },
     {
       'title': 'Profile',
       'icon': Icons.person_outline,
-      'position': 273,
+      'position': 343,
     },
     {
       'title': 'Mail',
       'icon': Icons.mail_outline,
-      'position': 343,
+      'position': 413,
     },
     {
       'title': 'Message',
       'icon': Icons.message_outlined,
-      'position': 413,
+      'position': 483,
     }
   ];
 
@@ -104,6 +110,7 @@ class Utils {
   static final List<Widget> widgetDashboard = [
     HomeScreen(),
     EmployMainScreen(),
+    ContestManagementScreen(),
     TaskScreen(),
     ProfileScreen(),
     MailNotificationScreen(),
@@ -141,7 +148,7 @@ class Utils {
     ),
     Expanded(
       flex: 1,
-      child: Text('RECRUITMENT STATUS',
+      child: Text('STATUS',
           textAlign: TextAlign.start,
           style: TextStyle(
               color: AppColors.textColor, fontWeight: FontWeight.bold)),

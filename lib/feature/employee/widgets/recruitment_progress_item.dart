@@ -7,7 +7,7 @@ class RecruitmentProgressItem extends StatelessWidget {
   final String name;
   final String type;
   final String email;
-  final int round;
+  final String status;
   final String phoneNumber;
   const RecruitmentProgressItem({
     Key? key,
@@ -15,7 +15,7 @@ class RecruitmentProgressItem extends StatelessWidget {
     required this.name,
     required this.type,
     required this.email,
-    required this.round,
+    required this.status,
     required this.phoneNumber,
   }) : super(key: key);
 
@@ -105,7 +105,7 @@ class RecruitmentProgressItem extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    '$round Round',
+                    status,
                     style: const TextStyle(
                         color: Colors.green, fontWeight: FontWeight.bold),
                   ),
