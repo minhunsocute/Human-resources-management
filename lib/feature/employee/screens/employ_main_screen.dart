@@ -56,12 +56,13 @@ class EmployMainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(15),
-      child: Column(children: [
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: const [
+              SizedBox(width: 30.0),
               TopEmployeeWidget(
                 name: "HEAD OF THE DEPARTMENT",
                 image: "assets/images/person.png",

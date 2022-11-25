@@ -4,6 +4,7 @@ import 'package:ueh_project_admin/feature/auth/controller/auth_controller.dart';
 import 'package:ueh_project_admin/widgets/custom_button.dart';
 
 import '../../../constants/app_color.dart';
+import '../../../services/auth_services.dart';
 
 PageController pageController = PageController(initialPage: 0, keepPage: true);
 void onButtonTape(int index) {

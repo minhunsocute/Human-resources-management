@@ -422,6 +422,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "10.2.1"
   get:
     dependency: "direct main"
     description:
@@ -681,6 +688,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  readmore:
+    dependency: "direct main"
+    description:
+      name: readmore
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
   share_plus:
     dependency: transitive
     description:

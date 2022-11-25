@@ -5,6 +5,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
 import 'package:ueh_project_admin/feature/employee/widgets/button_icon.dart';
+import 'package:ueh_project_admin/feature/task_project/screens/create_project_screen.dart';
 import 'package:ueh_project_admin/feature/task_project/screens/view_project_screen.dart';
 
 import '../../../constants/app_color.dart';
@@ -60,6 +61,12 @@ class TaskScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 10.0),
                                 Expanded(child: TextFormField()),
+                                IconButton(
+                                  onPressed: () => Get.to(() =>
+                                      Material(child: CreateProjectScreen())),
+                                  icon:
+                                      const Icon(Icons.add, color: Colors.blue),
+                                ),
                               ],
                             ),
                             const SizedBox(height: 40.0),

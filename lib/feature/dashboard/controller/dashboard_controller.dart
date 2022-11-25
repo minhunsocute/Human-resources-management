@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
+import 'package:ueh_project_admin/feature/course/screens/course_main_screen.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/custom_left_appbar.dart';
-import 'package:ueh_project_admin/feature/employ/screens/employ_main_screen.dart';
+import 'package:ueh_project_admin/feature/home/screens/home_screen.dart';
 import 'package:ueh_project_admin/feature/mail_notification/screens/mail_notification_screen.dart';
 import 'package:ueh_project_admin/feature/messenger/screens/main_messenger_screen.dart';
 import 'package:ueh_project_admin/feature/profile/screns/profile_screen.dart';
@@ -10,6 +11,8 @@ import 'package:ueh_project_admin/feature/task_project/screens/create_project_sc
 import 'package:ueh_project_admin/feature/task_project/screens/task_screen.dart';
 import 'package:ueh_project_admin/feature/time_line/screens/time_line_board_column_screen.dart';
 
+import '../../contest/screens/contest_management_screen.dart';
+import '../../employee/screens/employ_main_screen.dart';
 import '../../time_line/screens/time_line_main_screen.dart';
 
 class DashboardController extends GetxController {
@@ -50,14 +53,15 @@ class DashboardController extends GetxController {
       sizing: StackFit.loose,
       index: pageIndex.value,
       children: [
-        TimeLineColumnScreen(),
-        CreateProjectScreen(),
+        HomeScreen(),
         EmployMainScreen(),
         TaskScreen(),
+        CourseMainScreen(),
+        ContestManagementScreen(),
         MailNotificationScreen(),
         ProfileScreen(),
       ],
-      children: Utils.widgetDashboard,
+      // children: []Utils.widgetDashboard,
     ),
   );
 }

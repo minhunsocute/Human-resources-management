@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
 import 'package:ueh_project_admin/feature/dashboard/controller/dashboard_controller.dart';
@@ -19,7 +20,7 @@ class CustomLeftAppBar extends StatelessWidget {
   late final titleAndIconWidget = [
     NavigationRailDestination(
       icon: IconTabBar(
-        icon: Icons.dashboard_outlined,
+        icon: Icons.bar_chart_sharp,
         top: 60,
         isOpened: isOpened,
       ),
@@ -43,11 +44,27 @@ class CustomLeftAppBar extends StatelessWidget {
     ),
     NavigationRailDestination(
       icon: IconTabBar(
-        icon: Icons.mail_outline,
+        icon: Icons.computer,
         top: 343,
         isOpened: isOpened,
       ),
-      label: const Text('Mail'),
+      label: const Text('Course'),
+    ),
+    NavigationRailDestination(
+      icon: IconTabBar(
+        icon: Icons.edit,
+        top: 343,
+        isOpened: isOpened,
+      ),
+      label: const Text('Contest'),
+    ),
+    NavigationRailDestination(
+      icon: IconTabBar(
+        icon: Icons.mail,
+        top: 273,
+        isOpened: isOpened,
+      ),
+      label: const Text('Email'),
     ),
     NavigationRailDestination(
       icon: IconTabBar(
@@ -58,7 +75,7 @@ class CustomLeftAppBar extends StatelessWidget {
       label: const Text('Profile'),
     ),
   ];
-  late final titleAndIconWidget = Utils.titleAndIconList
+  late final title = Utils.titleAndIconList
       .map(
         (e) => NavigationRailDestination(
           icon: IconTabBar(

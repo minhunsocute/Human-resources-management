@@ -32,7 +32,7 @@ class MailNotificationScreen extends StatelessWidget {
   RxList<Map<String, dynamic>> listPageView = <Map<String, dynamic>>[
     {
       'type': 0,
-      'title': 'Phuc Khao Diem CC j day t dell biet',
+      'title': 'Nhan Dien AI',
     },
     {
       'type': 1,
@@ -195,7 +195,7 @@ class MailNotificationScreen extends StatelessWidget {
                             listPageView.value.add(
                               {
                                 'type': 0,
-                                'title': 'Phuc Khao Diem CC j day t dell biet',
+                                'title': 'Nhan Dien AI',
                               },
                             );
                             showViewMessIndex.value = 0;
@@ -518,7 +518,7 @@ class MailNotificationScreen extends StatelessWidget {
                       )
                     : Utils.emptySizeBox,
                 const Text(
-                  ' Phuc Khao diem co so du lieu',
+                  ' Get new Course',
                   style: TextStyle(
                       color: AppColors.textColor,
                       fontWeight: FontWeight.bold,

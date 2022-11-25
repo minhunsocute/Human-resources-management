@@ -36,11 +36,11 @@ class SplashScreen extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: 'Human ',
+                      text: 'Smart ',
                       style: TextStyle(color: AppColors.primaryColor),
                     ),
                     TextSpan(
-                      text: 'Resource Management',
+                      text: 'Training',
                       style: TextStyle(color: AppColors.textColor),
                     ),
                   ],

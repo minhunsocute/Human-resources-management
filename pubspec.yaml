@@ -56,6 +56,8 @@ dependencies:
   firebase: ^9.0.3
   flutter_inappwebview: ^5.7.2
   url_launcher: ^6.1.7
+  font_awesome_flutter: ^10.2.1
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_test:
