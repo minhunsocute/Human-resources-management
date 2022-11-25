@@ -26,7 +26,6 @@ class EmployeeListTable extends StatelessWidget {
               children: [
                 Text(
                   'Patient List',
-                  style: Theme.of(context).textTheme.headline2,
                 ),
                 CustomIconButton(
                   onPressed: () {},
@@ -65,7 +64,6 @@ class EmployeeListTable extends StatelessWidget {
                   onPressed: () {},
                   label: Text(
                     'Filter',
-                    style: Theme.of(context).textTheme.headline4,
                   ),
                   icon: const Icon(
                     Icons.filter_alt_outlined,

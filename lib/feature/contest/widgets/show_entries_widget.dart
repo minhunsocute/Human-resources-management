@@ -23,7 +23,6 @@ class ShowEntriesWidget extends StatelessWidget {
       children: [
         Text(
           'Show',
-          style: Theme.of(context).textTheme.headline4,
         ),
         const SizedBox(width: 8),
         Container(
@@ -90,7 +89,6 @@ class ShowEntriesWidget extends StatelessWidget {
         const SizedBox(width: 8),
         Text(
           'entries',
-          style: Theme.of(context).textTheme.headline4,
         )
       ],
     );

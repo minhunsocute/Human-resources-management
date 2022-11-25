@@ -71,7 +71,7 @@ class EmployeeResult extends StatelessWidget {
               const SizedBox(width: 5),
               color == Colors.white
                   ? ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(10),
                       child: Image.asset(
                         avt,
                         fit: BoxFit.cover,
@@ -89,10 +89,6 @@ class EmployeeResult extends StatelessWidget {
                     (e) => Expanded(
                       child: Text(
                         e.value,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline4!
-                            .copyWith(color: Colors.blueGrey),
                       ),
                     ),
                   )
@@ -106,9 +102,6 @@ class EmployeeResult extends StatelessWidget {
                     )
                   : Text(
                       'Action',
-                      style: Theme.of(context).textTheme.headline4!.copyWith(
-                            color: Colors.blueGrey,
-                          ),
                     ),
               const SizedBox(width: 5),
             ],

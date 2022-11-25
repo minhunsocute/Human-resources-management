@@ -18,7 +18,6 @@ class FilterCategory extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 15),
         ),
         const SizedBox(height: 5),
         TextFormField(
@@ -26,8 +25,6 @@ class FilterCategory extends StatelessWidget {
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
               hintText: hint,
-              hintStyle: Theme.of(context).textTheme.headline3!.copyWith(
-                  color: Colors.grey[400]!, fontWeight: FontWeight.w500),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
