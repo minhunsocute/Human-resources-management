@@ -15,75 +15,78 @@ class CourseMainScreen extends StatelessWidget {
     return Row(children: [
       Expanded(
         flex: 3,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: const [
-                  Icon(FontAwesomeIcons.computer,
-                      color: Colors.black, size: 30.0),
-                  Text(
-                    '  Course',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.0,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  children: const [
+                    Icon(FontAwesomeIcons.computer,
+                        color: Colors.black, size: 30.0),
+                    Text(
+                      '  Course',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0,
+                      ),
                     ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(children: [
+                    ...fakeDataCourseCate.map(
+                      (e) => Container(
+                        padding: const EdgeInsets.all(10.0),
+                        margin: const EdgeInsets.only(right: 20.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(width: 2, color: e['color']),
+                        ),
+                        child: Row(children: [
+                          Container(
+                            padding: const EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: e['color']),
+                            child: const Icon(
+                              Icons.file_copy,
+                              color: Colors.white,
+                              size: 26.0,
+                            ),
+                          ),
+                          const SizedBox(width: 20.0),
+                          Text(
+                            e['title'],
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22.0,
+                            ),
+                          ),
+                          const SizedBox(width: 40.0),
+                        ]),
+                      ),
+                    )
+                  ]),
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              Wrap(
+                children: [
+                  ...fakeDataCourse.map(
+                    (e) => CourseCard(e: e),
                   ),
                 ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(children: [
-                  ...fakeDataCourseCate.map(
-                    (e) => Container(
-                      padding: const EdgeInsets.all(10.0),
-                      margin: const EdgeInsets.only(right: 20.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        border: Border.all(width: 2, color: e['color']),
-                      ),
-                      child: Row(children: [
-                        Container(
-                          padding: const EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: e['color']),
-                          child: const Icon(
-                            Icons.file_copy,
-                            color: Colors.white,
-                            size: 26.0,
-                          ),
-                        ),
-                        const SizedBox(width: 20.0),
-                        Text(
-                          e['title'],
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22.0,
-                          ),
-                        ),
-                        const SizedBox(width: 40.0),
-                      ]),
-                    ),
-                  )
-                ]),
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            Wrap(
-              children: [
-                ...fakeDataCourse.map(
-                  (e) => CourseCard(e: e),
-                ),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
       const SizedBox(width: 10.0),
@@ -141,69 +144,77 @@ class CourseMainScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          e['title'],
-                          style: const TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22.0,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            e['title'],
+                            style: const TextStyle(
+                              color: AppColors.textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22.0,
+                            ),
                           ),
-                        ),
-                        Row(
-                          children: const [
-                            Icon(
-                              FontAwesomeIcons.youtube,
-                              color: Colors.blue,
-                              size: 26.0,
-                            ),
-                            Text(
-                              '  14 lessons',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22.0,
+                          Row(
+                            children: const [
+                              Icon(
+                                FontAwesomeIcons.youtube,
+                                color: Colors.blue,
+                                size: 26.0,
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              FontAwesomeIcons.clock,
-                              color: Colors.blue,
-                              size: 26.0,
-                            ),
-                            Text(
-                              '  ${DateFormat().add_yMEd().format(DateTime.now())} - ${DateFormat().add_yMEd().format(DateTime.now())}',
-                              style: const TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
+                              Expanded(
+                                child: Text(
+                                  '  14 lessons',
+                                  style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22.0,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: const [
-                            Icon(
-                              FontAwesomeIcons.peopleGroup,
-                              color: Colors.blue,
-                              size: 26.0,
-                            ),
-                            Text(
-                              '  300 Employee',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                FontAwesomeIcons.clock,
+                                color: Colors.blue,
+                                size: 26.0,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              Expanded(
+                                child: Text(
+                                  '  ${DateFormat().add_yMEd().format(DateTime.now())} - ${DateFormat().add_yMEd().format(DateTime.now())}',
+                                  style: const TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: const [
+                              Icon(
+                                FontAwesomeIcons.peopleGroup,
+                                color: Colors.blue,
+                                size: 26.0,
+                              ),
+                              Text(
+                                '  300 Employee',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
