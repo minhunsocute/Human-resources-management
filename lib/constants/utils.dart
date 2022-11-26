@@ -60,7 +60,7 @@ class Utils {
   static const curvesAnimation = Curves.easeInOut;
 
   static const starAdminTextSpan = TextSpan(
-    text: 'Star',
+    text: 'Smart',
     style: TextStyle(
       fontSize: 23,
       color: Colors.black,
@@ -68,7 +68,7 @@ class Utils {
     ),
     children: [
       TextSpan(
-        text: 'Admin',
+        text: 'Training',
         style: TextStyle(color: Colors.blueAccent),
       )
     ],

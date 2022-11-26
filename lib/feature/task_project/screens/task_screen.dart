@@ -12,10 +12,106 @@ import '../../../constants/app_color.dart';
 import '../../../constants/utils.dart';
 import '../../../widgets/column_2_chart.dart';
 import '../../../widgets/custom_button.dart';
+import '../../home/controller/home_controller.dart';
+import '../../home/widgets/week_calendar.dart';
 
+List<List<BarChartGroupData>> fakeProjectEmploymentData = [
+  [
+    makeGroupData(0, 150 / 300 * 20, 60 / 300 * 20),
+    makeGroupData(1, 180 / 300 * 20, 70 / 300 * 20),
+    makeGroupData(2, 80 / 300 * 20, 50 / 300 * 20),
+    makeGroupData(3, 230 / 300 * 20, 210 / 300 * 20),
+    makeGroupData(4, 100 / 300 * 20, 80 / 300 * 20),
+    makeGroupData(5, 100 / 300 * 20, 30 / 300 * 20),
+    makeGroupData(6, 200 / 300 * 20, 30 / 300 * 20),
+  ],
+  [
+    makeGroupData(0, 200 / 300 * 20, 30 / 300 * 20),
+    makeGroupData(1, 180 / 300 * 20, 70 / 300 * 20),
+    makeGroupData(2, 150 / 300 * 20, 60 / 300 * 20),
+    makeGroupData(3, 230 / 300 * 20, 210 / 300 * 20),
+    makeGroupData(4, 80 / 300 * 20, 50 / 300 * 20),
+    makeGroupData(5, 100 / 300 * 20, 80 / 300 * 20),
+    makeGroupData(6, 100 / 300 * 20, 30 / 300 * 20),
+  ]
+];
+
+List<List<Widget>> fakeTaskToday = [
+  [
+    TaskItem(
+      taskName: 'UI/UX Design',
+      imagePic: 'assets/images/person.png',
+      name: 'Minh Hung',
+      type: 0,
+      time: DateTime.now(),
+    ),
+    const Divider(thickness: 1),
+    TaskItem(
+      taskName: 'Front End',
+      imagePic: 'assets/images/person1.png',
+      name: 'Duc Hoang',
+      type: 1,
+      time: DateTime.now(),
+    ),
+    const Divider(thickness: 1),
+    TaskItem(
+      taskName: 'Backend',
+      imagePic: 'assets/images/person2.png',
+      name: 'Trung Hieu',
+      type: 1,
+      time: DateTime.now(),
+    ),
+    const Divider(thickness: 1),
+    TaskItem(
+      taskName: 'Figma',
+      imagePic: 'assets/images/person.png',
+      name: 'Minh Hung',
+      type: 0,
+      time: DateTime.now(),
+    ),
+  ],
+  [
+    TaskItem(
+      taskName: 'Front End',
+      imagePic: 'assets/images/person1.png',
+      name: 'Duc Hoang',
+      type: 1,
+      time: DateTime.now(),
+    ),
+    const Divider(thickness: 1),
+    TaskItem(
+      taskName: 'UI/UX Design',
+      imagePic: 'assets/images/person.png',
+      name: 'Minh Hung',
+      type: 1,
+      time: DateTime.now(),
+    ),
+    const Divider(thickness: 1),
+    TaskItem(
+      taskName: 'Figma',
+      imagePic: 'assets/images/person.png',
+      name: 'Minh Hung',
+      type: 1,
+      time: DateTime.now(),
+    ),
+    const Divider(thickness: 1),
+    TaskItem(
+      taskName: 'Backend',
+      imagePic: 'assets/images/person2.png',
+      name: 'Trung Hieu',
+      type: 0,
+      time: DateTime.now(),
+    ),
+  ]
+];
+
+// ignore: must_be_immutable
 class TaskScreen extends StatelessWidget {
   TaskScreen({super.key});
   RxInt checkPage = 0.obs;
+  final homeController = Get.find<HomeController>();
+
+  var flag = 0.obs;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -123,14 +219,32 @@ class TaskScreen extends StatelessWidget {
                                 startTime: DateTime.now(),
                                 deadTime: DateTime.now(),
                                 percent: 0.7,
-                                func: () => checkPage.value = 1,
+                                func: () => Get.to(() => Scaffold(
+                                      body: SingleChildScrollView(
+                                        child: ViewProjectScreen(
+                                          backFunc: () {
+                                            checkPage.value = 0;
+                                          },
+                                        ),
+                                      ),
+                                    )),
                                 tasks: 20),
                             const Divider(thickness: 1),
                             ProjectItem(
                                 title: 'Coding Project',
                                 startTime: DateTime.now(),
                                 deadTime: DateTime.now(),
-                                func: () {},
+                                func: () {
+                                  Get.to(() => Scaffold(
+                                        body: SingleChildScrollView(
+                                          child: ViewProjectScreen(
+                                            backFunc: () {
+                                              checkPage.value = 0;
+                                            },
+                                          ),
+                                        ),
+                                      ));
+                                },
                                 percent: 0.2,
                                 tasks: 20),
                             const Divider(thickness: 1),
@@ -138,7 +252,17 @@ class TaskScreen extends StatelessWidget {
                                 title: 'Lala Project',
                                 startTime: DateTime.now(),
                                 deadTime: DateTime.now(),
-                                func: () {},
+                                func: () {
+                                  Get.to(() => Scaffold(
+                                        body: SingleChildScrollView(
+                                          child: ViewProjectScreen(
+                                            backFunc: () {
+                                              checkPage.value = 0;
+                                            },
+                                          ),
+                                        ),
+                                      ));
+                                },
                                 percent: 0.7,
                                 tasks: 20),
                             const Divider(thickness: 1),
@@ -146,7 +270,17 @@ class TaskScreen extends StatelessWidget {
                                 title: 'Pro Project',
                                 startTime: DateTime.now(),
                                 deadTime: DateTime.now(),
-                                func: () {},
+                                func: () {
+                                  Get.to(() => Scaffold(
+                                        body: SingleChildScrollView(
+                                          child: ViewProjectScreen(
+                                            backFunc: () {
+                                              checkPage.value = 0;
+                                            },
+                                          ),
+                                        ),
+                                      ));
+                                },
                                 percent: 0.1,
                                 tasks: 20),
                           ]),
@@ -184,8 +318,17 @@ class TaskScreen extends StatelessWidget {
                                       fontSize: 18.0),
                                 ),
                                 ButtonIcon(
-                                    title: 'Select Date',
-                                    press: () {},
+                                    title: 'Select Week',
+                                    press: () {
+                                      homeController.currentChart =
+                                          "Project Employment";
+                                      Get.dialog(
+                                        SizedBox(
+                                            height: Get.height * 0.5,
+                                            width: Get.width * 0.5,
+                                            child: WeekCalendar()),
+                                      );
+                                    },
                                     icon: Icons.calendar_month,
                                     color1: AppColors.primaryColor,
                                     color2:
@@ -196,22 +339,8 @@ class TaskScreen extends StatelessWidget {
                               height: 420,
                               width: double.infinity,
                               child: ColumnChartTwoColumnCustom(
-                                barGroups: [
-                                  makeGroupData(
-                                      0, 150 / 300 * 20, 60 / 300 * 20),
-                                  makeGroupData(
-                                      1, 180 / 300 * 20, 70 / 300 * 20),
-                                  makeGroupData(
-                                      2, 80 / 300 * 20, 50 / 300 * 20),
-                                  makeGroupData(
-                                      3, 230 / 300 * 20, 210 / 300 * 20),
-                                  makeGroupData(
-                                      4, 100 / 300 * 20, 80 / 300 * 20),
-                                  makeGroupData(
-                                      5, 100 / 300 * 20, 30 / 300 * 20),
-                                  makeGroupData(
-                                      6, 200 / 300 * 20, 30 / 300 * 20),
-                                ],
+                                barGroups: fakeProjectEmploymentData[
+                                    homeController.flagChange1.value],
                                 members: Utils.listDaysInWeek,
                                 columnData: 300,
                               ),
@@ -220,103 +349,76 @@ class TaskScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 20),
-                      FieldAuto(
-                          child: SizedBox(
-                              child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Obx(() => FieldAuto(
+                              child: SizedBox(
+                                  child: Column(
                             children: [
-                              const Text(
-                                'Task today',
-                                style: TextStyle(
-                                    color: AppColors.textColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0),
-                              ),
-                              ButtonIcon(
-                                  title: 'Completed',
-                                  press: () {},
-                                  icon: Icons.change_circle_outlined,
-                                  color1: AppColors.primaryColor,
-                                  color2:
-                                      AppColors.primaryColor.withOpacity(0.3))
-                            ],
-                          ),
-                          const SizedBox(height: 30.0),
-                          const SizedBox(height: 10.0),
-                          Row(
-                            children: const [
-                              Expanded(
-                                flex: 1,
-                                child: Text('TASK NAME',
-                                    textAlign: TextAlign.start,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    'Task today',
                                     style: TextStyle(
                                         color: AppColors.textColor,
-                                        fontWeight: FontWeight.bold)),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0),
+                                  ),
+                                  ButtonIcon(
+                                      title: 'Completed',
+                                      press: () {
+                                        flag.value = (flag.value - 1).abs();
+                                      },
+                                      icon: Icons.change_circle_outlined,
+                                      color1: AppColors.primaryColor,
+                                      color2: AppColors.primaryColor
+                                          .withOpacity(0.3))
+                                ],
                               ),
-                              Expanded(
-                                flex: 1,
-                                child: Text('USER',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: AppColors.textColor,
-                                        fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 30.0),
+                              const SizedBox(height: 10.0),
+                              Row(
+                                children: const [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text('TASK NAME',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            color: AppColors.textColor,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text('USER',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            color: AppColors.textColor,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text('DEAD TIME',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text('EXPANDED',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                flex: 1,
-                                child: Text('DEAD TIME',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Text('EXPANDED',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold)),
-                              ),
+                              const SizedBox(height: 10.0),
+                              const Divider(thickness: 1),
+                              const SizedBox(height: 10.0),
+                              ...fakeTaskToday[flag.value],
                             ],
-                          ),
-                          const SizedBox(height: 10.0),
-                          const Divider(thickness: 1),
-                          const SizedBox(height: 10.0),
-                          TaskItem(
-                            taskName: 'UI/UX Design',
-                            imagePic: 'assets/images/person.png',
-                            name: 'Minh Hung',
-                            type: 0,
-                            time: DateTime.now(),
-                          ),
-                          const Divider(thickness: 1),
-                          TaskItem(
-                            taskName: 'Front End',
-                            imagePic: 'assets/images/person1.png',
-                            name: 'Duc Hoang',
-                            type: 1,
-                            time: DateTime.now(),
-                          ),
-                          const Divider(thickness: 1),
-                          TaskItem(
-                            taskName: 'Backend',
-                            imagePic: 'assets/images/person2.png',
-                            name: 'Trung Hieu',
-                            type: 1,
-                            time: DateTime.now(),
-                          ),
-                          const Divider(thickness: 1),
-                          TaskItem(
-                            taskName: 'Figma',
-                            imagePic: 'assets/images/person.png',
-                            name: 'Minh Hung',
-                            type: 0,
-                            time: DateTime.now(),
-                          ),
-                        ],
-                      )))
+                          ))))
                     ],
                   ),
                 ),

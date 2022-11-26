@@ -23,6 +23,7 @@ class _LineChartDesignState extends State<LineChartDesign> {
       aspectRatio: 1.70,
       child: LineChart(
         mainData(),
+        swapAnimationDuration: const Duration(milliseconds: 300),
       ),
     );
   }

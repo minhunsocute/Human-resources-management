@@ -1,9 +1,12 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
 import 'package:ueh_project_admin/feature/employee/widgets/button_icon.dart';
+import 'package:ueh_project_admin/feature/home/controller/home_controller.dart';
 import 'package:ueh_project_admin/feature/home/screens/home_screen.dart';
 import 'package:ueh_project_admin/widgets/custom_button.dart';
 
@@ -14,6 +17,27 @@ import '../../auth/screens/sign_in _screen.dart';
 import '../widgets/custom_dialog_error/question_dialog.dart';
 import '../widgets/git_hub_calender.dart';
 import '../widgets/task_data_item.dart';
+
+List<List<BarChartGroupData>> fakeProjectEmploymentData = [
+  [
+    makeGroupData(0, 150 / 300 * 20, 60 / 300 * 20),
+    makeGroupData(1, 180 / 300 * 20, 70 / 300 * 20),
+    makeGroupData(2, 80 / 300 * 20, 50 / 300 * 20),
+    makeGroupData(3, 230 / 300 * 20, 210 / 300 * 20),
+    makeGroupData(4, 100 / 300 * 20, 80 / 300 * 20),
+    makeGroupData(5, 100 / 300 * 20, 30 / 300 * 20),
+    makeGroupData(6, 200 / 300 * 20, 30 / 300 * 20),
+  ],
+  [
+    makeGroupData(0, 200 / 300 * 20, 30 / 300 * 20),
+    makeGroupData(1, 180 / 300 * 20, 70 / 300 * 20),
+    makeGroupData(2, 150 / 300 * 20, 60 / 300 * 20),
+    makeGroupData(3, 230 / 300 * 20, 210 / 300 * 20),
+    makeGroupData(4, 80 / 300 * 20, 50 / 300 * 20),
+    makeGroupData(5, 100 / 300 * 20, 80 / 300 * 20),
+    makeGroupData(6, 100 / 300 * 20, 30 / 300 * 20),
+  ]
+];
 
 List<Map<String, dynamic>> fakeDataCommit = [
   {
@@ -70,6 +94,7 @@ class ViewProjectScreen extends StatelessWidget {
   final Function() backFunc;
   ViewProjectScreen({super.key, required this.backFunc});
   final _textController = TextEditingController();
+  final homeController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -243,19 +268,12 @@ class ViewProjectScreen extends StatelessWidget {
                     flex: 1,
                     child: SizedBox(
                       height: 300.0,
-                      child: ColumnChartTwoColumnCustom(
-                        barGroups: [
-                          makeGroupData(0, 150 / 300 * 20, 60 / 300 * 20),
-                          makeGroupData(1, 180 / 300 * 20, 70 / 300 * 20),
-                          makeGroupData(2, 80 / 300 * 20, 50 / 300 * 20),
-                          makeGroupData(3, 230 / 300 * 20, 210 / 300 * 20),
-                          makeGroupData(4, 100 / 300 * 20, 80 / 300 * 20),
-                          makeGroupData(5, 100 / 300 * 20, 30 / 300 * 20),
-                          makeGroupData(6, 200 / 300 * 20, 30 / 300 * 20),
-                        ],
-                        members: Utils.listDaysInWeek,
-                        columnData: 300,
-                      ),
+                      child: Obx(() => ColumnChartTwoColumnCustom(
+                            barGroups: fakeProjectEmploymentData[
+                                homeController.flagChange1.value],
+                            members: Utils.listDaysInWeek,
+                            columnData: 300,
+                          )),
                     ),
                   ),
                   FieldAuto(
