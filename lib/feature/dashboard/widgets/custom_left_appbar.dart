@@ -191,13 +191,13 @@ class _IconTabBarState extends State<IconTabBar> {
   @override
   void initState() {
     super.initState();
-    focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        openMenu(context);
-      } else {
-        overlayEntry!.remove();
-      }
-    });
+    // focusNode.addListener(() {
+    //   if (focusNode.hasFocus) {
+    //     openMenu(context);
+    //   } else {
+    //     overlayEntry!.remove();
+    //   }
+    // });
   }
 
   void openMenu(BuildContext context) {
