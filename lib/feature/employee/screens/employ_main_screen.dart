@@ -49,9 +49,105 @@ List<Map<String, dynamic>> listEmployeeFakeData = [
   }
 ];
 
+List<List<Widget>> fakeEmploymentProgress = [
+  [
+    EmployeeProgressItem(
+      image: 'assets/images/person.png',
+      name: 'Truong Huynh Duc hoang',
+      type: 'Backend Developer',
+      amount: 20.01,
+      email: 'hoang.201102ak@gmail.com',
+      phoneNumber: '0935703991',
+      time: DateTime.now(),
+      percent: 0.6,
+    ),
+    const Divider(thickness: 1),
+    EmployeeProgressItem(
+      image: 'assets/images/person2.png',
+      name: 'Truong Huynh Duc hoang',
+      type: 'Backend Developer',
+      amount: 31.02,
+      email: 'hoang.201102ak@gmail.com',
+      phoneNumber: '0935703991',
+      time: DateTime.now(),
+      percent: 0.3,
+    ),
+    const Divider(thickness: 1),
+    EmployeeProgressItem(
+      image: 'assets/images/person1.png',
+      name: 'Truong Huynh Duc hoang',
+      type: 'Backend Developer',
+      amount: 10.01,
+      email: 'hoang.201102ak@gmail.com',
+      phoneNumber: '0935703991',
+      time: DateTime.now(),
+      percent: 0.8,
+    ),
+    const Divider(thickness: 1),
+    EmployeeProgressItem(
+      image: 'assets/images/person2.png',
+      name: 'Truong Huynh Duc hoang',
+      type: 'Backend Developer',
+      amount: 12.2,
+      email: 'hoang.201102ak@gmail.com',
+      phoneNumber: '0935703991',
+      time: DateTime.now(),
+      percent: 0.1,
+    ),
+  ],
+  [
+    EmployeeProgressItem(
+      image: 'assets/images/person2.png',
+      name: 'Truong Huynh Duc hoang',
+      type: 'Backend Developer',
+      amount: 31.02,
+      email: 'hoang.201102ak@gmail.com',
+      phoneNumber: '0935703991',
+      time: DateTime.now(),
+      percent: 0.1,
+    ),
+    const Divider(thickness: 1),
+    EmployeeProgressItem(
+      image: 'assets/images/person.png',
+      name: 'Truong Huynh Duc hoang',
+      type: 'Backend Developer',
+      amount: 20.01,
+      email: 'hoang.201102ak@gmail.com',
+      phoneNumber: '0935703991',
+      time: DateTime.now(),
+      percent: 0.2,
+    ),
+    const Divider(thickness: 1),
+    EmployeeProgressItem(
+      image: 'assets/images/person2.png',
+      name: 'Truong Huynh Duc hoang',
+      type: 'Backend Developer',
+      amount: 12.2,
+      email: 'hoang.201102ak@gmail.com',
+      phoneNumber: '0935703991',
+      time: DateTime.now(),
+      percent: 0.6,
+    ),
+    const Divider(thickness: 1),
+    EmployeeProgressItem(
+      image: 'assets/images/person1.png',
+      name: 'Truong Huynh Duc hoang',
+      type: 'Backend Developer',
+      amount: 10.01,
+      email: 'hoang.201102ak@gmail.com',
+      phoneNumber: '0935703991',
+      time: DateTime.now(),
+      percent: 0.2,
+    ),
+  ]
+];
+
 class EmployMainScreen extends StatelessWidget {
   EmployMainScreen({super.key});
   final _controller = TextEditingController();
+
+  var flag = 0.obs;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -271,119 +367,80 @@ class EmployMainScreen extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Obx(() => Column(
                 children: [
-                  const Text(
-                    'Employee Progress',
-                    style: TextStyle(
-                        color: AppColors.textColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Employee Progress',
+                        style: TextStyle(
+                            color: AppColors.textColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
+                      ButtonIcon(
+                        title: flag.value == 1 ? 'Completed' : 'Uncompleted',
+                        press: () {
+                          flag.value = (flag.value - 1).abs();
+                        },
+                        icon: Icons.change_circle_outlined,
+                        color1: Colors.blue,
+                        color2: Colors.blue.withOpacity(0.3),
+                      )
+                    ],
                   ),
-                  ButtonIcon(
-                    title: 'Completesd',
-                    press: () {},
-                    icon: Icons.change_circle_outlined,
-                    color1: Colors.blue,
-                    color2: Colors.blue.withOpacity(0.3),
-                  )
+                  const SizedBox(height: 20.0),
+                  Row(
+                    children: const [
+                      Expanded(
+                        flex: 1,
+                        child: Text('USER',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: AppColors.textColor,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text('NAME',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: AppColors.textColor,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text('PROGRESS',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text('AMOUNT',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: AppColors.textColor,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text('DEADLINE',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: AppColors.textColor,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10.0),
+                  const Divider(thickness: 1),
+                  const SizedBox(height: 10.0),
+                  ...fakeEmploymentProgress[flag.value],
                 ],
-              ),
-              const SizedBox(height: 20.0),
-              Row(
-                children: const [
-                  Expanded(
-                    flex: 1,
-                    child: Text('USER',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('NAME',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('PROGRESS',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.bold)),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('AMOUNT',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('DEADLINE',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              const Divider(thickness: 1),
-              const SizedBox(height: 10.0),
-              EmployeeProgressItem(
-                image: 'assets/images/person.png',
-                name: 'Truong Huynh Duc hoang',
-                type: 'Backend Developer',
-                amount: 20.01,
-                email: 'hoang.201102ak@gmail.com',
-                phoneNumber: '0935703991',
-                time: DateTime.now(),
-                percent: 0.6,
-              ),
-              const Divider(thickness: 1),
-              EmployeeProgressItem(
-                image: 'assets/images/person2.png',
-                name: 'Truong Huynh Duc hoang',
-                type: 'Backend Developer',
-                amount: 31.02,
-                email: 'hoang.201102ak@gmail.com',
-                phoneNumber: '0935703991',
-                time: DateTime.now(),
-                percent: 0.3,
-              ),
-              const Divider(thickness: 1),
-              EmployeeProgressItem(
-                image: 'assets/images/person1.png',
-                name: 'Truong Huynh Duc hoang',
-                type: 'Backend Developer',
-                amount: 10.01,
-                email: 'hoang.201102ak@gmail.com',
-                phoneNumber: '0935703991',
-                time: DateTime.now(),
-                percent: 0.8,
-              ),
-              const Divider(thickness: 1),
-              EmployeeProgressItem(
-                image: 'assets/images/person2.png',
-                name: 'Truong Huynh Duc hoang',
-                type: 'Backend Developer',
-                amount: 12.2,
-                email: 'hoang.201102ak@gmail.com',
-                phoneNumber: '0935703991',
-                time: DateTime.now(),
-                percent: 0.1,
-              ),
-            ],
-          ),
+              )),
         ),
       ]),
     );

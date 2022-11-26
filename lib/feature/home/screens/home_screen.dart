@@ -4,7 +4,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:ueh_project_admin/constants/utils.dart';
 import 'package:ueh_project_admin/feature/employee/widgets/employee_status_item.dart';
 import 'package:ueh_project_admin/feature/employee/widgets/recruitment_progress_item.dart';
+import 'package:ueh_project_admin/feature/home/controller/home_controller.dart';
 import 'package:ueh_project_admin/feature/home/widgets/card_1.dart';
+import 'package:ueh_project_admin/feature/home/widgets/week_calendar.dart';
 
 import '../../../constants/app_color.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -51,6 +53,58 @@ List<Map<String, dynamic>> listEmployeeFakeData = [
     'email': 'hoang.201102ak@gmail.com',
     'phoneNumber': '0935703991',
   }
+];
+
+List<List<FlSpot>> fakeTurnOverData = [
+  [
+    FlSpot(0, 3.44),
+    FlSpot(1, 2.44),
+    FlSpot(2, 4.44),
+    FlSpot(3, 1.44),
+    FlSpot(4, 6.44),
+    FlSpot(5, 4.44),
+    FlSpot(6, 2.44),
+    FlSpot(7, 2.7),
+    FlSpot(8, 1.6),
+    FlSpot(9, 2.65),
+    FlSpot(10, 2.84),
+    FlSpot(11, 1.44)
+  ],
+  [
+    FlSpot(0, 2.44),
+    FlSpot(1, 3.44),
+    FlSpot(2, 2.44),
+    FlSpot(3, 2.44),
+    FlSpot(4, 5.44),
+    FlSpot(5, 3.44),
+    FlSpot(6, 1.44),
+    FlSpot(7, 5.7),
+    FlSpot(8, 2.6),
+    FlSpot(9, 3.65),
+    FlSpot(10, 4.84),
+    FlSpot(11, 5.44)
+  ]
+];
+
+List<List<BarChartGroupData>> fakeProjectEmploymentData = [
+  [
+    makeGroupData(0, 150 / 300 * 20, 60 / 300 * 20),
+    makeGroupData(1, 180 / 300 * 20, 70 / 300 * 20),
+    makeGroupData(2, 80 / 300 * 20, 50 / 300 * 20),
+    makeGroupData(3, 230 / 300 * 20, 210 / 300 * 20),
+    makeGroupData(4, 100 / 300 * 20, 80 / 300 * 20),
+    makeGroupData(5, 100 / 300 * 20, 30 / 300 * 20),
+    makeGroupData(6, 200 / 300 * 20, 30 / 300 * 20),
+  ],
+  [
+    makeGroupData(0, 200 / 300 * 20, 30 / 300 * 20),
+    makeGroupData(1, 180 / 300 * 20, 70 / 300 * 20),
+    makeGroupData(2, 150 / 300 * 20, 60 / 300 * 20),
+    makeGroupData(3, 230 / 300 * 20, 210 / 300 * 20),
+    makeGroupData(4, 80 / 300 * 20, 50 / 300 * 20),
+    makeGroupData(5, 100 / 300 * 20, 80 / 300 * 20),
+    makeGroupData(6, 100 / 300 * 20, 30 / 300 * 20),
+  ]
 ];
 
 List<Map<String, dynamic>> listCard1 = [
@@ -108,6 +162,8 @@ List<Map<String, dynamic>> listTodoFakeData = [
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   RxInt touchedIndex = (-1).obs;
+
+  final homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +274,15 @@ class HomeScreen extends StatelessWidget {
                           fontSize: 18.0),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        homeController.currentChart = "Turnover";
+                        Get.dialog(
+                          SizedBox(
+                              height: Get.height * 0.5,
+                              width: Get.width * 0.5,
+                              child: WeekCalendar()),
+                        );
+                      },
                       child: Row(
                         children: const [
                           Text("Week ",
@@ -234,30 +298,20 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10.0),
-                const SizedBox(
+                SizedBox(
                   width: double.infinity,
                   height: 210,
-                  child: LineChartDesign(listData: [
-                    FlSpot(0, 3.44),
-                    FlSpot(1, 2.44),
-                    FlSpot(2, 4.44),
-                    FlSpot(3, 1.44),
-                    FlSpot(4, 6.44),
-                    FlSpot(5, 4.44),
-                    FlSpot(6, 2.44),
-                    FlSpot(7, 2.7),
-                    FlSpot(8, 1.6),
-                    FlSpot(9, 2.65),
-                    FlSpot(10, 2.84),
-                    FlSpot(11, 1.44),
-                  ]),
+                  child: Obx(() => LineChartDesign(
+                        listData: fakeTurnOverData
+                            .elementAt(homeController.flagChange.value),
+                      )),
                 )
               ],
             ),
           ),
           ////////////////////////////////////////////////////////////////
           const SizedBox(height: 20.0),
-          const Row2FieldWidget(),
+          Row2FieldWidget(),
           const SizedBox(height: 20.0),
           const SizedBox(height: 20.0),
           Row4FieldWidget(),
@@ -643,7 +697,9 @@ class TodoItemInput extends StatelessWidget {
 }
 
 class Row2FieldWidget extends StatelessWidget {
-  const Row2FieldWidget({super.key});
+  Row2FieldWidget({super.key});
+
+  final homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -778,7 +834,15 @@ class Row2FieldWidget extends StatelessWidget {
                     const Spacer(),
                     InkWell(
                       borderRadius: BorderRadius.circular(5.0),
-                      onTap: () {},
+                      onTap: () {
+                        homeController.currentChart = "Project Employment";
+                        Get.dialog(
+                          SizedBox(
+                              height: Get.height * 0.5,
+                              width: Get.width * 0.5,
+                              child: WeekCalendar()),
+                        );
+                      },
                       child: Container(
                         padding: Utils.edgeInsetsHor10Ver5,
                         decoration: BoxDecoration(
@@ -808,19 +872,12 @@ class Row2FieldWidget extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   height: 400,
-                  child: ColumnChartTwoColumnCustom(
-                    barGroups: [
-                      makeGroupData(0, 150 / 300 * 20, 60 / 300 * 20),
-                      makeGroupData(1, 180 / 300 * 20, 70 / 300 * 20),
-                      makeGroupData(2, 80 / 300 * 20, 50 / 300 * 20),
-                      makeGroupData(3, 230 / 300 * 20, 210 / 300 * 20),
-                      makeGroupData(4, 100 / 300 * 20, 80 / 300 * 20),
-                      makeGroupData(5, 100 / 300 * 20, 30 / 300 * 20),
-                      makeGroupData(6, 200 / 300 * 20, 30 / 300 * 20),
-                    ],
-                    members: Utils.listDaysInWeek,
-                    columnData: 300,
-                  ),
+                  child: Obx(() => ColumnChartTwoColumnCustom(
+                        barGroups: fakeProjectEmploymentData[
+                            homeController.flagChange1.value],
+                        members: Utils.listDaysInWeek,
+                        columnData: 300,
+                      )),
                 ),
                 const SizedBox(height: 10.0),
                 Row(

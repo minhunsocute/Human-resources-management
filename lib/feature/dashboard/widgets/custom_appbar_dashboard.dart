@@ -64,33 +64,6 @@ class CustomAppBarDashboard extends StatelessWidget {
             Row(
               children: [
                 if (!isSmallScreen) ...[
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      padding: const EdgeInsets.all(5),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          width: 0.5,
-                          color: Colors.grey,
-                        ),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Row(
-                        children: const [
-                          Text(
-                            "Select Category",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down_outlined,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                   const SizedBox(width: 10),
                   InkWell(
                     onTap: () {},
