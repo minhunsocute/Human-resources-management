@@ -6,7 +6,7 @@ import 'package:ueh_project_admin/feature/messenger/widgets/message_widget.dart'
 
 class MessageController extends GetxController {
   Rx<List<Widget>> messages = Rx<List<Widget>>([
-    MessageWidget(
+    const MessageWidget(
       message: 'asdfasdfasdfasdfasdfasdfasdf',
     ),
     MessageWidget(

@@ -11,6 +11,7 @@ class CustomLeftAppBar extends StatelessWidget {
       required this.widthDevice,
       required this.selectPage,
       required this.scaffoldDashboardScreenKey});
+
   final bool isOpened;
   final double widthDevice;
   final Function(int) selectPage;
@@ -19,7 +20,7 @@ class CustomLeftAppBar extends StatelessWidget {
   late final titleAndIconWidget = [
     NavigationRailDestination(
       icon: IconTabBar(
-        icon: Icons.dashboard_outlined,
+        icon: Icons.bar_chart_sharp,
         top: 60,
         isOpened: isOpened,
       ),
@@ -43,11 +44,27 @@ class CustomLeftAppBar extends StatelessWidget {
     ),
     NavigationRailDestination(
       icon: IconTabBar(
-        icon: Icons.mail_outline,
+        icon: Icons.computer,
         top: 343,
         isOpened: isOpened,
       ),
-      label: const Text('Mail'),
+      label: const Text('Course'),
+    ),
+    NavigationRailDestination(
+      icon: IconTabBar(
+        icon: Icons.edit,
+        top: 343,
+        isOpened: isOpened,
+      ),
+      label: const Text('Contest'),
+    ),
+    NavigationRailDestination(
+      icon: IconTabBar(
+        icon: Icons.mail,
+        top: 273,
+        isOpened: isOpened,
+      ),
+      label: const Text('Email'),
     ),
     NavigationRailDestination(
       icon: IconTabBar(
@@ -58,6 +75,18 @@ class CustomLeftAppBar extends StatelessWidget {
       label: const Text('Profile'),
     ),
   ];
+  late final title = Utils.titleAndIconList
+      .map(
+        (e) => NavigationRailDestination(
+          icon: IconTabBar(
+            icon: e['icon'],
+            top: e['position'],
+            isOpened: isOpened,
+          ),
+          label: Text(e['title'] as String),
+        ),
+      )
+      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +105,11 @@ class CustomLeftAppBar extends StatelessWidget {
           labelType: NavigationRailLabelType.none,
           backgroundColor: Colors.white,
           extended: isOpened,
-          onDestinationSelected: controller.selectPage,
+          onDestinationSelected: (value) {
+            controller.selectPage(value);
+            scaffoldDashboardScreenKey.currentState!.closeDrawer();
+            scaffoldDashboardScreenKey.currentState!.closeEndDrawer();
+          },
           selectedIndex: controller.pageIndex.value,
           destinations: titleAndIconWidget,
         );
@@ -158,13 +191,13 @@ class _IconTabBarState extends State<IconTabBar> {
   @override
   void initState() {
     super.initState();
-    focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        openMenu(context);
-      } else {
-        overlayEntry!.remove();
-      }
-    });
+    // focusNode.addListener(() {
+    //   if (focusNode.hasFocus) {
+    //     openMenu(context);
+    //   } else {
+    //     overlayEntry!.remove();
+    //   }
+    // });
   }
 
   void openMenu(BuildContext context) {

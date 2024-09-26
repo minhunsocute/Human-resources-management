@@ -7,7 +7,7 @@ import 'package:ueh_project_admin/widgets/custom_button.dart';
 import '../../../constants/app_color.dart';
 import '../../../constants/reponsiveness.dart';
 import '../../dashboard/widgets/field_auto.dart';
-import '../../employ/screens/employ_main_screen.dart';
+import '../../employee/screens/employ_main_screen.dart';
 import '../widgets/button_contact.dart';
 import '../widgets/setting_item.dart';
 
@@ -315,7 +315,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: Row2Field(
               check: 1,
-              childre: [
+              children: [
                 Container(
                   width: 150,
                   height: 150,
@@ -529,7 +529,7 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             child: Row2Field(
-              childre: [
+              children: [
                 SizedBox(
                   width: isSmasllScreen ? double.infinity : 220,
                   child: Column(

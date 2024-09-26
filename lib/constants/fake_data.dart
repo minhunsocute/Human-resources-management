@@ -49,6 +49,104 @@ class FakeData {
   ];
 }
 
+final List<Map<String, dynamic>> fakeDataCourse = [
+  {
+    'imge': 'assets/images/figma.png',
+    'title': 'How to use figma',
+  },
+  {
+    'imge': 'assets/images/flutter.png',
+    'title': 'How to use flutter',
+  },
+  {
+    'imge': 'assets/images/nodejs.png',
+    'title': 'How to use nodejs',
+  },
+  {
+    'imge': 'assets/images/react.png',
+    'title': 'How to use react',
+  },
+  {
+    'imge': 'assets/images/flutter.png',
+    'title': 'How to use flutter',
+  },
+  {
+    'imge': 'assets/images/nodejs.png',
+    'title': 'How to use nodejs',
+  },
+  {
+    'imge': 'assets/images/react.png',
+    'title': 'How to use react',
+  },
+  {
+    'imge': 'assets/images/flutter.png',
+    'title': 'How to use flutter',
+  },
+  {
+    'imge': 'assets/images/nodejs.png',
+    'title': 'How to use nodejs',
+  },
+  {
+    'imge': 'assets/images/react.png',
+    'title': 'How to use react',
+  }
+];
+
+final List<Map<String, dynamic>> fakeDataCourseCate = [
+  {
+    'color': Colors.amber,
+    'title': 'New',
+  },
+  {
+    'color': Colors.green,
+    'title': 'Free',
+  },
+  {
+    'color': Colors.blue,
+    'title': 'Popular',
+  },
+  {
+    'color': Colors.purple,
+    'title': 'Paid',
+  },
+  {
+    'color': Colors.orange,
+    'title': 'Upcomming',
+  }
+];
+
+List<Map<String, dynamic>> listLessons = [
+  {
+    'title': 'She is polite and quite',
+    'hour': 2,
+    'minute': 30,
+    'check': true,
+  },
+  {
+    'title': 'What is he like',
+    'hour': 5,
+    'minute': 30,
+    'check': false,
+  },
+  {
+    'title': 'UI/UX Designer',
+    'hour': 2,
+    'minute': 30,
+    'check': false,
+  },
+  {
+    'title': 'Machine Learning ',
+    'hour': 1,
+    'minute': 30,
+    'check': false,
+  },
+  {
+    'title': 'Information Technology',
+    'hour': 6,
+    'minute': 30,
+    'check': false,
+  },
+];
 final List<Map<String, dynamic>> listPopupButtonField2 = [
   {
     'message': 'Mail Recieve',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
-import 'package:ueh_project_admin/feature/employ/screens/employ_main_screen.dart';
+import 'package:ueh_project_admin/feature/employee/screens/employ_main_screen.dart';
 import '../../../constants/app_color.dart';
 import '../../../constants/fake_data.dart';
 import '../../../constants/reponsiveness.dart';
@@ -32,7 +32,7 @@ class MailNotificationScreen extends StatelessWidget {
   RxList<Map<String, dynamic>> listPageView = <Map<String, dynamic>>[
     {
       'type': 0,
-      'title': 'Phuc Khao Diem CC j day t dell biet',
+      'title': 'Nhan Dien AI',
     },
     {
       'type': 1,
@@ -195,7 +195,7 @@ class MailNotificationScreen extends StatelessWidget {
                             listPageView.value.add(
                               {
                                 'type': 0,
-                                'title': 'Phuc Khao Diem CC j day t dell biet',
+                                'title': 'Nhan Dien AI',
                               },
                             );
                             showViewMessIndex.value = 0;
@@ -518,7 +518,7 @@ class MailNotificationScreen extends StatelessWidget {
                       )
                     : Utils.emptySizeBox,
                 const Text(
-                  ' Phuc Khao diem co so du lieu',
+                  ' Get new Course',
                   style: TextStyle(
                       color: AppColors.textColor,
                       fontWeight: FontWeight.bold,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ueh_project_admin/feature/auth/screens/sign_in%20_screen.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/field_auto.dart';
 import 'package:ueh_project_admin/feature/dashboard/widgets/row_field.dart';
-import 'package:ueh_project_admin/feature/employ/screens/employ_main_screen.dart';
+import 'package:ueh_project_admin/feature/employee/screens/employ_main_screen.dart';
 import 'package:ueh_project_admin/widgets/custom_button.dart';
 
 import '../../../constants/app_color.dart';

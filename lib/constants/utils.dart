@@ -1,27 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:ueh_project_admin/feature/contest/screens/contest_management_screen.dart';
+
+import '../feature/employee/screens/employ_main_screen.dart';
+import '../feature/home/screens/home_screen.dart';
+import '../feature/mail_notification/screens/mail_notification_screen.dart';
+import '../feature/messenger/screens/main_messenger_screen.dart';
+import '../feature/profile/screns/profile_screen.dart';
+import '../feature/task_project/screens/task_screen.dart';
+import 'app_color.dart';
 
 class Utils {
   static const double iconSize = 28;
   static const List<Map<String, dynamic>> titleAndIconList = [
     {
-      'index': 0,
       'title': 'Dashboard',
-      'icon': Icon(Icons.dashboard_outlined, size: iconSize),
+      'icon': Icons.dashboard_outlined,
+      'position': 60,
     },
     {
-      'index': 1,
       'title': 'Employee',
-      'icon': Icon(Icons.people_outline_outlined, size: iconSize),
+      'icon': Icons.people_outline_outlined,
+      'position': 130,
     },
     {
-      'index': 2,
+      'title': 'Exam',
+      'icon': Icons.book_outlined,
+      'position': 203,
+    },
+    {
       'title': 'Project',
-      'icon': Icon(Icons.assignment_outlined, size: iconSize),
+      'icon': Icons.assignment_outlined,
+      'position': 273,
     },
     {
-      'index': 3,
       'title': 'Profile',
-      'icon': Icon(Icons.person_outline, size: iconSize),
+      'icon': Icons.person_outline,
+      'position': 343,
+    },
+    {
+      'title': 'Mail',
+      'icon': Icons.mail_outline,
+      'position': 413,
+    },
+    {
+      'title': 'Message',
+      'icon': Icons.message_outlined,
+      'position': 483,
     }
   ];
 
@@ -36,7 +60,7 @@ class Utils {
   static const curvesAnimation = Curves.easeInOut;
 
   static const starAdminTextSpan = TextSpan(
-    text: 'Star',
+    text: 'Smart',
     style: TextStyle(
       fontSize: 23,
       color: Colors.black,
@@ -44,7 +68,7 @@ class Utils {
     ),
     children: [
       TextSpan(
-        text: 'Admin',
+        text: 'Training',
         style: TextStyle(color: Colors.blueAccent),
       )
     ],
@@ -81,6 +105,54 @@ class Utils {
     'Thu',
     'Fri',
     'Sat'
+  ];
+
+  static final List<Widget> widgetDashboard = [
+    HomeScreen(),
+    EmployMainScreen(),
+    ContestManagementScreen(),
+    TaskScreen(),
+    ProfileScreen(),
+    MailNotificationScreen(),
+    MainMessengerScreen(),
+  ];
+
+  static const List<Widget> tableTitleListEmployee = [
+    Expanded(
+      flex: 1,
+      child: Text('CANDIDATE NAME',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
+    Expanded(
+      flex: 1,
+      child: Text('EMAIL ADDRESS',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
+    Expanded(
+      flex: 1,
+      child: Text('CONTACT NUMBER',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
+    Expanded(
+      flex: 1,
+      child: Text('JOB TITLE',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
+    Expanded(
+      flex: 1,
+      child: Text('STATUS',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: AppColors.textColor, fontWeight: FontWeight.bold)),
+    ),
   ];
 
   static const emptyTextSpan = TextSpan();

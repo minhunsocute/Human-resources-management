@@ -3,4 +3,7 @@
         "main"
     ],
     "cmake.sourceDirectory": "${workspaceFolder}/linux"
+    // "cSpell.words": [
+    //     "timelapse"
+    // ]
 }
